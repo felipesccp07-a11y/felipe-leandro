@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Tomorrow</title>
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  :root{
+    --graphite:#181818;
+    --graphite-2:#333333;
+    --graphite-text-soft:#b7b7b0;
+    --smoke:#F5F5F5;
+    --smoke-2:#e9e9e4;
+    --smoke-text-soft:#6b6b64;
+    --orange:#F58F29;
+    --orange-deep:#d97615;
+    --blue:#2B59C3;
+    --blue-deep:#20439a;
+    --line-on-graphite: rgba(245,245,245,0.16);
+    --line-on-graphite-soft: rgba(245,245,245,0.08);
+    --line-on-smoke: rgba(41,41,41,0.14);
+    --line-on-blue: rgba(245,245,245,0.22);
+    --gutter: 24px;
+    color-scheme: dark;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--graphite);
+    color:var(--smoke);
+    font-family:'Archivo',Helvetica,Arial,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  ul{ margin:0; padding:0; list-style:none; }
+  p{ margin:0; }
+  h1,h2,h3{ margin:0; text-wrap:balance; font-weight:800; letter-spacing:-0.01em; }
+  *:focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+
+  .mono{ font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; }
+  .tabular{ font-variant-numeric: tabular-nums; }
+
+  .wrap{ max-width:1140px; margin:0 auto; padding-inline:var(--gutter); }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    margin-bottom:1.1em;
+  }
+  .eyebrow::before{ content:''; width:9px; height:9px; flex:none; }
+  .eyebrow--orange::before{ background:var(--orange); }
+  .eyebrow--blue::before{ background:var(--blue); }
+  .eyebrow--graphite::before{ background:var(--graphite); }
+  .eyebrow--smoke::before{ background:var(--smoke); }
+
+  .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.8rem;
+    letter-spacing:.08em;
+    opacity:.55;
+  }
+
+  /* ---------- sections ---------- */
+  .sec{ padding-block: clamp(56px, 9vw, 108px); }
+  .sec--graphite{ background:var(--graphite); color:var(--smoke); }
+  .sec--smoke{ background:var(--smoke); color:var(--graphite); }
+  .sec--orange{ background:var(--orange); color:var(--graphite); }
+  .sec--blue{ background:var(--blue); color:var(--smoke); }
+
+  .sec--graphite .soft{ color:var(--graphite-text-soft); }
+  .sec--smoke .soft{ color:var(--smoke-text-soft); }
+  .sec--orange .soft{ color:rgba(41,41,41,.68); }
+  .sec--blue .soft{ color:rgba(245,245,245,.72); }
+
+  .sec-head{ max-width: 680px; margin-bottom: 2.6rem; }
+  .sec-head h2{ font-size:clamp(1.55rem, 3vw, 2.35rem); }
+  .sec-head p{ margin-top:.9rem; font-size:1.05rem; }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; z-index:80;
+    background:var(--graphite);
+    border-bottom:2px solid var(--blue);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:1rem;
+    padding-block:14px;
+  }
+  .logo-img{ height:20px; width:auto; display:block; }
+  .nav-links{ display:flex; align-items:center; gap:1.6rem; margin-left:auto; }
+  .nav-link{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:500;
+    letter-spacing:.04em; text-decoration:none; color:var(--graphite-text-soft);
+    white-space:nowrap; transition:color .15s ease;
+  }
+  .nav-link:hover{ color:var(--smoke); }
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem; font-weight:500;
+    letter-spacing:.06em; text-transform:uppercase;
+    color:var(--graphite); background:var(--orange);
+    padding:.6em 1.1em; text-decoration:none; white-space:nowrap;
+    transition: background-color .15s ease;
+  }
+  .nav-cta:hover{ background:var(--orange-deep); }
+
+  /* ---------- hero ---------- */
+  .hero{ padding-top:calc(64px + env(safe-area-inset-top,0px) + 56px); }
+  .h1{ font-size:clamp(2.15rem, 5.4vw, 4.1rem); line-height:1.06; max-width:16ch; }
+  .lede{ margin-top:1.6rem; font-size:clamp(1.05rem,1.7vw,1.28rem); max-width:46ch; color:var(--graphite-text-soft); }
+  .cta-row{ margin-top:2.4rem; display:flex; gap:1rem; flex-wrap:wrap; align-items:center; }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:.6em;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.86rem;
+    letter-spacing:.03em; text-decoration:none;
+    padding: 1em 1.6em; border:2px solid transparent; cursor:pointer;
+    transition: transform .12s ease, background-color .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn--orange{ background:var(--orange); color:var(--graphite); }
+  .btn--orange:hover{ background:var(--orange-deep); }
+  .btn--graphite{ background:var(--graphite); color:var(--smoke); }
+  .btn--graphite:hover{ background:#171717; }
+  .btn--ghost-smoke{ background:transparent; border-color:var(--smoke); color:var(--smoke); }
+  .btn--ghost-smoke:hover{ background:rgba(245,245,245,.08); }
+  .btn--ghost-graphite{ background:transparent; border-color:var(--graphite); color:var(--graphite); }
+  .btn--ghost-graphite:hover{ background:rgba(41,41,41,.06); }
+
+  /* ---------- 01 flow ---------- */
+  .flow{ display:flex; align-items:stretch; gap:1.5rem; }
+  .flow-box{
+    flex:1; background:var(--smoke); border:1px solid var(--line-on-smoke);
+    padding:1.8rem 1.7rem;
+  }
+  .flow-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:.74rem; font-weight:600;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--orange-deep);
+    display:block; margin-bottom:1rem;
+  }
+  .flow-tag--blue{ color:var(--blue); }
+  .chip-list{ display:flex; flex-direction:column; gap:.65rem; }
+  .chip-list li{ display:flex; align-items:center; gap:.7rem; font-size:1rem; }
+  .chip-sq{ width:9px; height:9px; flex:none; }
+  .chip-sq--orange{ background:var(--orange); }
+  .chip-sq--blue{ background:var(--blue); }
+  .flow-arrow{ display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:var(--orange); flex:none; width:2rem; }
+  .note{ margin-top:1.8rem; font-size:1rem; max-width:52ch; }
+
+  @media (max-width:680px){
+    .flow{ flex-direction:column; }
+    .flow-arrow{ transform:rotate(90deg); width:auto; padding-block:.2rem; }
+  }
+
+  /* ---------- 02 motive cards ---------- */
+  .motive-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+  .motive-card{
+    border:1px solid var(--line-on-graphite);
+    display:flex; flex-direction:column;
+  }
+  .motive-icon{
+    aspect-ratio:1.6/1; display:flex; align-items:center; justify-content:center;
+  }
+  .motive-icon svg{ width:38px; height:38px; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  .motive-icon--orange{ background:var(--orange); }
+  .motive-icon--orange svg{ stroke:var(--graphite); }
+  .motive-icon--blue{ background:var(--blue); }
+  .motive-icon--blue svg{ stroke:var(--smoke); }
+  .motive-icon--smoke{ background:var(--smoke); }
+  .motive-icon--smoke svg{ stroke:var(--graphite); }
+  .motive-card p{ padding:1.3rem 1.4rem 1.5rem; font-size:1rem; color:var(--smoke); }
+
+  @media (max-width:860px){ .motive-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .motive-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- 03 entry cards ---------- */
+  .entry-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.4rem; }
+  .entry-card{ background:var(--graphite); color:var(--smoke); padding:1.8rem 1.6rem; border-top:3px solid var(--orange); }
+  .entry-card:nth-child(2){ border-top-color:var(--graphite); }
+  .entry-card:nth-child(3){ border-top-color:var(--blue); }
+  .entry-card .num{ display:block; margin-bottom:.9rem; opacity:.6; }
+  .entry-card h3{ font-size:1.12rem; margin-bottom:.6rem; }
+  .entry-card p{ font-size:.98rem; color:var(--graphite-text-soft); }
+  @media (max-width:780px){ .entry-grid{ grid-template-columns:1fr; } }
+
+  /* ---------- 04 timeline chart ---------- */
+  .chart-wrap{ overflow-x:auto; }
+  .chart-svg{ width:100%; min-width:520px; height:auto; display:block; }
+  .chart-legend{ display:flex; gap:1.6rem; flex-wrap:wrap; margin-top:1rem; }
+  .legend-item{ display:flex; align-items:center; gap:.55rem; font-family:'IBM Plex Mono',monospace; font-size:.8rem; }
+  .legend-sq{ width:10px; height:10px; flex:none; }
+
+  .spec-table-wrap{ overflow-x:auto; margin-top:2.6rem; }
+  table.spec{ border-collapse:collapse; width:100%; min-width:560px; font-family:'IBM Plex Mono',monospace; font-size:.9rem; }
+  table.spec th{
+    text-align:left; text-transform:uppercase; letter-spacing:.08em; font-size:.72rem;
+    font-weight:600; color:var(--graphite-text-soft); padding:.8rem 1rem;
+    border-bottom:1px solid var(--line-on-graphite);
+  }
+  table.spec td{ padding:1rem 1rem; border-bottom:1px solid var(--line-on-graphite-soft); vertical-align:top; }
+  table.spec tr:last-child td{ border-bottom:none; }
+  table.spec td:first-child{ font-family:'Archivo',sans-serif; font-weight:600; font-size:1rem; }
+
+  /* ---------- 05 gains ---------- */
+  .gain-grid{ display:grid; grid-template-columns:repeat(3,1fr); }
+  .gain-col{ padding:0 1.8rem; border-left:1px solid var(--line-on-smoke); }
+  .gain-col:first-child{ border-left:none; padding-left:0; }
+  .gain-col .eyebrow{ margin-bottom:.9rem; }
+  .gain-col p{ font-size:1.02rem; }
+  @media (max-width:780px){
+    .gain-grid{ grid-template-columns:1fr; gap:2.2rem; }
+    .gain-col{ border-left:none; padding-left:0; border-top:1px solid var(--line-on-smoke); padding-top:1.8rem; }
+    .gain-col:first-child{ border-top:none; padding-top:0; }
+  }
+
+  /* ---------- 06 not-do list ---------- */
+  .not-list{ display:flex; flex-direction:column; gap:1rem; max-width:640px; }
+  .not-item{ display:flex; align-items:flex-start; gap:1rem; font-size:1.06rem; }
+  .not-chip{
+    flex:none; width:26px; height:26px; border:1.5px solid var(--smoke);
+    display:flex; align-items:center; justify-content:center; margin-top:.15rem;
+  }
+  .not-chip svg{ width:13px; height:13px; stroke:var(--orange); stroke-width:2.4; }
+
+  /* ---------- 07 proof ---------- */
+  .proof-wrap{ display:grid; grid-template-columns:1.3fr 1fr; gap:3rem; align-items:center; }
+  .proof-quote{ font-size:clamp(1.35rem, 2.6vw, 1.9rem); font-weight:600; line-height:1.35; text-wrap:balance; }
+  .proof-audio{
+    border:1px solid var(--line-on-blue); padding:1.6rem;
+    display:flex; flex-direction:column; gap:1rem;
+  }
+  .proof-cap{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.03em; color:rgba(245,245,245,.75); }
+  @media (max-width:780px){ .proof-wrap{ grid-template-columns:1fr; gap:2rem; } }
+
+  /* ---------- 08 steps ---------- */
+  .steps{ display:flex; gap:0; }
+  .step{ flex:1; position:relative; padding-top:2.2rem; }
+  .step::before{
+    content:''; position:absolute; top:9px; left:0; right:0; height:2px; background:var(--line-on-smoke);
+  }
+  .step:first-child::before{ left:9px; }
+  .step:last-child::before{ right:calc(50% + 9px); }
+  .step-dot{ position:absolute; top:0; left:0; width:19px; height:19px; background:var(--orange); border:3px solid var(--smoke); z-index:2; }
+  .step p{ font-size:.98rem; padding-right:1rem; }
+  @media (max-width:820px){
+    .steps{ flex-direction:column; gap:1.6rem; }
+    .step{ padding-top:0; padding-left:2.4rem; }
+    .step::before{ top:0; bottom:0; left:9px; right:auto; width:2px; height:auto; }
+    .step:last-child::before{ display:none; }
+    .step-dot{ top:2px; left:0; }
+  }
+
+  /* ---------- 09 fit ---------- */
+  .fit-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2.4rem; }
+  .fit-block{ display:flex; gap:1.1rem; align-items:flex-start; }
+  .fit-chip{ flex:none; width:30px; height:30px; display:flex; align-items:center; justify-content:center; margin-top:.2rem; }
+  .fit-chip--yes{ background:var(--orange); }
+  .fit-chip--yes svg{ width:15px; height:15px; stroke:var(--graphite); stroke-width:2.6; }
+  .fit-chip--no{ border:1.5px solid var(--smoke); background:transparent; }
+  .fit-chip--no svg{ width:13px; height:13px; stroke:var(--smoke); stroke-width:2.4; }
+  .fit-label{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; display:block; margin-bottom:.5rem; color:var(--graphite-text-soft); }
+  .fit-block p{ font-size:1.04rem; }
+  @media (max-width:720px){ .fit-grid{ grid-template-columns:1fr; gap:2rem; } }
+
+  /* ---------- 10 CTA orange ---------- */
+  .bora-inner{ max-width:640px; }
+  .bora-inner h2{ font-size:clamp(1.7rem,3.6vw,2.6rem); color:var(--graphite); }
+  .bora-inner > p{ margin-top:1rem; font-size:1.08rem; }
+  .bora-form{ margin-top:2.2rem; display:flex; flex-direction:column; gap:1rem; max-width:460px; }
+  .mono-label{ font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(41,41,41,.65); }
+  #msg{
+    font-family:'Archivo',sans-serif; font-size:1rem; padding:.85em 1em;
+    border:2px solid var(--graphite); background:var(--smoke); color:var(--graphite);
+  }
+  #msg::placeholder{ color:rgba(41,41,41,.45); }
+
+  /* ---------- 11 faq ---------- */
+  .faq-list{ max-width:760px; display:flex; flex-direction:column; }
+  .faq-item{ border-bottom:1px solid var(--line-on-smoke); }
+  .faq-item summary{
+    list-style:none; cursor:pointer; padding:1.4rem 0; display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary span:first-child{ font-weight:600; font-size:1.05rem; }
+  .faq-icon{ font-family:'IBM Plex Mono',monospace; font-size:1.3rem; color:var(--orange-deep); flex:none; width:1.2em; text-align:center; }
+  .faq-icon::before{ content:'+'; }
+  .faq-item[open] .faq-icon::before{ content:'\2212'; }
+  .faq-a{ padding-bottom:1.5rem; max-width:60ch; }
+  .faq-a p{ font-size:1rem; color:var(--smoke-text-soft); }
+
+  /* ---------- footer ---------- */
+  .footer{ padding-block:3.4rem 3rem; border-top:2px solid var(--blue); }
+  .footer-top{ display:flex; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+  .footer-logo-img{ height:26px; width:auto; display:block; }
+  .footer-contacts{ display:flex; flex-direction:column; gap:.9rem; }
+  .contact-row{ display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
+  .contact-row .mono{ font-size:.95rem; }
+  .copy-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+    background:transparent; border:1px solid var(--line-on-graphite); color:var(--smoke);
+    padding:.4em .8em; cursor:pointer; transition:border-color .15s ease, background-color .15s ease;
+  }
+  .copy-btn:hover{ border-color:var(--orange); background:rgba(245,143,41,.08); }
+  .footer-bottom{ margin-top:2.6rem; display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; }
+  .footer-bottom a{ text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:.82rem; }
+  .footer-bottom a:hover{ color:var(--orange); }
+  .copyright{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--graphite-text-soft); }
+
+  /* ---------- ajustes de celular pequeno (nav e gutter) ---------- */
+  @media (max-width:400px){
+    :root{ --gutter:16px; }
+    .nav-cta{ font-size:.68rem; padding:.55em .85em; }
+    .logo-img{ height:17px; }
+    .nav-links{ gap:.9rem; }
+    .nav-link{ font-size:.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner wrap">
+    <img src="tomorrow.png" alt="Tomorrow" class="logo-img">
+    <div class="nav-links">
+      <a class="nav-link" href="portfolio.html">Portfólio</a>
+      <a class="nav-cta" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<section class="sec sec--graphite hero">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--orange">TOMORROW &middot; PROJETOS DE MARKETING</p>
+    <h1 class="h1">Projetos fechados pra resolver problemas específicos de marketing.</h1>
+    <p class="lede">Sem calendário de posts. Sem contrato mensal por padrão. Escopo, prazo e preço fechados antes de começar.</p>
+    <div class="cta-row">
+      <a class="btn btn--orange" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Quero falar sobre um projeto</a>
+      <a class="btn btn--ghost-smoke" href="portfolio.html">Ver portfólio</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--smoke" id="s01">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--orange"><span class="num" style="opacity:1;color:var(--orange-deep)">01</span></p>
+    <div class="sec-head">
+      <h2>O que sai daqui</h2>
+    </div>
+    <div class="flow">
+      <div class="flow-box">
+        <span class="flow-tag">Estratégia e ideia</span>
+        <ul class="chip-list">
+          <li><span class="chip-sq chip-sq--orange"></span>Diagnóstico</li>
+          <li><span class="chip-sq chip-sq--orange"></span>Posicionamento</li>
+          <li><span class="chip-sq chip-sq--orange"></span>Conceito</li>
+          <li><span class="chip-sq chip-sq--orange"></span>Narrativa</li>
+        </ul>
+      </div>
+      <div class="flow-arrow" aria-hidden="true">&#8594;</div>
+      <div class="flow-box">
+        <span class="flow-tag flow-tag--blue">Colocar no mundo</span>
+        <ul class="chip-list">
+          <li><span class="chip-sq chip-sq--blue"></span>Roteiro</li>
+          <li><span class="chip-sq chip-sq--blue"></span>Filme e fotografia</li>
+          <li><span class="chip-sq chip-sq--blue"></span>Design e identidade visual</li>
+          <li><span class="chip-sq chip-sq--blue"></span>Mídia</li>
+          <li><span class="chip-sq chip-sq--blue"></span>Landing page</li>
+          <li><span class="chip-sq chip-sq--blue"></span>WhatsApp</li>
+        </ul>
+      </div>
+    </div>
+    <p class="note soft">O problema define o que entra. Pode ser só a ideia. Pode ser a ideia inteira executada.</p>
+  </div>
+</section>
+
+<section class="sec sec--graphite" id="s02">
+  <div class="wrap">
+    <p class="num" style="color:var(--blue);opacity:1">02</p>
+    <div class="sec-head">
+      <h2>Quando a gente entra</h2>
+    </div>
+    <div class="motive-grid">
+      <div class="motive-card">
+        <div class="motive-icon motive-icon--orange">
+          <svg viewBox="0 0 40 40"><line x1="20" y1="31" x2="20" y2="10"></line><polyline points="11,19 20,9 29,19"></polyline></svg>
+        </div>
+        <p>Um produto ou item novo (um prato, uma linha, um serviço) que precisa de alcance pra ser conhecido.</p>
+      </div>
+      <div class="motive-card">
+        <div class="motive-icon motive-icon--blue">
+          <svg viewBox="0 0 40 40"><polyline points="8,18 20,7 32,18"></polyline><rect x="11" y="18" width="18" height="14"></rect><line x1="20" y1="32" x2="20" y2="24"></line></svg>
+        </div>
+        <p>Uma unidade abrindo, que não devia abrir em silêncio.</p>
+      </div>
+      <div class="motive-card">
+        <div class="motive-icon motive-icon--smoke">
+          <svg viewBox="0 0 40 40"><rect x="7" y="10" width="26" height="23" rx="1"></rect><line x1="7" y1="17" x2="33" y2="17"></line><line x1="13" y1="6" x2="13" y2="12"></line><line x1="27" y1="6" x2="27" y2="12"></line><circle cx="20" cy="25" r="2.4"></circle></svg>
+        </div>
+        <p>Uma data comemorativa específica, e a marca precisa de um motivo pra aparecer nela, não um banner com desconto.</p>
+      </div>
+      <div class="motive-card">
+        <div class="motive-icon motive-icon--orange">
+          <svg viewBox="0 0 40 40"><line x1="11" y1="9" x2="11" y2="33"></line><path d="M11 11 L30 16 L11 22 Z"></path></svg>
+        </div>
+        <p>Um evento, feira ou ação, com conteúdo antes, durante e depois.</p>
+      </div>
+      <div class="motive-card">
+        <div class="motive-icon motive-icon--blue">
+          <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="13"></circle><circle cx="20" cy="20" r="7.5"></circle><circle cx="20" cy="20" r="2"></circle></svg>
+        </div>
+        <p>Uma meta de venda específica: um produto, um dia da semana, um público.</p>
+      </div>
+      <div class="motive-card">
+        <div class="motive-icon motive-icon--smoke">
+          <svg viewBox="0 0 40 40"><rect x="7" y="11" width="14" height="14"></rect><circle cx="27" cy="26" r="7.5"></circle></svg>
+        </div>
+        <p>Uma empresa que parece igual à concorrente e precisa de um motivo pra ser escolhida.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--smoke" id="s03">
+  <div class="wrap">
+    <p class="num" style="color:var(--orange-deep);opacity:1">03</p>
+    <div class="sec-head">
+      <h2>Como a gente entra</h2>
+    </div>
+    <div class="entry-grid">
+      <div class="entry-card">
+        <span class="num">A</span>
+        <h3>Projeto inteiro</h3>
+        <p>Do diagnóstico à campanha no ar.</p>
+      </div>
+      <div class="entry-card">
+        <span class="num">B</span>
+        <h3>Só a parte que falta</h3>
+        <p>Você já tem o conceito e falta produção. Já tem o material e falta colocar no ar. A gente entra só nesse ponto.</p>
+      </div>
+      <div class="entry-card">
+        <span class="num">C</span>
+        <h3>Como fornecedor de outra agência</h3>
+        <p>Sua agência já atende a marca e precisa de capacidade ou repertório pra um projeto específico. A gente entra branqueado, sem aparecer.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--graphite" id="s04">
+  <div class="wrap">
+    <p class="num" style="color:var(--orange);opacity:1">04</p>
+    <div class="sec-head">
+      <h2>Prazo</h2>
+      <p class="soft">Varia com o escopo.</p>
+    </div>
+
+    <div class="chart-wrap">
+      <svg class="chart-svg" viewBox="0 0 760 200" role="img" aria-label="Gráfico de prazos: peça pontual de 5 a 10 dias, campanha completa de 15 a 25 dias, sistema de marca de 20 a 40 dias">
+        <!-- axis -->
+        <line x1="40" y1="170" x2="720" y2="170" stroke="var(--line-on-graphite)" stroke-width="1"></line>
+        <!-- ticks 0,10,20,30,40 -->
+        <g class="mono" font-size="11" fill="var(--graphite-text-soft)">
+          <line x1="40" y1="165" x2="40" y2="175" stroke="var(--line-on-graphite)"></line>
+          <text x="40" y="190" text-anchor="middle">0</text>
+          <line x1="210" y1="165" x2="210" y2="175" stroke="var(--line-on-graphite)"></line>
+          <text x="210" y="190" text-anchor="middle">10</text>
+          <line x1="380" y1="165" x2="380" y2="175" stroke="var(--line-on-graphite)"></line>
+          <text x="380" y="190" text-anchor="middle">20</text>
+          <line x1="550" y1="165" x2="550" y2="175" stroke="var(--line-on-graphite)"></line>
+          <text x="550" y="190" text-anchor="middle">30</text>
+          <line x1="720" y1="165" x2="720" y2="175" stroke="var(--line-on-graphite)"></line>
+          <text x="720" y="190" text-anchor="middle">40 dias</text>
+        </g>
+        <!-- bar 1: peça pontual 5-10 -->
+        <text x="40" y="30" class="mono" font-size="13" fill="var(--smoke)" font-weight="600">Peça pontual</text>
+        <rect x="125" y="42" width="85" height="16" fill="var(--orange)"></rect>
+        <text x="218" y="55" class="mono tabular" font-size="12" fill="var(--smoke)">5&ndash;10</text>
+        <!-- bar 2: campanha completa 15-25 -->
+        <text x="40" y="90" class="mono" font-size="13" fill="var(--smoke)" font-weight="600">Campanha completa</text>
+        <rect x="295" y="102" width="170" height="16" fill="var(--blue)"></rect>
+        <text x="473" y="115" class="mono tabular" font-size="12" fill="var(--smoke)">15&ndash;25</text>
+        <!-- bar 3: sistema de marca 20-40 -->
+        <text x="40" y="150" class="mono" font-size="13" fill="var(--smoke)" font-weight="600">Sistema de marca</text>
+        <rect x="380" y="162" width="340" height="16" fill="var(--smoke)"></rect>
+        <text x="40" y="175" class="mono tabular" font-size="12" fill="var(--graphite-text-soft)" opacity="0"> </text>
+        <text x="380" y="152" class="mono tabular" font-size="12" fill="var(--smoke)">20&ndash;40 dias</text>
+      </svg>
+    </div>
+    <div class="chart-legend">
+      <span class="legend-item"><span class="legend-sq" style="background:var(--orange)"></span>Peça pontual</span>
+      <span class="legend-item"><span class="legend-sq" style="background:var(--blue)"></span>Campanha completa</span>
+      <span class="legend-item"><span class="legend-sq" style="background:var(--smoke)"></span>Sistema de marca</span>
+    </div>
+
+    <div class="spec-table-wrap">
+      <table class="spec">
+        <thead>
+          <tr><th>Escopo</th><th>Prazo</th><th>Exemplo</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Peça pontual</td><td class="tabular">5&ndash;10 dias</td><td class="soft">Filme, KV, landing page</td></tr>
+          <tr><td>Campanha completa</td><td class="tabular">15&ndash;25 dias</td><td class="soft">Conceito, produção e mídia</td></tr>
+          <tr><td>Sistema de marca</td><td class="tabular">20&ndash;40 dias</td><td class="soft">Reposicionamento</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note soft" style="margin-top:1.6rem;">O prazo exato fecha junto com o escopo.</p>
+  </div>
+</section>
+
+<section class="sec sec--smoke" id="s05">
+  <div class="wrap">
+    <p class="num" style="color:var(--blue);opacity:1">05</p>
+    <div class="sec-head">
+      <h2>O que a empresa ganha</h2>
+    </div>
+    <div class="gain-grid">
+      <div class="gain-col">
+        <span class="eyebrow eyebrow--orange">Numa peça pontual</span>
+        <p>Velocidade, sem perder consistência com o que já existe.</p>
+      </div>
+      <div class="gain-col">
+        <span class="eyebrow eyebrow--blue">Numa campanha</span>
+        <p>Atenção e conversão num momento específico, sem pagar por um mês inteiro de trabalho genérico.</p>
+      </div>
+      <div class="gain-col">
+        <span class="eyebrow eyebrow--graphite">Num sistema de marca</span>
+        <p>Um ativo que continua sendo usado depois que o projeto terminou, não um relatório de alcance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--graphite" id="s06">
+  <div class="wrap">
+    <p class="num" style="color:var(--orange);opacity:1">06</p>
+    <div class="sec-head">
+      <h2>O que não fazemos</h2>
+    </div>
+    <div class="not-list">
+      <div class="not-item">
+        <span class="not-chip"><svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"></line><line x1="13" y1="1" x2="1" y2="13"></line></svg></span>
+        <p>Impulsionar post sem estratégia por trás.</p>
+      </div>
+      <div class="not-item">
+        <span class="not-chip"><svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"></line><line x1="13" y1="1" x2="1" y2="13"></line></svg></span>
+        <p>Prometer resultado sem entender o negócio antes.</p>
+      </div>
+      <div class="not-item">
+        <span class="not-chip"><svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"></line><line x1="13" y1="1" x2="1" y2="13"></line></svg></span>
+        <p>Aplicar a mesma fórmula em negócios diferentes.</p>
+      </div>
+      <div class="not-item">
+        <span class="not-chip"><svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"></line><line x1="13" y1="1" x2="1" y2="13"></line></svg></span>
+        <p>Entregar relatório de alcance como se fosse venda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--blue" id="s07">
+  <div class="wrap">
+    <p class="num" style="color:var(--smoke);opacity:.7">07</p>
+    <div class="proof-wrap">
+      <p class="proof-quote">Restaurante do interior de Minas Gerais. Narrativa nova em vez de mais verba de mídia. No dia seguinte, uma excursão que tinha outro destino mudou de rota pra almoçar lá.</p>
+      <div class="proof-audio">
+        <audio controls preload="none" style="width:100%;">
+          <source src="depoimento.MP3" type="audio/mpeg">
+        </audio>
+        <p class="proof-cap">depoimento.MP3 &middot; áudio enviado pela cliente por WhatsApp</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--smoke" id="s08">
+  <div class="wrap">
+    <p class="num" style="color:var(--orange-deep);opacity:1">08</p>
+    <div class="sec-head">
+      <h2>Como funciona</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="step-dot"></span><p>Diagnóstico do problema.</p></div>
+      <div class="step"><span class="step-dot"></span><p>Definição do que precisa existir.</p></div>
+      <div class="step"><span class="step-dot"></span><p>Produção.</p></div>
+      <div class="step"><span class="step-dot"></span><p>Entrega.</p></div>
+      <div class="step"><span class="step-dot"></span><p>Fim do projeto.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--graphite" id="s09">
+  <div class="wrap">
+    <p class="num" style="color:var(--blue);opacity:1">09</p>
+    <div class="fit-grid">
+      <div class="fit-block">
+        <span class="fit-chip fit-chip--yes"><svg viewBox="0 0 14 14"><polyline points="2,7 6,11 12,3"></polyline></svg></span>
+        <div>
+          <span class="fit-label">Fecha se</span>
+          <p>Decide sozinho, tem orçamento pra executar o combinado, quer resolver um problema de verdade &mdash; não preencher agenda de conteúdo.</p>
+        </div>
+      </div>
+      <div class="fit-block">
+        <span class="fit-chip fit-chip--no"><svg viewBox="0 0 14 14"><line x1="1" y1="1" x2="13" y2="13"></line><line x1="13" y1="1" x2="1" y2="13"></line></svg></span>
+        <div>
+          <span class="fit-label">Não fecha se</span>
+          <p>Quer alguém pra postar todo dia sem motivo, ou espera que a solução resolva produto ruim ou atendimento ruim.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--orange" id="s10">
+  <div class="wrap bora-inner">
+    <p class="num" style="color:var(--graphite);opacity:.6">10</p>
+    <h2>Bora</h2>
+    <p>Conte qual é o problema. Retorno em até 1 dia com o que precisa ser feito.</p>
+    <div class="bora-form">
+      <label class="mono-label" for="msg">Conte em uma linha (opcional)</label>
+      <input id="msg" type="text" maxlength="140" placeholder="Ex.: vamos lançar uma linha nova em outubro">
+      <a id="waBtn" class="btn btn--graphite" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Quero falar sobre um projeto</a>
+      <a class="btn btn--ghost-graphite" href="contato.html">Ou preencha o formulário</a>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--smoke" id="s11">
+  <div class="wrap">
+    <p class="num" style="color:var(--blue);opacity:1">11</p>
+    <div class="sec-head">
+      <h2>Dúvidas comuns</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary><span>Posso fechar projeto pontual e/ou recorrente?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>As duas. O padrão é pontual, com escopo e prazo fechados. Se fizer sentido continuar depois, ou se você já busca algo recorrente, também fechamos.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Pagamento é único?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>Depende do projeto. Pode ser à vista ou parcelado, o formato entra na proposta junto com escopo e prazo.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Preciso ter a ideia toda planejada?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>Não. Pode chegar só com o problema. Se já tem conceito ou briefing pronto, o processo começa mais rápido.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Como funcionam revisões e arquivos finais?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>Número de rodadas de ajuste e formato dos arquivos finais (editáveis ou não) entram no escopo, definidos antes de começar.</p></div>
+      </details>
+      <details class="faq-item">
+        <summary><span>Já tenho equipe de marketing, vocês atendem mesmo assim?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+        <div class="faq-a"><p>Sim. Entramos só na parte que falta: produção, uma peça específica, ou execução do que sua equipe já pensou.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="sec sec--graphite footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <img src="tmw-logo.png" alt="Tomorrow" class="footer-logo-img">
+      <div class="footer-contacts">
+        <div class="contact-row">
+          <span class="mono">+55 35 98446-8504</span>
+          <button type="button" class="copy-btn" data-copy="+55 35 98446-8504">Copiar</button>
+        </div>
+        <div class="contact-row">
+          <span class="mono">contato@wearetomorrow.com.br</span>
+          <button type="button" class="copy-btn" data-copy="contato@wearetomorrow.com.br">Copiar</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="https://www.instagram.com/agenciatomorrow" target="_blank" rel="noopener">Instagram</a>
+      <a href="portfolio.html">Portfólio</a>
+      <a href="contato.html">Formulário completo</a>
+      <span class="copyright">&copy; 2026 Tomorrow. Feito com ◆ e nenhuma sigla.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var input = document.getElementById('msg');
+    var btn = document.getElementById('waBtn');
+    var base = 'https://wa.me/5535984468504?text=';
+    if(input && btn){
+      input.addEventListener('input', function(){
+        var val = input.value.trim();
+        var msg = val ? ('Olá! ' + val) : 'Olá! Quero falar sobre um projeto.';
+        btn.setAttribute('href', base + encodeURIComponent(msg));
+      });
+    }
+  })();
+
+  (function(){
+    function fallbackSelect(text){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }catch(e){}
+    }
+    var buttons = document.querySelectorAll('.copy-btn');
+    for(var i=0;i<buttons.length;i++){
+      buttons[i].addEventListener('click', function(){
+        var b = this;
+        var text = b.getAttribute('data-copy');
+        var original = b.textContent;
+        function done(label){
+          b.textContent = label;
+          setTimeout(function(){ b.textContent = original; }, 1600);
+        }
+        try{
+          navigator.clipboard.writeText(text).then(function(){
+            done('Copiado');
+          }).catch(function(){
+            fallbackSelect(text);
+            done('Selecionado');
+          });
+        }catch(e){
+          fallbackSelect(text);
+          done('Selecionado');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

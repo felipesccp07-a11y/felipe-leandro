@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Café Peneira Alta &middot; Portfólio Tomorrow</title>
+<meta name="description" content="Reposicionamento de marca e narrativa nova para o Café Peneira Alta.">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  :root{
+    --graphite:#181818;
+    --graphite-2:#333333;
+    --graphite-text-soft:#b7b7b0;
+    --smoke:#F5F5F5;
+    --smoke-2:#e9e9e4;
+    --smoke-text-soft:#6b6b64;
+    --orange:#F58F29;
+    --orange-deep:#d97615;
+    --blue:#2B59C3;
+    --blue-deep:#20439a;
+    --line-on-graphite: rgba(245,245,245,0.16);
+    --line-on-graphite-soft: rgba(245,245,245,0.08);
+    --line-on-smoke: rgba(41,41,41,0.14);
+    --line-on-blue: rgba(245,245,245,0.22);
+    --gutter: 24px;
+    color-scheme: dark;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--graphite);
+    color:var(--smoke);
+    font-family:'Archivo',Helvetica,Arial,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  ul{ margin:0; padding:0; list-style:none; }
+  p{ margin:0; }
+  h1,h2,h3{ margin:0; text-wrap:balance; font-weight:800; letter-spacing:-0.01em; }
+  *:focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+
+  .mono{ font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; }
+
+  .wrap{ max-width:1140px; margin:0 auto; padding-inline:var(--gutter); }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    margin-bottom:1.1em;
+  }
+  .eyebrow::before{ content:''; width:9px; height:9px; flex:none; }
+  .eyebrow--orange::before{ background:var(--orange); }
+  .eyebrow--blue::before{ background:var(--blue); }
+
+  .sec{ padding-block: clamp(56px, 9vw, 108px); }
+  .sec--graphite{ background:var(--graphite); color:var(--smoke); }
+  .sec--smoke{ background:var(--smoke); color:var(--graphite); }
+  .sec--orange{ background:var(--orange); color:var(--graphite); }
+  .sec--graphite .soft{ color:var(--graphite-text-soft); }
+  .sec--smoke .soft{ color:var(--smoke-text-soft); }
+  .sec--orange .soft{ color:rgba(41,41,41,.68); }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; z-index:80;
+    background:var(--graphite);
+    border-bottom:2px solid var(--blue);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:14px;
+  }
+  .logo-img{ height:20px; width:auto; display:block; }
+  .nav-back{
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem; font-weight:500;
+    letter-spacing:.04em; text-decoration:none; color:var(--graphite-text-soft);
+    display:flex; align-items:center; gap:.5em;
+    transition:color .15s ease;
+  }
+  .nav-back:hover{ color:var(--smoke); }
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem; font-weight:500;
+    letter-spacing:.06em; text-transform:uppercase;
+    color:var(--graphite); background:var(--orange);
+    padding:.6em 1.1em; text-decoration:none; white-space:nowrap;
+    transition: background-color .15s ease;
+  }
+  .nav-cta:hover{ background:var(--orange-deep); }
+
+  /* ---------- header do projeto ---------- */
+  .proj-hero{ padding-top:calc(64px + env(safe-area-inset-top,0px) + 44px); padding-bottom:0; }
+  .proj-title{ font-size:clamp(2rem, 4.8vw, 3.4rem); line-height:1.08; max-width:20ch; }
+  .proj-meta{
+    margin-top:1.8rem; display:flex; flex-wrap:wrap; gap:2rem;
+    padding-top:1.8rem; border-top:1px solid var(--line-on-graphite);
+  }
+  .proj-meta-item .mono-label{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:.7rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--graphite-text-soft);
+    margin-bottom:.4rem;
+  }
+  .proj-meta-item span:last-child{ font-size:1rem; font-weight:600; }
+
+  .proj-cover{
+    margin-top:2.6rem;
+    aspect-ratio:16/9;
+    background:var(--graphite-2);
+    position:relative;
+    overflow:hidden;
+  }
+  .proj-cover img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .proj-cover-fallback{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:.85rem; letter-spacing:.06em;
+    text-transform:uppercase; color:var(--graphite-text-soft); text-align:center; padding:1rem;
+  }
+
+  /* ---------- texto (desafio / solução) ---------- */
+  .proj-text-grid{ display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+  .proj-text-block h2{ font-size:clamp(1.3rem,2.4vw,1.7rem); margin-bottom:1rem; }
+  .proj-text-block p{ font-size:1.04rem; }
+  .proj-text-block p + p{ margin-top:.9rem; }
+  @media (max-width:780px){ .proj-text-grid{ grid-template-columns:1fr; gap:2.2rem; } }
+
+  /* ---------- entregáveis ---------- */
+  .chip-list{ display:flex; flex-direction:column; gap:.65rem; margin-top:1.4rem; }
+  .chip-list li{ display:flex; align-items:center; gap:.7rem; font-size:1rem; }
+  .chip-sq{ width:9px; height:9px; flex:none; background:var(--orange); }
+
+  /* ---------- galeria de imagens do projeto ---------- */
+  .proj-gallery{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.2rem; }
+  .proj-gallery figure{ margin:0; background:var(--smoke-2); aspect-ratio:4/3; position:relative; overflow:hidden; }
+  .proj-gallery img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  .proj-gallery .gal-fallback{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem; color:var(--smoke-text-soft);
+    text-align:center; padding:1rem;
+  }
+  @media (max-width:640px){ .proj-gallery{ grid-template-columns:1fr; } }
+
+  /* ---------- resultado (destaque) ---------- */
+  .result-quote{ font-size:clamp(1.3rem, 2.6vw, 1.85rem); font-weight:600; line-height:1.35; text-wrap:balance; max-width:36ch; }
+
+  /* ---------- botão ---------- */
+  .btn{
+    display:inline-flex; align-items:center; gap:.6em;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.86rem;
+    letter-spacing:.03em; text-decoration:none;
+    padding: 1em 1.6em; border:2px solid transparent; cursor:pointer;
+    transition: transform .12s ease, background-color .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn--orange{ background:var(--orange); color:var(--graphite); }
+  .btn--orange:hover{ background:var(--orange-deep); }
+  .btn--graphite{ background:var(--graphite); color:var(--smoke); }
+  .btn--graphite:hover{ background:#171717; }
+  .btn--ghost-graphite{ background:transparent; border-color:var(--graphite); color:var(--graphite); }
+  .btn--ghost-graphite:hover{ background:rgba(41,41,41,.06); }
+
+  /* ---------- próximo projeto ---------- */
+  .next-proj{
+    display:flex; align-items:center; justify-content:space-between; gap:1.5rem;
+    padding:2rem 0; border-top:1px solid var(--line-on-smoke);
+  }
+  .next-proj .mono-label{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:.72rem;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--smoke-text-soft); margin-bottom:.4rem;
+  }
+  .next-proj h3{ font-size:1.3rem; }
+  .next-arrow{ font-size:1.6rem; flex:none; }
+
+  /* ---------- CTA laranja ---------- */
+  .bora-inner{ max-width:640px; }
+  .bora-inner h2{ font-size:clamp(1.7rem,3.6vw,2.6rem); color:var(--graphite); }
+  .bora-inner > p{ margin-top:1rem; font-size:1.08rem; }
+  .bora-row{ margin-top:2.2rem; display:flex; gap:1rem; flex-wrap:wrap; }
+
+  /* ---------- footer ---------- */
+  .footer{ padding-block:3.4rem 3rem; border-top:2px solid var(--blue); }
+  .footer-top{ display:flex; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+  .footer-logo-img{ height:26px; width:auto; display:block; }
+  .footer-contacts{ display:flex; flex-direction:column; gap:.9rem; }
+  .contact-row{ display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
+  .contact-row .mono{ font-size:.95rem; }
+  .copy-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+    background:transparent; border:1px solid var(--line-on-graphite); color:var(--smoke);
+    padding:.4em .8em; cursor:pointer; transition:border-color .15s ease, background-color .15s ease;
+  }
+  .copy-btn:hover{ border-color:var(--orange); background:rgba(245,143,41,.08); }
+  .footer-bottom{ margin-top:2.6rem; display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; }
+  .footer-bottom a{ text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:.82rem; }
+  .footer-bottom a:hover{ color:var(--orange); }
+  .copyright{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--graphite-text-soft); }
+
+  @media (max-width:400px){
+    :root{ --gutter:16px; }
+    .nav-cta{ font-size:.68rem; padding:.55em .85em; }
+    .logo-img{ height:17px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===========================================================
+     TEMPLATE DE PÁGINA DE PROJETO
+     Pra criar um projeto novo: duplique este arquivo com outro
+     nome (ex.: projeto-nome-do-cliente.html), troque os textos,
+     as imagens (ou apague as divs "fallback" quando tiver fotos
+     reais) e o link "próximo projeto" no fim da página. Depois
+     adicione um card novo em portfolio.html apontando pra ele.
+     =========================================================== -->
+
+<header class="nav">
+  <div class="nav-inner wrap">
+    <a href="index.html" aria-label="Tomorrow &mdash; início"><img src="tomorrow.png" alt="Tomorrow" class="logo-img"></a>
+    <a class="nav-back" href="portfolio.html">&larr; Voltar ao portfólio</a>
+    <a class="nav-cta" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Vi%20o%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<section class="sec sec--graphite proj-hero">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--orange">RESTAURANTE &middot; REPOSICIONAMENTO</p>
+    <h1 class="proj-title">Café Peneira Alta</h1>
+    <div class="proj-meta">
+      <div class="proj-meta-item"><span class="mono-label">Cliente</span><span>Café Peneira Alta</span></div>
+      <div class="proj-meta-item"><span class="mono-label">Ano</span><span>2026</span></div>
+      <div class="proj-meta-item"><span class="mono-label">Escopo</span><span>Narrativa, filme e fotografia</span></div>
+      <div class="proj-meta-item"><span class="mono-label">Prazo</span><span>18 dias</span></div>
+    </div>
+
+    <div class="proj-cover">
+      <img src="img/portfolio/projetos/exemplo-capa.jpg" alt="Capa do projeto Café Peneira Alta" loading="eager" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+      <div class="proj-cover-fallback">Imagem de capa do projeto<br>(entra aqui)</div>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--graphite" style="padding-top:3rem;">
+  <div class="wrap proj-text-grid">
+    <div class="proj-text-block">
+      <h2>O desafio</h2>
+      <p class="soft">Restaurante tradicional do interior de Minas Gerais, conhecido localmente, mas sem nenhuma presença que trouxesse gente de fora da cidade. Cardápio forte, história forte &mdash; e nenhuma das duas coisas contadas pra quem passava perto.</p>
+    </div>
+    <div class="proj-text-block">
+      <h2>O que fizemos</h2>
+      <p class="soft">Em vez de mais verba de mídia, uma narrativa nova: quem é a família por trás da cozinha, o que torna o lugar diferente, e por que vale o desvio de rota.</p>
+      <ul class="chip-list">
+        <li><span class="chip-sq"></span>Roteiro e filme</li>
+        <li><span class="chip-sq"></span>Fotografia de prato e ambiente</li>
+        <li><span class="chip-sq"></span>Campanha de mídia local</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--smoke">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--blue" style="color:var(--blue)">REGISTRO DO PROJETO</p>
+    <div class="proj-gallery">
+      <figure>
+        <img src="img/portfolio/projetos/exemplo-01.jpg" alt="Café Peneira Alta &mdash; imagem 1" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="gal-fallback">Foto 1</div>
+      </figure>
+      <figure>
+        <img src="img/portfolio/projetos/exemplo-02.jpg" alt="Café Peneira Alta &mdash; imagem 2" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="gal-fallback">Foto 2</div>
+      </figure>
+      <figure>
+        <img src="img/portfolio/projetos/exemplo-03.jpg" alt="Café Peneira Alta &mdash; imagem 3" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="gal-fallback">Foto 3</div>
+      </figure>
+      <figure>
+        <img src="img/portfolio/projetos/exemplo-04.jpg" alt="Café Peneira Alta &mdash; imagem 4" loading="lazy" onload="this.nextElementSibling.style.display='none'" onerror="this.style.display='none'">
+        <div class="gal-fallback">Foto 4</div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--graphite">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--orange">RESULTADO</p>
+    <p class="result-quote">No dia seguinte ao filme no ar, uma excursão que tinha outro destino mudou de rota pra almoçar lá.</p>
+  </div>
+</section>
+
+<section class="sec sec--smoke" style="padding-top:0;">
+  <div class="wrap">
+    <a class="next-proj" href="portfolio.html">
+      <div>
+        <span class="mono-label">Próximo</span>
+        <h3>Ver todos os projetos</h3>
+      </div>
+      <span class="next-arrow">&#8594;</span>
+    </a>
+  </div>
+</section>
+
+<section class="sec sec--orange">
+  <div class="wrap bora-inner">
+    <h2>Bora fazer o seu.</h2>
+    <p>Conte qual é o problema. Retorno em até 1 dia com o que precisa ser feito.</p>
+    <div class="bora-row">
+      <a class="btn btn--graphite" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Vi%20o%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Quero falar sobre um projeto</a>
+      <a class="btn btn--ghost-graphite" href="contato.html">Ou preencha o formulário</a>
+    </div>
+  </div>
+</section>
+
+<footer class="sec sec--graphite footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <img src="tmw-logo.png" alt="Tomorrow" class="footer-logo-img">
+      <div class="footer-contacts">
+        <div class="contact-row">
+          <span class="mono">+55 35 98446-8504</span>
+          <button type="button" class="copy-btn" data-copy="+55 35 98446-8504">Copiar</button>
+        </div>
+        <div class="contact-row">
+          <span class="mono">contato@wearetomorrow.com.br</span>
+          <button type="button" class="copy-btn" data-copy="contato@wearetomorrow.com.br">Copiar</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="https://www.instagram.com/agenciatomorrow" target="_blank" rel="noopener">Instagram</a>
+      <a href="portfolio.html">&larr; Voltar ao portfólio</a>
+      <span class="copyright">&copy; 2026 Tomorrow. Feito com &#9670; e nenhuma sigla.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    function fallbackSelect(text){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }catch(e){}
+    }
+    var buttons = document.querySelectorAll('.copy-btn');
+    for(var i=0;i<buttons.length;i++){
+      buttons[i].addEventListener('click', function(){
+        var b = this;
+        var text = b.getAttribute('data-copy');
+        var original = b.textContent;
+        function done(label){
+          b.textContent = label;
+          setTimeout(function(){ b.textContent = original; }, 1600);
+        }
+        try{
+          navigator.clipboard.writeText(text).then(function(){
+            done('Copiado');
+          }).catch(function(){
+            fallbackSelect(text);
+            done('Selecionado');
+          });
+        }catch(e){
+          fallbackSelect(text);
+          done('Selecionado');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
