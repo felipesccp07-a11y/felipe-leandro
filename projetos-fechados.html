@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Projetos fechados · Felipe Leandro</title>
+<meta name="description" content="Identidade visual, filme, campanha, vídeos curtos e landing page. Escopo, prazo e preço fechados.">
+<meta property="og:title" content="Projetos fechados · Felipe Leandro">
+<meta property="og:description" content="Identidade visual, filme, campanha, vídeos curtos e landing page. Escopo, prazo e preço fechados.">
+<meta property="og:image" content="img/felipe.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+:root{--o:#FE510A;--o2:#d94000;--ink:#0d0d0d;--ink2:#1c1c1c;--paper:#F3F0EA;--mute:#8d8a84;--line:rgba(243,240,234,.14);--g:clamp(18px,4vw,40px);color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}html,body{margin:0;padding:0}html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:'Archivo',Helvetica,Arial,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}a{color:inherit;text-decoration:none}p,h1,h2,h3,ul{margin:0;padding:0}ul{list-style:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.mono{font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace}
+.wrap{max-width:1320px;margin:0 auto;padding-inline:var(--g)}
+.disp{font-family:'Archivo',sans-serif;font-stretch:62%;font-variation-settings:'wdth' 62;font-weight:900;text-transform:uppercase;line-height:.82;letter-spacing:-.01em}
+.lbl{font-family:'IBM Plex Mono',monospace;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+/* header */
+.top{position:sticky;top:0;z-index:50;background:var(--ink);border-bottom:2px solid var(--o)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:62px}
+.wm{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 62;font-stretch:62%;font-weight:900;font-size:1.55rem;letter-spacing:.01em;text-transform:uppercase;line-height:1}
+.wm b{color:var(--o)}
+.nav{display:flex;align-items:center;gap:clamp(12px,2.4vw,30px)}
+.nav a.l{font-family:'IBM Plex Mono',monospace;font-size:.76rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;opacity:.75}
+.nav a.l:hover,.nav a.l[aria-current]{opacity:1;color:var(--o)}
+.btn{display:inline-flex;align-items:center;gap:.6em;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;padding:.95em 1.4em;border:2px solid currentColor;transition:transform .15s,background .15s,color .15s}
+.btn:hover{transform:translate(-3px,-3px);box-shadow:3px 3px 0 currentColor}
+.btn--o{background:var(--o);color:var(--ink);border-color:var(--o)}.btn--o:hover{box-shadow:3px 3px 0 var(--paper)}
+.btn--ink{background:var(--ink);color:var(--paper);border-color:var(--ink)}.btn--ink:hover{box-shadow:3px 3px 0 var(--ink)}
+.btn--sm{padding:.7em 1em;font-size:.72rem}
+@media (max-width:760px){.nav a.l{display:none}}
+/* marquee */
+.mq{background:var(--paper);color:var(--ink);overflow:hidden;border-block:2px solid var(--ink);white-space:nowrap}
+.mq-in{display:inline-flex;animation:mq 28s linear infinite;padding-block:14px}
+.mq span{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 62;font-stretch:62%;font-weight:900;font-size:clamp(1.6rem,3.4vw,2.6rem);text-transform:uppercase;padding-inline:.5em;line-height:1}
+.mq i{font-style:normal;color:var(--o)}
+@keyframes mq{to{transform:translateX(-50%)}}
+/* sections */
+.sec{padding-block:clamp(64px,10vw,140px)}
+.sec--o{background:var(--o);color:var(--ink)}
+.sec--paper{background:var(--paper);color:var(--ink)}
+.kick{display:flex;align-items:center;gap:.7em;margin-bottom:28px}
+.kick::before{content:'';width:12px;height:12px;background:var(--o);flex:none}
+.sec--o .kick::before{background:var(--ink)}
+.h2{font-size:clamp(3.2rem,9vw,8.5rem)}
+.lede{font-size:clamp(1.15rem,1.8vw,1.45rem);line-height:1.45;max-width:38ch}
+/* page hero (inner) */
+.phero{padding-block:clamp(56px,9vw,120px) clamp(40px,6vw,72px);border-bottom:2px solid var(--line)}
+.phero h1{font-size:clamp(4rem,15vw,15rem);color:var(--paper)}
+.phero h1 span{color:var(--o)}
+.phero .lede{margin-top:28px;color:var(--paper);opacity:.85}
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,26px)}
+@media (max-width:980px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:600px){.grid{grid-template-columns:1fr}}
+.card{display:block;position:relative;background:var(--ink2);border:2px solid var(--ink2);transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--o);transform:translateY(-4px)}
+.card .th{aspect-ratio:4/5;overflow:hidden;position:relative;background:#222}
+.card .th img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1);transition:filter .35s,transform .5s}
+.card:hover .th img{filter:none;transform:scale(1.04)}
+.card .num{position:absolute;top:12px;left:12px;background:var(--o);color:var(--ink);padding:.3em .55em;z-index:2}
+.card .meta{padding:16px 16px 18px;display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.card h3{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 62;font-stretch:62%;font-weight:900;text-transform:uppercase;font-size:2rem;line-height:.9}
+.card .tag{color:var(--mute);margin-top:8px;display:block}
+.card .arr{font-size:1.6rem;color:var(--o);line-height:1}
+/* cta */
+.cta h2{font-size:clamp(4rem,14vw,13rem)}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:40px;align-items:center}
+.cta .mail{font-family:'IBM Plex Mono',monospace;font-weight:600;border-bottom:2px solid var(--ink);padding-bottom:2px}
+/* footer */
+.foot{border-top:2px solid var(--o);padding-block:36px}
+.foot .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px}
+.foot .lnk{display:flex;flex-wrap:wrap;gap:22px;color:var(--mute)}
+.foot .lnk a:hover{color:var(--o)}
+.copy-btn{background:none;border:1px solid var(--line);color:var(--paper);font:inherit;font-size:.7rem;padding:.25em .6em;cursor:pointer;margin-left:.5em}
+.copy-btn:hover{border-color:var(--o);color:var(--o)}
+
+.svc{display:grid;grid-template-columns:120px 1.1fr 1fr;gap:clamp(18px,4vw,56px);padding-block:clamp(36px,5vw,60px);border-top:2px solid var(--line);scroll-margin-top:80px}
+.svc:last-child{border-bottom:2px solid var(--line)}
+.svc .n{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 62;font-stretch:62%;font-weight:900;font-size:clamp(3rem,6vw,5.5rem);line-height:.8;color:var(--o)}
+.svc h2{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 62;font-stretch:62%;font-weight:900;text-transform:uppercase;font-size:clamp(2.4rem,5.4vw,4.6rem);line-height:.88}
+.svc p{font-size:1.15rem;line-height:1.5;opacity:.9}
+.svc .ex{margin-top:16px;color:var(--mute)}
+.svc .ex b{color:var(--paper);font-weight:600}
+@media (max-width:860px){.svc{grid-template-columns:1fr;gap:12px}}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink)}
+.step{padding:28px 22px 32px;border-right:2px solid var(--ink)}
+.step:last-child{border-right:0}
+.step .n{display:inline-block;background:var(--ink);color:var(--o);padding:.3em .6em;margin-bottom:22px}
+.step h3{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 62;font-stretch:62%;font-weight:900;text-transform:uppercase;font-size:2.4rem;line-height:.9;margin-bottom:12px}
+.step p{line-height:1.45}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}.step:nth-child(2){border-right:0}.step:nth-child(-n+2){border-bottom:2px solid var(--ink)}}
+@media (max-width:560px){.steps{grid-template-columns:1fr}.step{border-right:0;border-bottom:2px solid var(--ink)}.step:last-child{border-bottom:0}}
+.faq{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,3vw,40px)}
+.faq h3{font-family:'Archivo',sans-serif;font-variation-settings:'wdth' 62;font-stretch:62%;font-weight:900;text-transform:uppercase;font-size:1.9rem;line-height:.95;margin-bottom:12px;color:var(--o)}
+.faq p{opacity:.88}
+@media (max-width:860px){.faq{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <a class="wm" href="index.html">Felipe<b>.</b>Leandro</a>
+  <nav class="nav"><a class="l" href="projetos-fechados.html" aria-current="page">Projetos fechados</a><a class="l" href="portfolio.html">Portfólio</a><a class="btn btn--o btn--sm" href="https://wa.me/5535984468504?text=Ol%C3%A1%20Felipe%21%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp</a></nav>
+</div></header>
+<section class="phero"><div class="wrap">
+  <p class="lbl kick">O que eu entrego</p>
+  <h1 class="disp">Projetos<br><span>fechados.</span></h1>
+  <p class="lede">Escopo, prazo e preço definidos antes de começar. Começo, meio e fim. Sem mensalidade.</p>
+</div></section>
+<section class="sec"><div class="wrap"><article class="svc" id="s1"><span class="n">01</span><h2>Identidade visual</h2><div><p>Logo, cores, tipografia e aplicações. Para marca nova ou para marca que ficou velha.</p><p class="ex lbl">Exemplo: <b>Razze Turismo · Márcio Bertocco · Método Start</b></p></div></article><article class="svc" id="s2"><span class="n">02</span><h2>Filme de marca</h2><div><p>O filme que mostra quem a empresa é. Roteiro, captação e edição.</p><p class="ex lbl">Exemplo: <b>Carijó — filme de 1 ano</b></p></div></article><article class="svc" id="s3"><span class="n">03</span><h2>Filme de campanha</h2><div><p>Data comercial, lançamento, inauguração. Um filme com ideia, não um anúncio de desconto.</p><p class="ex lbl">Exemplo: <b>Cafézim · Carijó — Dia das Mães</b></p></div></article><article class="svc" id="s4"><span class="n">04</span><h2>Vídeos curtos e criativos</h2><div><p>Reels, vídeos para anúncio e peças para redes, feitos para parar o dedo.</p><p class="ex lbl">Exemplo: <b>Rogério Ribeiro · Carijó — Do Sítio à Mesa</b></p></div></article><article class="svc" id="s5"><span class="n">05</span><h2>Landing page</h2><div><p>Página de venda ou de apresentação, feita junto com a marca e a campanha.</p></div></article></div></section>
+<section class="sec sec--o"><div class="wrap">
+  <p class="lbl kick">Como funciona · 100% remoto</p>
+  <h2 class="disp h2" style="margin-bottom:44px">De qualquer lugar.</h2>
+  <div class="steps"><div class="step"><span class="n lbl">01</span><h3>Briefing</h3><p>Chamada de vídeo para entender a marca, o objetivo e o prazo.</p></div><div class="step"><span class="n lbl">02</span><h3>Proposta</h3><p>Escopo, prazo e preço fechados, por escrito. Sem mensalidade.</p></div><div class="step"><span class="n lbl">03</span><h3>Produção</h3><p>Cada etapa aprovada por link. Você acompanha sem sair de onde está.</p></div><div class="step"><span class="n lbl">04</span><h3>Entrega</h3><p>Arquivos finais em alta, organizados e prontos para usar.</p></div></div>
+</div></section>
+<section class="sec"><div class="wrap">
+  <p class="lbl kick">Perguntas rápidas</p>
+  <div class="faq">
+    <div><h3>Quanto custa?</h3><p>Depende do escopo. Depois do briefing você recebe uma proposta com preço fechado.</p></div>
+    <div><h3>E a filmagem, se eu for longe?</h3><p>Quando o projeto pede, eu vou até o local. Quando não, faço roteiro e direção remota e cuido da edição.</p></div>
+    <div><h3>Quanto tempo leva?</h3><p>O prazo entra na proposta e é cumprido. Depende do tamanho do projeto.</p></div>
+  </div>
+</div></section>
+<section class="sec sec--o cta"><div class="wrap">
+  <p class="lbl kick">Atendimento 100% remoto · Brasil inteiro</p>
+  <h2 class="disp">Bora?</h2>
+  <p class="lede" style="margin-top:24px">Me conta o que você precisa. Respondo em até 1 dia com o caminho, o prazo e o orçamento.</p>
+  <div class="cta-row">
+    <a class="btn btn--ink" href="https://wa.me/5535984468504?text=Ol%C3%A1%20Felipe%21%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Chamar no WhatsApp →</a>
+    <a class="mail" href="mailto:felipesccp07@gmail.com">felipesccp07@gmail.com</a>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <a class="wm" href="index.html">Felipe<b>.</b>Leandro</a>
+  <div class="lnk lbl">
+    <a href="projetos-fechados.html">Projetos fechados</a>
+    <a href="portfolio.html">Portfólio</a>
+    <a href="https://wa.me/5535984468504?text=Ol%C3%A1%20Felipe%21%20Vi%20seu%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">WhatsApp +55 35 98446-8504</a>
+    <span>felipesccp07@gmail.com<button type="button" class="copy-btn" data-copy="felipesccp07@gmail.com">Copiar</button></span>
+  </div>
+  <span class="lbl" style="color:var(--mute)">© 2026 Felipe Leandro</span>
+</div></footer>
+<script>
+document.querySelectorAll('.copy-btn').forEach(function(b){b.addEventListener('click',function(){try{navigator.clipboard.writeText(b.dataset.copy);var t=b.textContent;b.textContent='Copiado';setTimeout(function(){b.textContent=t},1400)}catch(e){}})});
+</script>
+</body></html>
