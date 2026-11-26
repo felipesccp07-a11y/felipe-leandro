@@ -1,0 +1,940 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Gestão mensal de marketing: tráfego pago e redes sociais | Tomorrow</title>
+<meta name="description" content="Gestão mensal com teste de criativo em rodadas, redes sociais com conteúdo que as pessoas param pra ver, guerrilha e relatório semanal. Sem pacote fixo.">
+<link rel="canonical" href="https://wearetomorrow.com.br/gestao-mensal.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Gestão mensal | Tomorrow">
+<meta property="og:description" content="Tráfego pago testado em rodadas. Redes sociais que não parecem de empresa. Relatório toda semana.">
+<meta property="og:url" content="https://wearetomorrow.com.br/gestao-mensal.html">
+<meta property="og:image" content="https://wearetomorrow.com.br/tomorrow.png">
+<meta name="theme-color" content="#111111">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Service","name":"Gestão mensal de marketing","serviceType":"Gestão de tráfego pago e redes sociais","provider":{"@type":"Organization","name":"Tomorrow","url":"https://wearetomorrow.com.br","email":"contato@wearetomorrow.com.br","telephone":"+55 35 98446-8504"},"description":"Gestão mensal com etapa de exploração de criativos, rodadas de teste, redes sociais, marketing de guerrilha e relatório semanal."}
+</script>
+<style>
+:root{
+  --o:#FF7B00;
+  --o-soft:#FF7B0022;
+  --dark:#111111;
+  --dark-2:#1b1b1b;
+  --block:#3d3d3d;
+  --block-2:#2b2b2b;
+  --block-dim:#232323;
+  --light:#E8E8E8;
+  --white:#ffffff;
+  --paper:#EDEDED;
+  --ink:#111111;
+  --mute-d:#9a9a9a;
+  --mute-l:#5c5c5c;
+  --line-d:#2e2e2e;
+  --line-l:#d2d2d2;
+  --r:14px;
+  --pad:clamp(16px,5vw,64px);
+  --maxw:1180px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:"Inter Tight",system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;background:var(--dark);color:var(--paper);line-height:1.45;font-size:17px;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+
+/* ---------- type ---------- */
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}
+.num{font-size:13px;font-weight:600;letter-spacing:.08em;color:var(--o);margin-bottom:18px;display:block}
+.h-xl{font-weight:700;letter-spacing:-.055em;line-height:.9;font-size:clamp(46px,9vw,124px)}
+.h-l{font-weight:700;letter-spacing:-.05em;line-height:.92;font-size:clamp(36px,5.6vw,80px)}
+.h-m{font-weight:700;letter-spacing:-.04em;line-height:.98;font-size:clamp(28px,4vw,52px)}
+.lead{font-weight:300;letter-spacing:-.035em;line-height:1.08;font-size:clamp(20px,2.6vw,34px)}
+.lead b{font-weight:700}
+.o{color:var(--o)}
+.mute{color:var(--mute-d)}
+.light .mute{color:var(--mute-l)}
+.tag{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:6px 10px;border-radius:999px;border:1px solid currentColor;opacity:.75}
+
+/* ---------- layout ---------- */
+.slide{position:relative;padding:clamp(72px,11vh,140px) var(--pad);display:flex;flex-direction:column;justify-content:center;overflow:hidden}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto}
+.dark{background:var(--dark);color:var(--paper)}
+.light{background:var(--light);color:var(--ink)}
+.orange{background:var(--o);color:var(--ink)}
+.center{text-align:center}
+.stack>*+*{margin-top:22px}
+
+/* ---------- header ---------- */
+.top{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px var(--pad);background:linear-gradient(#111111ee,#11111100);transition:opacity .3s}
+.logo{display:flex;align-items:center;height:30px;text-decoration:none}
+.logo img{height:26px;width:auto}
+.wordmark{font-weight:800;letter-spacing:-.07em;font-size:30px;color:var(--o);line-height:1}
+.nav{display:flex;align-items:center;gap:22px;font-size:15px;font-weight:500}
+.nav a{text-decoration:none;opacity:.8}
+.nav a:hover{opacity:1}
+.nav a.active{opacity:1;color:var(--o)}
+.btn{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:16px;padding:15px 22px;border-radius:999px;text-decoration:none;transition:transform .2s var(--ease),background .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-o{background:var(--o);color:var(--ink)}
+.btn-line{border:1.5px solid currentColor}
+.btn-sm{padding:10px 16px;font-size:14px}
+@media (max-width:720px){.nav .hide-m{display:none}}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+/* ---------- hero ---------- */
+.hero{min-height:100vh;min-height:100svh}
+.hero .h-xl{max-width:11ch}
+.hero-sub{max-width:34ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:38px}
+.hero-ticker{margin-top:clamp(40px,8vh,80px);display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:760px}
+.tk{background:var(--block-2);border-radius:var(--r);padding:18px}
+.tk b{display:block;font-size:clamp(26px,3.6vw,40px);letter-spacing:-.05em;font-weight:700;line-height:1}
+.tk span{font-size:14px;color:var(--mute-d)}
+.tk.on b{color:var(--o)}
+@media (max-width:620px){.hero-ticker{grid-template-columns:1fr}}
+
+/* ---------- month timeline ---------- */
+.weeks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:48px}
+.wk{background:var(--white);border-radius:var(--r);padding:22px 20px 24px;box-shadow:0 6px 20px #0000000f;position:relative;overflow:hidden}
+.wk h3{font-size:15px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--mute-l);margin-bottom:12px}
+.wk p{font-size:20px;letter-spacing:-.03em;line-height:1.12;font-weight:500}
+.wk .bar{position:absolute;left:0;bottom:0;height:5px;width:0;background:var(--o);transition:width 1.1s var(--ease)}
+.wk .fri{position:absolute;right:14px;top:16px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--o);opacity:0;transition:opacity .4s}
+.in .wk .bar{width:100%}
+.in .wk .fri{opacity:1}
+.in .wk:nth-child(1) .bar{transition-delay:.1s}.in .wk:nth-child(2) .bar{transition-delay:.6s}.in .wk:nth-child(3) .bar{transition-delay:1.1s}.in .wk:nth-child(4) .bar{transition-delay:1.6s}
+.in .wk:nth-child(1) .fri{transition-delay:1s}.in .wk:nth-child(2) .fri{transition-delay:1.5s}.in .wk:nth-child(3) .fri{transition-delay:2s}.in .wk:nth-child(4) .fri{transition-delay:2.5s}
+.note{margin-top:22px;font-size:15px}
+@media (max-width:820px){.weeks{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.weeks{grid-template-columns:1fr}}
+
+/* ---------- exploration ---------- */
+.ex-title .l2{color:var(--paper)}
+.ex-lead{margin-top:22px;max-width:42ch;color:var(--o)}
+.ex-lead b{color:var(--o)}
+.ex-panel{margin-top:36px;display:grid;grid-template-columns:320px 1fr;gap:clamp(20px,4vw,48px);align-items:start}
+.ctrl{background:var(--dark-2);border:1px solid var(--line-d);border-radius:var(--r);padding:22px}
+.ctrl label{display:block;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--mute-d)}
+.ctrl .money{font-size:40px;font-weight:700;letter-spacing:-.05em;margin:6px 0 14px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:99px;background:linear-gradient(90deg,var(--o) var(--p,30%),var(--block) var(--p,30%));outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--o);border:4px solid var(--dark);box-shadow:0 0 0 2px var(--o);cursor:grab}
+input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--o);border:4px solid var(--dark);box-shadow:0 0 0 2px var(--o);cursor:grab}
+.kv{margin-top:18px;border-top:1px solid var(--line-d)}
+.kv div{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid var(--line-d);font-size:15px}
+.kv dt{color:var(--mute-d);white-space:nowrap}
+.kv dd{font-weight:600;text-align:right;white-space:nowrap}
+.ctrl .btn{width:100%;justify-content:center;margin-top:18px}
+.ctrl small{display:block;margin-top:12px;font-size:13px;color:var(--mute-d);line-height:1.4}
+.grid-head{font-size:clamp(16px,1.6vw,20px);font-weight:600;letter-spacing:-.03em;text-align:center;margin-bottom:18px}
+.axes{display:grid;grid-template-columns:repeat(var(--n,5),minmax(0,128px));justify-content:center;gap:clamp(10px,2vw,26px)}
+.axis{display:flex;flex-direction:column;gap:10px;transition:opacity .4s}
+.axis-h{aspect-ratio:1/1;background:var(--block);display:flex;align-items:center;justify-content:center;text-align:center;padding:10px;font-size:clamp(13px,1.35vw,17px);letter-spacing:-.03em;line-height:1.05;font-weight:400;transition:background .4s}
+.cells{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cell{aspect-ratio:1/1;background:var(--block);display:flex;align-items:center;justify-content:center;font-size:clamp(14px,1.5vw,20px);font-weight:400;transition:background .25s,opacity .45s,transform .3s var(--ease),color .25s}
+.cell.flash{background:#6a6a6a;transform:scale(.94)}
+.cell.lose{opacity:.18}
+.cell.win{background:var(--o);color:var(--ink);font-weight:700;transform:scale(1.04)}
+.axis.done .axis-h{background:var(--block-2)}
+.eqs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.eq{display:flex;align-items:center;gap:14px;justify-content:center;text-align:center;font-weight:600;font-size:clamp(14px,1.45vw,18px);letter-spacing:-.03em;line-height:1.05;color:var(--o);padding:16px;border-radius:var(--r);border:1px solid var(--line-d);transition:border-color .4s,background .4s}
+.eq i{font-style:normal;opacity:.7}
+.eq.bad{color:var(--mute-d)}
+.eq.lit{border-color:var(--o);background:var(--o-soft)}
+.ex-close{margin-top:clamp(32px,5vh,56px);font-size:clamp(24px,3vw,40px)}
+@media (max-width:980px){.ex-panel{grid-template-columns:1fr}}
+@media (max-width:640px){.axes{grid-template-columns:repeat(min(var(--n,5),3),1fr)}.eqs{grid-template-columns:1fr}}
+
+/* ---------- round 2 ---------- */
+.r2{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:clamp(12px,2vw,28px);align-items:center;margin-top:52px}
+.r2-col h4{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--mute-d);margin-bottom:14px}
+.chips{display:flex;flex-direction:column;gap:8px}
+.chip{display:flex;justify-content:space-between;align-items:center;background:var(--block-2);border-radius:10px;padding:12px 14px;font-size:15px;opacity:0;transform:translateX(-14px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.chip b{background:var(--o);color:var(--ink);border-radius:6px;padding:2px 9px;font-size:14px}
+.in .chip{opacity:1;transform:none}
+.arrow{font-size:34px;color:var(--o);font-weight:300}
+.combo{min-height:230px;background:var(--o);color:var(--ink);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;justify-content:space-between;transform:scale(.9);opacity:0;transition:all .7s var(--ease) .5s}
+.in .combo{transform:none;opacity:1}
+.combo strong{font-size:clamp(22px,2.6vw,32px);letter-spacing:-.04em;line-height:1;font-weight:700}
+.combo span{font-size:14px;font-weight:600}
+.derived{display:grid;grid-template-columns:repeat(2,minmax(0,110px));gap:10px}
+.dv{aspect-ratio:1/1;background:var(--block);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:15px;opacity:0;transform:scale(.85);transition:all .5s var(--ease)}
+.dv small{font-size:11px;color:var(--mute-d);letter-spacing:.04em;text-transform:uppercase}
+.in .dv{opacity:1;transform:none}
+.in .dv:nth-child(1){transition-delay:1s}.in .dv:nth-child(2){transition-delay:1.15s}.in .dv:nth-child(3){transition-delay:1.3s}.in .dv:nth-child(4){transition-delay:1.45s}
+.loop{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:44px}
+.lp{border-top:2px solid var(--o);padding-top:14px}
+.lp b{display:block;font-size:20px;letter-spacing:-.03em;margin-bottom:4px}
+.lp span{font-size:15px;color:var(--mute-d)}
+@media (max-width:900px){.r2{grid-template-columns:1fr}.arrow{transform:rotate(90deg);justify-self:center}.combo{aspect-ratio:auto;min-height:180px}.loop{grid-template-columns:1fr}}
+
+/* ---------- journey ---------- */
+.jt{color:var(--o);max-width:13ch}
+.jr{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(12px,2vw,26px);margin-top:48px}
+.sc{display:flex;flex-direction:column;align-items:center;text-align:center}
+.sc-h{font-size:22px;letter-spacing:-.04em;font-weight:400}
+.sc-s{font-size:14px;font-weight:700;letter-spacing:-.02em;margin-bottom:16px;min-height:2.4em}
+.box{width:100%;max-width:200px;background:var(--white);border-radius:var(--r);box-shadow:0 6px 18px #0000001a;padding:14px 10px;font-size:17px;letter-spacing:-.03em;line-height:1.05;opacity:0;transform:translateY(12px);transition:all .5s var(--ease)}
+.box small{display:block;font-size:12.5px;margin-top:3px;letter-spacing:-.01em}
+.dn{font-size:22px;line-height:1;margin:8px 0;opacity:0;transition:opacity .4s}
+.in .box,.in .dn{opacity:1;transform:none}
+.res{margin:16px auto 0;max-width:14ch;font-weight:700;letter-spacing:-.03em;line-height:1.02}
+.res .pc{display:block;color:var(--o);font-size:21px}
+.res .vd{font-size:20px}
+.sc-n{margin-top:12px;font-size:14.5px;line-height:1.25;letter-spacing:-.01em;max-width:24ch}
+.sc.best .box{outline:2.5px solid var(--o)}
+.sc.best .sc-s{color:var(--o)}
+.ratio{margin-top:10px;font-size:13px;color:var(--mute-l)}
+.ratio b{color:var(--ink)}
+.j-close{margin-top:clamp(36px,6vh,64px);max-width:32ch}
+.j-close .o b{font-weight:700}
+.illus{margin-top:24px;font-size:13px;color:var(--mute-l)}
+@media (max-width:900px){
+  .jr{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:16px;margin-left:calc(var(--pad)*-1);margin-right:calc(var(--pad)*-1);padding:6px var(--pad) 18px}
+  .sc{flex:0 0 72%;scroll-snap-align:center}
+}
+
+/* ---------- social ---------- */
+.soc{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.lim{margin-top:28px;display:grid;gap:10px}
+.lim div{display:flex;gap:12px;align-items:flex-start;font-size:16px}
+.lim div::before{content:"";flex:0 0 10px;height:10px;margin-top:7px;background:var(--o)}
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.ph{background:#000;border-radius:26px;padding:8px;border:1px solid var(--line-d);transform:translateY(20px);opacity:0;transition:all .8s var(--ease)}
+.in .ph{transform:none;opacity:1}
+.in .ph:nth-child(2){transition-delay:.15s;transform:translateY(-14px)}
+.in .ph:nth-child(3){transition-delay:.3s}
+.ph-top{display:flex;align-items:center;gap:8px;padding:8px 8px 10px;font-size:12px;font-weight:600}
+.av{width:22px;height:22px;border-radius:50%;background:var(--o)}
+.post{aspect-ratio:4/5;border-radius:4px;display:flex;flex-direction:column;justify-content:space-between;padding:12% 10%;container-type:inline-size}
+.post p{font-weight:700;letter-spacing:-.05em;line-height:.95;font-size:11.5cqw}
+.post .pm{font-size:5cqw;font-weight:600;opacity:.8;letter-spacing:0}
+.p-dark{background:#151515;color:var(--paper)}
+.p-dark p span{color:var(--o)}
+.p-light{background:#ececec;color:var(--ink)}
+.p-o{background:var(--o);color:var(--ink)}
+.ph-act{display:flex;gap:10px;padding:10px 8px 4px;font-size:15px}
+.cmt{padding:4px 8px 10px;font-size:11.5px;line-height:1.35;color:#d9d9d9}
+.cmt b{font-weight:600;color:#fff}
+@media (max-width:980px){.soc{grid-template-columns:1fr}}
+@media (max-width:560px){.phones{grid-template-columns:1fr 1fr}.phones .ph:nth-child(3){display:none}}
+
+/* ---------- guerrilla ---------- */
+.arts{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:16px;margin-top:40px;align-items:start;max-width:900px}
+.art{position:relative}
+.art figcaption{margin-top:12px;font-size:14px;line-height:1.3}
+.art figcaption b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:2px}
+.frame{aspect-ratio:4/5;border-radius:6px;overflow:hidden;position:relative;box-shadow:0 10px 30px #00000022;background:#fff}
+.frame img{width:100%;height:100%;object-fit:cover}
+/* eye chart */
+.chart{position:absolute;inset:0;container-type:inline-size;background:#fafafa;color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform 1.1s var(--ease);transform-origin:50% 86%;cursor:zoom-in}
+.chart.zoom{transform:scale(3);cursor:zoom-out}
+.ln{position:relative;width:100%;text-align:center;font-weight:700;line-height:1;text-transform:uppercase;letter-spacing:.14em;padding-left:.14em}
+.ln .dec{position:absolute;right:5cqw;top:50%;transform:translateY(-50%);font-size:1.35cqw;font-weight:500;letter-spacing:0;color:#9a9a9a}
+.l1{font-size:14.81cqw;margin-bottom:6.5cqw}
+.l2{font-size:7.41cqw;margin-bottom:4.5cqw}
+.l3{font-size:5.19cqw;margin-bottom:3.5cqw}
+.l4{font-size:3.7cqw;margin-bottom:2.8cqw}
+.l5{font-size:2.96cqw;margin-bottom:2.3cqw}
+.l6{font-size:2.22cqw;margin-bottom:1.9cqw}
+.l7{font-size:1.85cqw;margin-bottom:1.9cqw}
+.l8{font-size:1.48cqw;text-transform:none;letter-spacing:0;padding:0 34cqw;font-weight:600;color:var(--o);line-height:1.25}
+.l9{font-size:1.3cqw;text-transform:none;letter-spacing:0;padding:0 34cqw;font-weight:500;margin-top:.8cqw;color:#777}
+.zoom-hint{position:absolute;left:10px;bottom:10px;z-index:2;font-size:12px;font-weight:600;background:var(--ink);color:#fff;padding:7px 11px;border-radius:999px;pointer-events:none;transition:opacity .3s}
+.frame.zoomed .zoom-hint{opacity:0}
+/* fallback poster arts */
+.fb{position:absolute;inset:0;container-type:inline-size;display:flex;flex-direction:column;justify-content:space-between;padding:11%}
+.fb-1{background:#111;color:var(--paper)}
+.fb-1 .big{font-weight:700;letter-spacing:-.05em;line-height:.92;font-size:13cqw}
+.fb-1 .big span{color:var(--o)}
+.fb-1 .sm{font-size:4cqw;opacity:.7}
+.fb-2{background:#f2f2f2;color:#111;align-items:center;justify-content:center;text-align:center}
+.fb-2 .tiny{font-size:3.3cqw;font-weight:500;max-width:60%;line-height:1.3}
+.fb-2 .mk{position:absolute;bottom:9%;left:0;right:0;font-weight:800;letter-spacing:-.06em;color:var(--o);font-size:7cqw}
+@media (max-width:900px){.arts{grid-template-columns:1fr 1fr}.art.main{grid-column:1/-1}}
+@media (max-width:520px){.arts{grid-template-columns:1fr}}
+
+/* ---------- scope ---------- */
+.scope{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:44px}
+.sp{background:var(--block-2);border-radius:var(--r);padding:24px 22px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;transition:background .3s}
+.sp:hover{background:var(--block)}
+.sp b{font-size:22px;letter-spacing:-.04em;font-weight:600;line-height:1.05}
+.sp span{font-size:14.5px;color:var(--mute-d);margin-top:14px}
+.sp i{font-style:normal;font-size:12px;font-weight:700;color:var(--o);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+@media (max-width:820px){.scope{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.scope{grid-template-columns:1fr}}
+
+/* ---------- report ---------- */
+.rep{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(28px,5vw,72px);align-items:center}
+.pages{position:relative;height:clamp(360px,42vw,480px)}
+.pg{position:absolute;width:min(78%,380px);aspect-ratio:1/1.414;background:#fff;border-radius:6px;box-shadow:0 18px 40px #00000026;padding:7% 7%;font-size:12px;color:#111;transition:transform 1s var(--ease)}
+.pg:nth-child(1){left:0;top:12%;transform:rotate(-6deg) translateX(-10px)}
+.pg:nth-child(2){left:9%;top:6%;transform:rotate(-2deg)}
+.pg:nth-child(3){left:18%;top:0;transform:rotate(3deg)}
+.in .pg:nth-child(1){transform:rotate(-9deg) translateX(-24px)}
+.in .pg:nth-child(3){transform:rotate(5deg) translateX(14px)}
+.pg-h{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--o);padding-bottom:8px;margin-bottom:12px}
+.pg-h b{font-size:14px;letter-spacing:-.02em}
+.pg-h span{color:var(--o);font-weight:800;letter-spacing:-.06em;font-size:16px}
+.pg h5{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#888;margin:12px 0 6px}
+.pg .big{font-size:18px;font-weight:700;letter-spacing:-.04em;line-height:1.05}
+.tbl{width:100%;border-collapse:collapse;font-size:10.5px}
+.tbl td{padding:5px 0;border-bottom:1px solid #eee}
+.tbl td:last-child{text-align:right}
+.st{display:inline-block;padding:1px 7px;border-radius:99px;font-size:9.5px;font-weight:600}
+.st.w{background:var(--o);color:#111}
+.st.p{background:#eee;color:#777}
+.pg ul{list-style:none;display:grid;gap:4px}
+.pg li::before{content:"→ ";color:var(--o)}
+@media (max-width:900px){.rep{grid-template-columns:1fr}}
+
+/* ---------- monthly + projects ---------- */
+.track{margin-top:52px}
+.months{display:grid;grid-template-columns:repeat(6,1fr);font-size:13px;color:var(--mute-d);margin-bottom:10px}
+.base{position:relative;height:64px;background:var(--block-2);border-radius:10px;overflow:hidden}
+.base .fill{position:absolute;inset:0;width:0;background:repeating-linear-gradient(90deg,var(--block) 0 calc(100%/6 - 2px),var(--dark) calc(100%/6 - 2px) calc(100%/6));transition:width 1.6s var(--ease)}
+.in .base .fill{width:100%}
+.base label{position:absolute;left:16px;top:50%;transform:translateY(-50%);font-weight:600;font-size:15px;z-index:1}
+.proj{position:relative;height:64px;margin-top:10px}
+.pj{position:absolute;top:0;height:100%;background:var(--o);color:var(--ink);border-radius:10px;padding:0 14px;display:flex;align-items:center;font-weight:600;font-size:14px;line-height:1.05;transform:translateY(-12px);opacity:0;transition:all .6s var(--ease)}
+.in .pj{transform:none;opacity:1}
+.in .pj:nth-child(1){transition-delay:1.2s}.in .pj:nth-child(2){transition-delay:1.5s}
+.track-legend{display:flex;gap:22px;flex-wrap:wrap;margin-top:22px;font-size:14px;color:var(--mute-d)}
+.track-legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:8px;vertical-align:-1px;background:var(--block)}
+.track-legend span.or::before{background:var(--o)}
+
+/* ---------- promises ---------- */
+.prom{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,72px);margin-top:44px}
+.prom h3{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.x li,.v li{list-style:none;font-size:clamp(22px,2.6vw,32px);letter-spacing:-.04em;line-height:1.08;padding:16px 0;border-top:1px solid var(--line-l)}
+.x li{color:var(--mute-l);text-decoration:line-through;text-decoration-thickness:2px;text-decoration-color:var(--o)}
+.v li{font-weight:600}
+@media (max-width:780px){.prom{grid-template-columns:1fr}}
+
+/* ---------- fit ---------- */
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:44px}
+.ft{border-radius:var(--r);padding:clamp(24px,3.4vw,40px)}
+.ft h3{font-size:clamp(28px,3.4vw,44px);letter-spacing:-.05em;font-weight:700;line-height:1;margin-bottom:18px}
+.ft p{font-size:18px;line-height:1.35}
+.ft.yes{background:var(--o);color:var(--ink)}
+.ft.no{background:var(--block-2)}
+@media (max-width:780px){.fit{grid-template-columns:1fr}}
+
+/* ---------- faq ---------- */
+.faq{margin-top:40px;max-width:860px}
+.faq details{border-top:1px solid var(--line-l)}
+.faq details:last-child{border-bottom:1px solid var(--line-l)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;padding:22px 0;font-size:clamp(19px,2vw,24px);letter-spacing:-.03em;font-weight:500}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--o);font-weight:400;font-size:28px;line-height:.8;transition:transform .3s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq p{padding:0 0 24px;max-width:62ch;font-size:17px;color:#333}
+
+/* ---------- cta / footer ---------- */
+.cta .h-xl{max-width:8ch}
+.foot{background:var(--dark);border-top:1px solid var(--line-d);padding:48px var(--pad) 40px;font-size:15px}
+.foot .wrap{display:grid;grid-template-columns:1fr auto;gap:28px;align-items:end}
+.foot a{text-decoration:none;opacity:.8}
+.foot a:hover{opacity:1;color:var(--o)}
+.flinks{display:flex;gap:20px;flex-wrap:wrap}
+.copy{grid-column:1/-1;font-size:13px;color:var(--mute-d)}
+@media (max-width:640px){.foot .wrap{grid-template-columns:1fr}}
+
+/* ---------- presentation mode ---------- */
+.hud{position:fixed;right:18px;bottom:18px;z-index:60;display:none;align-items:center;gap:6px;background:#000c;backdrop-filter:blur(8px);color:#fff;border-radius:999px;padding:6px;font-size:13px;font-weight:600}
+.hud button{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px}
+.hud button:hover{background:#ffffff1f}
+.hud .cnt{padding:0 8px;font-variant-numeric:tabular-nums;min-width:62px;text-align:center}
+.progress{position:fixed;left:0;top:0;height:3px;background:var(--o);z-index:61;width:0;transition:width .4s var(--ease);display:none}
+html.present{scroll-snap-type:y mandatory;scroll-behavior:smooth}
+.present .slide{min-height:100vh;min-height:100svh;scroll-snap-align:start;scroll-snap-stop:always}
+.present .top{opacity:0;pointer-events:none}
+.present .hud,.present .progress{display:flex}
+.present .progress{display:block}
+.present .foot{scroll-snap-align:end}
+@media (min-width:1100px){.present .slide{padding-top:7vh;padding-bottom:7vh}}
+.toast{position:fixed;left:50%;top:22px;transform:translate(-50%,-20px);z-index:70;background:var(--o);color:var(--ink);font-weight:600;font-size:14px;padding:10px 16px;border-radius:999px;opacity:0;transition:all .4s var(--ease);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="/" aria-label="Tomorrow — página inicial">
+    <img src="tomorrow.png" alt="Tomorrow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'wordmark',textContent:'tmw'}))">
+  </a>
+  <nav class="nav">
+    <a href="/" class="hide-m">Projetos fechados</a>
+    <a href="portfolio.html" class="hide-m">Portfólio</a>
+    <a href="gestao-mensal.html" class="active hide-m">Gestão mensal</a>
+    <a class="btn btn-o btn-sm" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20gest%C3%A3o%20mensal." target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </nav>
+</header>
+
+<main>
+
+<!-- 00 HERO -->
+<section class="slide dark hero" data-title="Gestão mensal">
+  <div class="wrap">
+    <p class="eyebrow mute rv">Tomorrow · Gestão mensal</p>
+    <h1 class="h-xl rv d1" style="margin-top:22px"><span class="o">Marketing todo mês,</span> sem piloto automático.</h1>
+    <p class="lead hero-sub rv d2" style="margin-top:28px">Tráfego pago testado em rodadas. Redes sociais com conteúdo que as pessoas param pra ver. Relatório toda semana.</p>
+    <div class="hero-cta rv d3">
+      <a class="btn btn-o" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20gest%C3%A3o%20mensal." target="_blank" rel="noopener">Quero falar sobre gestão mensal</a>
+      <a class="btn btn-line" href="#mes">Ver como funciona ↓</a>
+    </div>
+    <div class="hero-ticker rv d4" aria-hidden="true">
+      <div class="tk on"><b id="tkRound">Rodada 1</b><span>teste de criativo no ar</span></div>
+      <div class="tk"><b id="tkVer">20</b><span>versões testadas</span></div>
+      <div class="tk"><b>Sexta</b><span>relatório em PDF</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 01 MÊS -->
+<section class="slide light" id="mes" data-title="Como o mês funciona">
+  <div class="wrap">
+    <span class="num">01</span>
+    <h2 class="h-l rv">Como o mês funciona.</h2>
+    <div class="weeks rv d1">
+      <div class="wk"><span class="fri">Relatório</span><h3>Semana 1</h3><p>Leitura do mês anterior. Definição do que testar e do que produzir.</p><span class="bar"></span></div>
+      <div class="wk"><span class="fri">Relatório</span><h3>Semana 2</h3><p>Produção dos criativos e do conteúdo.</p><span class="bar"></span></div>
+      <div class="wk"><span class="fri">Relatório</span><h3>Semana 3</h3><p>Rodadas de teste no ar. Conteúdo reagindo ao que acontece.</p><span class="bar"></span></div>
+      <div class="wk"><span class="fri">Relatório</span><h3>Semana 4</h3><p>Ajuste das rodadas. O que venceu define o próximo mês.</p><span class="bar"></span></div>
+    </div>
+    <p class="note mute rv d2">Toda sexta, um relatório em PDF: o que rodou, o que venceu, o que muda.</p>
+  </div>
+</section>
+
+<!-- 02 EXPLORAÇÃO -->
+<section class="slide dark" id="exploracao" data-title="Etapa de exploração">
+  <div class="wrap">
+    <span class="num">02 · Tráfego pago</span>
+    <h2 class="h-l ex-title rv"><span class="o">Etapa de exploração:</span><br><span class="l2">Protegendo seu caixa.</span></h2>
+    <p class="lead ex-lead rv d1">Um dos <b>erros</b> mais comuns é colocar verba pesada em um anúncio logo na <b>primeira semana</b>, esperando que dê certo.</p>
+
+    <div class="ex-panel rv d2">
+      <div class="ctrl">
+        <label for="verba">Verba mensal de anúncio</label>
+        <div class="money" id="money">R$ 2.000</div>
+        <input type="range" id="verba" min="500" max="10000" step="100" value="2000" aria-label="Verba mensal de anúncio">
+        <dl class="kv">
+          <div><dt>Exploração · 15 dias</dt><dd id="kvExp">R$ 300 a R$ 500</dd></div>
+          <div><dt>Versões no ar</dt><dd id="kvVer">12</dd></div>
+          <div><dt>Eixos testados</dt><dd id="kvAx">4</dd></div>
+        </dl>
+        <button class="btn btn-o" id="run">▶ Rodar exploração</button>
+        <small>A quantidade de versões acompanha a verba. Verba pequena com versão demais não gera dado, gera sorteio.</small>
+      </div>
+
+      <div>
+        <p class="grid-head">Etapa de exploração · 15 dias</p>
+        <div class="axes" id="axes"></div>
+        <div class="eqs">
+          <div class="eq bad" id="eqBad">Distribuição igual em 30 dias <i>=</i> Dinheiro jogado fora</div>
+          <div class="eq" id="eqGood">15% a 25% nos primeiros 15 dias <i>=</i> Informação pra subir a verba no que funciona</div>
+        </div>
+      </div>
+    </div>
+
+    <p class="h-m ex-close rv">O risco cai antes de a verba subir.</p>
+  </div>
+</section>
+
+<!-- 03 RODADA SEGUINTE -->
+<section class="slide dark" id="rodada" data-title="Rodada seguinte" style="background:var(--dark-2)">
+  <div class="wrap">
+    <span class="num">03 · Tráfego pago</span>
+    <h2 class="h-l rv">O vencedor vira <span class="o">a próxima rodada.</span></h2>
+    <p class="lead rv d1" style="margin-top:22px;max-width:30ch">O que venceu em cada eixo é combinado num anúncio novo. Dele saem novas versões, mudando um elemento por vez.</p>
+    <div class="r2 rv d2" id="r2">
+      <div class="r2-col"><h4>Vencedores da exploração</h4><div class="chips" id="chips"></div></div>
+      <div class="arrow">→</div>
+      <div class="r2-col"><h4>Anúncio combinado</h4>
+        <div class="combo"><span>Rodada 2</span><strong id="comboTxt">Texto B + Foto D + Oferta A</strong><span>verba concentrada aqui</span></div>
+      </div>
+      <div class="arrow">→</div>
+      <div class="r2-col"><h4>Novas versões</h4>
+        <div class="derived">
+          <div class="dv">2.1<small>novo gancho</small></div>
+          <div class="dv">2.2<small>novo início</small></div>
+          <div class="dv">2.3<small>novo formato</small></div>
+          <div class="dv">2.4<small>nova chamada</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="loop rv d3">
+      <div class="lp"><b>Explora</b><span>15 dias, pouca verba, muitas versões.</span></div>
+      <div class="lp"><b>Refina</b><span>O vencedor gera a próxima rodada.</span></div>
+      <div class="lp"><b>Escala</b><span>A verba sobe só no que provou que funciona.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 JORNADA -->
+<section class="slide light" id="jornada" data-title="Jornada de compra">
+  <div class="wrap">
+    <span class="num">04 · Jornada de compra</span>
+    <h2 class="h-xl jt rv">Jornada de compra não é jogo de azar!</h2>
+    <div class="jr" id="jr"></div>
+    <p class="lead j-close rv">Quando a jornada certa é descoberta e cada etapa é ajustada, <span class="o">o faturamento deixa de ser palpite e <b>vira escolha de investimento.</b></span></p>
+    <p class="illus">Cenários ilustrativos, com os mesmos 1.000 cliques no anúncio.</p>
+  </div>
+</section>
+
+<!-- 05 SOCIAL -->
+<section class="slide dark" id="social" data-title="Redes sociais">
+  <div class="wrap soc">
+    <div>
+      <span class="num">05 · Redes sociais</span>
+      <h2 class="h-m rv" style="font-size:clamp(34px,4.6vw,64px)">Conteúdo que <span class="o">não parece de empresa.</span></h2>
+      <p class="lead rv d1" style="margin-top:22px;font-size:clamp(19px,1.9vw,26px)">Sem post por obrigação. O conteúdo reage ao que acontece na cidade, no assunto do momento e nos comentários. Humor, ironia e sarcasmo quando a marca permite.</p>
+      <div class="lim rv d2">
+        <div>O tom é calibrado com o dono antes de começar.</div>
+        <div>Humor não é ofensa. Ninguém vira piada, nem cliente, nem concorrente.</div>
+        <div>A quantidade de posts sai do que a marca tem pra dizer no mês, não de uma cota.</div>
+      </div>
+    </div>
+    <div class="phones rv d1" aria-label="Exemplos ilustrativos de posts">
+      <div class="ph">
+        <div class="ph-top"><span class="av"></span>suaotica</div>
+        <div class="post p-dark"><p>Você não precisa de óculos. <span>Só de um braço maior.</span></p><span class="pm">ótica</span></div>
+        <div class="ph-act">♡ ◯ ➤</div>
+        <div class="cmt"><b>ana.m</b> me senti atacada 😂<br><b>joaopedro</b> marca seu pai aqui</div>
+      </div>
+      <div class="ph">
+        <div class="ph-top"><span class="av"></span>seurestaurante</div>
+        <div class="post p-o"><p>Segunda é o dia mais vazio daqui. Ou seja, o melhor dia pra vir.</p><span class="pm">restaurante</span></div>
+        <div class="ph-act">♡ ◯ ➤</div>
+        <div class="cmt"><b>carol_s</b> sinceridade 10/10<br><b>rafa</b> segunda tô aí</div>
+      </div>
+      <div class="ph">
+        <div class="ph-top"><span class="av"></span>suaacademia</div>
+        <div class="post p-light"><p>Promessa de ano novo com dois meses de antecedência. Ousado.</p><span class="pm">academia</span></div>
+        <div class="ph-act">♡ ◯ ➤</div>
+        <div class="cmt"><b>lu.fit</b> me chamou de procrastinadora com educação<br><b>bruno</b> 😂😂</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 GUERRILHA -->
+<section class="slide light" id="guerrilha" data-title="Guerrilha">
+  <div class="wrap">
+    <span class="num">06 · Guerrilha</span>
+    <h2 class="h-l rv">A marca na rua e no feed, <span class="o">sendo comentada.</span></h2>
+    <p class="lead rv d1" style="margin-top:22px;max-width:30ch">Ações rápidas e fora do padrão, que fazem as pessoas pararem, fotografarem e mandarem pra alguém.</p>
+    <div class="arts">
+      <figure class="art main rv">
+        <div class="frame" id="eyeFrame">
+          <div class="chart" id="eye" role="button" tabindex="0" aria-label="Arte em formato de tabela de vista. Clique para dar zoom na última linha.">
+            <div class="ln l1">Você<span class="dec">0,1</span></div>
+            <div class="ln l2">Enxerga<span class="dec">0,2</span></div>
+            <div class="ln l3">Bem de<span class="dec">0,3</span></div>
+            <div class="ln l4">Longe. E<span class="dec">0,4</span></div>
+            <div class="ln l5">De perto?<span class="dec">0,5</span></div>
+            <div class="ln l6">Tá afastando<span class="dec">0,7</span></div>
+            <div class="ln l7">O celular, né?<span class="dec">0,8</span></div>
+            <div class="ln l8">Deu zoom pra ler isso? Relaxa, ninguém viu.<br>Sua Ótica · Rua X, nº 00</div>
+            <div class="ln l9">(e se leu sem zoom, manda print que a gente não acredita)</div>
+          </div>
+          <span class="zoom-hint">Toque pra dar zoom</span>
+        </div>
+        <figcaption><b>Cartaz e post · ótica</b>Tabela de vista. A última linha só é lida de perto.</figcaption>
+      </figure>
+      <figure class="art rv d1" data-art="gestao/guerrilha-02.jpg">
+        <div class="frame">
+          <div class="fb fb-1"><p class="big">Se você parou pra ler isso, <span>funcionou.</span></p><p class="sm">Cartaz de rua</p></div>
+        </div>
+        <figcaption><b>Arte 02</b>Espaço para a próxima ação.</figcaption>
+      </figure>
+      <figure class="art rv d2" data-art="gestao/guerrilha-03.jpg">
+        <div class="frame">
+          <div class="fb fb-2"><p class="tiny">Se você atravessou a rua pra ler esta frase, a gente já sabe que tem sua atenção.</p><span class="mk">tmw</span></div>
+        </div>
+        <figcaption><b>Arte 03</b>Espaço para a próxima ação.</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- 07 ESCOPO -->
+<section class="slide dark" id="escopo" data-title="O que entra no mês">
+  <div class="wrap">
+    <span class="num">07</span>
+    <h2 class="h-l rv">O que entra no mês.</h2>
+    <p class="lead rv d1" style="margin-top:22px;max-width:28ch">Não é pacote. Entra o que o negócio precisa.</p>
+    <div class="scope rv d2">
+      <div class="sp"><i>Mídia</i><b>Tráfego pago</b><span>Meta e Google, com exploração e rodadas de teste.</span></div>
+      <div class="sp"><i>Produção</i><b>Criativos</b><span>Vídeo e estático, feitos pra serem testados.</span></div>
+      <div class="sp"><i>Conteúdo</i><b>Redes sociais</b><span>Conteúdo com motivo, no tom da marca.</span></div>
+      <div class="sp"><i>Rua</i><b>Guerrilha</b><span>Ações que fazem a marca ser comentada.</span></div>
+      <div class="sp"><i>Quando necessário</i><b>Páginas de conversão</b><span>Pra levar a pessoa certa até o WhatsApp ou o cadastro.</span></div>
+      <div class="sp"><i>Toda semana</i><b>Relatório em PDF</b><span>E acompanhamento online do que está no ar.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 RELATÓRIO -->
+<section class="slide light" id="relatorio" data-title="Relatório">
+  <div class="wrap rep">
+    <div>
+      <span class="num">08</span>
+      <h2 class="h-l rv">Relatório toda sexta.</h2>
+      <p class="lead rv d1" style="margin-top:22px">Em PDF, simples: o que rodou, o que venceu, o que muda na próxima rodada.</p>
+      <p class="illus rv d2">Dados fictícios.</p>
+    </div>
+    <div class="pages rv d1" aria-hidden="true">
+      <div class="pg"><div class="pg-h"><b>Semana 1</b><span>tmw</span></div><h5>Exploração</h5><p class="big">12 versões no ar</p></div>
+      <div class="pg"><div class="pg-h"><b>Semana 2</b><span>tmw</span></div><h5>Vencedores</h5><p class="big">Texto B · Foto D</p></div>
+      <div class="pg">
+        <div class="pg-h"><b>Relatório · Semana 3</b><span>tmw</span></div>
+        <h5>Rodada 2</h5>
+        <p class="big">Anúncio combinado no ar</p>
+        <h5>Versões</h5>
+        <table class="tbl">
+          <tr><td>2.1 · novo gancho</td><td><span class="st w">venceu</span></td></tr>
+          <tr><td>2.2 · novo início</td><td><span class="st p">pausada</span></td></tr>
+          <tr><td>2.3 · novo formato</td><td><span class="st p">pausada</span></td></tr>
+          <tr><td>2.4 · nova chamada</td><td><span class="st p">pausada</span></td></tr>
+        </table>
+        <h5>Próxima semana</h5>
+        <ul><li>Verba sobe na versão 2.1</li><li>Nova rodada a partir dela</li></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 09 MENSAL + PROJETO -->
+<section class="slide dark" id="projetos" data-title="Mensal + projeto fechado">
+  <div class="wrap">
+    <span class="num">09</span>
+    <h2 class="h-l rv">Projeto fechado <span class="o">em cima do mensal.</span></h2>
+    <p class="lead rv d1" style="margin-top:22px;max-width:32ch">Cliente mensal pode fechar campanha à parte, com escopo, prazo e preço próprios.</p>
+    <div class="track rv d2">
+      <div class="months"><span>Mês 1</span><span>Mês 2</span><span>Mês 3</span><span>Mês 4</span><span>Mês 5</span><span>Mês 6</span></div>
+      <div class="base"><span class="fill"></span><label>Gestão mensal</label></div>
+      <div class="proj">
+        <span class="pj" style="left:calc(100%/6*1.2);width:calc(100%/6*1.3)">Inauguração</span>
+        <span class="pj" style="left:calc(100%/6*4.1);width:calc(100%/6*1.6)">Campanha de Natal</span>
+      </div>
+      <div class="track-legend"><span>Base contínua</span><span class="or">Projetos fechados</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 PROMESSAS -->
+<section class="slide light" id="promessas" data-title="O que não prometemos">
+  <div class="wrap">
+    <span class="num">10</span>
+    <h2 class="h-l rv">O que não prometemos.</h2>
+    <div class="prom">
+      <div class="rv d1"><h3>Fora</h3><ul class="x"><li>Custo por lead garantido.</li><li>Quantidade de posts como métrica de trabalho.</li><li>Resultado sem entender o negócio antes.</li></ul></div>
+      <div class="rv d2"><h3 class="o">Dentro</h3><ul class="v"><li>Método.</li><li>Teste, leitura e ajuste toda semana.</li><li>Clareza sobre o que funcionou e por quê.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<!-- 11 FIT -->
+<section class="slide dark" id="fit" data-title="Fecha se / não fecha se">
+  <div class="wrap">
+    <span class="num">11</span>
+    <h2 class="h-l rv">Pra quem é.</h2>
+    <div class="fit">
+      <div class="ft yes rv d1"><h3>Fecha se</h3><p>Decide sozinho, tem verba de mídia pra testar e aceita uma marca que fala diferente.</p></div>
+      <div class="ft no rv d2"><h3>Não fecha se</h3><p>Quer post todo dia sem motivo, ou quer conteúdo igual ao de todo mundo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 FAQ -->
+<section class="slide light" id="faq" data-title="Dúvidas">
+  <div class="wrap">
+    <span class="num">12</span>
+    <h2 class="h-l rv">Dúvidas comuns.</h2>
+    <div class="faq rv d1">
+      <details><summary>A verba de anúncio está inclusa?</summary><p>Não. A verba é paga direto para a Meta ou o Google, separada da gestão. O valor é definido junto, antes de começar.</p></details>
+      <details><summary>Quantas versões de anúncio são testadas?</summary><p>Depende da verba. Com verba menor, menos versões e menos eixos, pra que cada versão tenha dado suficiente. Com verba maior, mais eixos e mais variações.</p></details>
+      <details><summary>Quantos posts por mês?</summary><p>Não existe cota fixa. A quantidade sai do planejamento do mês, pelo que a marca precisa dizer.</p></details>
+      <details><summary>Tem prazo mínimo de contrato?</summary><p>O formato do contrato entra na proposta, junto com escopo e valor.</p></details>
+      <details><summary>Posso começar no mensal e fechar campanha à parte?</summary><p>Sim. Campanhas como inauguração ou Natal entram como projeto fechado, com escopo, prazo e preço próprios.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 13 CTA -->
+<section class="slide orange cta" id="bora" data-title="Bora">
+  <div class="wrap">
+    <span class="num" style="color:var(--ink)">13</span>
+    <h2 class="h-xl rv">Bora.</h2>
+    <p class="lead rv d1" style="margin-top:22px;max-width:28ch">Conte como está o marketing hoje. Retorno em até 1 dia com o que precisa ser feito.</p>
+    <div class="hero-cta rv d2">
+      <a class="btn" style="background:var(--ink);color:#fff" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20gest%C3%A3o%20mensal." target="_blank" rel="noopener">Quero falar sobre gestão mensal</a>
+      <a class="btn btn-line" href="contato.html">Ou preencha o formulário</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>
+      <a class="logo" href="/" style="opacity:1"><img src="tmw-logo.png" alt="Tomorrow" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'wordmark',textContent:'tmw'}))"></a>
+      <p style="margin-top:16px">+55 35 98446-8504 · contato@wearetomorrow.com.br</p>
+    </div>
+    <div class="flinks">
+      <a href="/">Projetos fechados</a>
+      <a href="portfolio.html">Portfólio</a>
+      <a href="https://www.instagram.com/agenciatomorrow" target="_blank" rel="noopener">Instagram</a>
+      <a href="contato.html">Formulário</a>
+    </div>
+    <p class="copy">© 2026 Tomorrow. Feito com ◆ e nenhuma sigla.</p>
+  </div>
+</footer>
+
+<div class="progress" id="progress"></div>
+<div class="hud" id="hud" aria-label="Controles da apresentação">
+  <button id="prev" aria-label="Anterior">←</button>
+  <span class="cnt" id="cnt">1 / 14</span>
+  <button id="next" aria-label="Próximo">→</button>
+  <button id="fs" aria-label="Tela cheia">⤢</button>
+  <button id="exit" aria-label="Sair da apresentação">✕</button>
+</div>
+<div class="toast" id="toast">Modo apresentação · ← → navega · F tela cheia · Esc sai</div>
+
+<script>
+(() => {
+  /* =========================================================
+     CONFIGURAÇÃO — ajuste aqui
+     Faixas de verba mensal → quantos eixos e quantas variações
+     ========================================================= */
+  const TIERS = [
+    { ate: 1500,     eixos: 3, variacoes: 2 },
+    { ate: 3000,     eixos: 4, variacoes: 3 },
+    { ate: Infinity, eixos: 5, variacoes: 4 }
+  ];
+  const EXPLORACAO = [0.15, 0.25];           // % da verba na exploração
+  const EIXOS = ['texto','foto','oferta','destino','público'];
+  const VENCEDORES = [1, 3, 0, 2, 1];        // índice do vencedor por eixo (A=0, B=1...)
+
+  const JORNADA = [
+    { t:'Cenário 1', s:'Direto pro WhatsApp', steps:[['Atração:','1.000 cliques no anúncio'],['Conversa no WhatsApp','100 pessoas']], pc:10, v:10, conv:100,
+      n:'Custo por venda baixo, mas o tempo do vendedor vai embora com 90 curiosos.' },
+    { t:'Cenário 2', s:'Página antes do WhatsApp', steps:[['Atração:','1.000 cliques no anúncio'],['Página carregada','500 visitas'],['Conversa no WhatsApp','50 pessoas']], pc:16, v:8, conv:50,
+      n:'Menos volume no WhatsApp, mas gente que já entendeu a oferta. A conversão sobe.' },
+    { t:'Cenário 3', s:'Cadastro direto', steps:[['Atração:','1.000 cliques no anúncio'],['Formulário','150 cadastros'],['Time comercial entra em contato','']], pc:6, v:9, conv:150,
+      n:'Foi preciso falar com 150 pessoas pra fechar 9 vendas.' },
+    { t:'Cenário 4', s:'O padrão Tomorrow', best:true, steps:[['Atração:','1.000 cliques no anúncio'],['Página carregada','800 visitas'],['Formulário','40 cadastros qualificados']], pc:25, v:10, conv:40,
+      n:'O vendedor fala com 40 pessoas e fecha as mesmas 10 vendas do cenário 1.' }
+  ];
+
+  const $ = s => document.querySelector(s);
+  const $$ = s => [...document.querySelectorAll(s)];
+  const sleep = ms => new Promise(r => setTimeout(r, ms));
+  const brl = n => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+  const L = 'ABCD';
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- reveal on scroll ---------- */
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); if (e.target.dataset.once) io.unobserve(e.target); }
+  }), { threshold: .18 });
+  $$('.rv, .r2, .jr, .phones, .pages, .track, .weeks').forEach(el => { el.dataset.once = 1; io.observe(el); });
+
+  /* ---------- exploration ---------- */
+  const slider = $('#verba'), axesEl = $('#axes');
+  let tier = TIERS[1], ran = false, running = false;
+
+  function tierFor(v){ return TIERS.find(t => v <= t.ate); }
+
+  function renderAxes(){
+    const n = tier.eixos, k = tier.variacoes;
+    axesEl.style.setProperty('--n', n);
+    axesEl.innerHTML = EIXOS.slice(0, n).map((ax, i) => `
+      <div class="axis" data-i="${i}">
+        <div class="axis-h">Variações<br>de ${ax}</div>
+        <div class="cells">${[...Array(k)].map((_, j) => `<div class="cell" data-j="${j}">${L[j]}</div>`).join('')}</div>
+      </div>`).join('');
+    $('#eqGood').classList.remove('lit');
+    ran = false;
+  }
+
+  function updateMoney(){
+    const v = +slider.value;
+    const p = (v - slider.min) / (slider.max - slider.min) * 100;
+    slider.style.setProperty('--p', p + '%');
+    $('#money').textContent = brl(v);
+    $('#kvExp').textContent = `${brl(v*EXPLORACAO[0])} a ${brl(v*EXPLORACAO[1])}`;
+    const t = tierFor(v);
+    $('#kvVer').textContent = t.eixos * t.variacoes;
+    $('#kvAx').textContent = t.eixos;
+    $('#tkVer').textContent = t.eixos * t.variacoes;
+    if (t !== tier){ tier = t; renderAxes(); updateRound2(); }
+  }
+
+  async function runExploration(){
+    if (running) return;
+    running = true;
+    const btn = $('#run'); btn.disabled = true; btn.textContent = 'Rodando…';
+    renderAxes();
+    const axes = $$('#axes .axis');
+    if (!reduce){
+      for (let r = 0; r < 3; r++){
+        for (const ax of axes){
+          const cells = [...ax.querySelectorAll('.cell')];
+          const c = cells[Math.floor(Math.random()*cells.length)];
+          c.classList.add('flash'); setTimeout(() => c.classList.remove('flash'), 220);
+        }
+        await sleep(260);
+      }
+    }
+    for (const [i, ax] of axes.entries()){
+      const w = Math.min(VENCEDORES[i], tier.variacoes - 1);
+      ax.querySelectorAll('.cell').forEach((c, j) => c.classList.add(j === w ? 'win' : 'lose'));
+      ax.classList.add('done');
+      await sleep(reduce ? 0 : 320);
+    }
+    $('#eqGood').classList.add('lit');
+    updateRound2();
+    btn.disabled = false; btn.textContent = '↻ Rodar de novo';
+    running = false; ran = true;
+  }
+
+  function updateRound2(){
+    const n = tier.eixos;
+    const items = EIXOS.slice(0, n).map((ax, i) => [ax, L[Math.min(VENCEDORES[i], tier.variacoes - 1)]]);
+    $('#chips').innerHTML = items.map(([ax, l], i) =>
+      `<div class="chip" style="transition-delay:${.1 + i*.1}s"><span>${ax[0].toUpperCase() + ax.slice(1)}</span><b>${l}</b></div>`).join('');
+    $('#comboTxt').textContent = items.slice(0, 3).map(([ax, l]) => `${ax[0].toUpperCase() + ax.slice(1)} ${l}`).join(' + ') + (n > 3 ? ' + …' : '');
+  }
+
+  slider.addEventListener('input', updateMoney);
+  $('#run').addEventListener('click', runExploration);
+  renderAxes(); updateMoney(); updateRound2();
+
+  new IntersectionObserver((es, ob) => es.forEach(e => {
+    if (e.isIntersecting && !ran){ setTimeout(runExploration, 500); }
+  }), { threshold: .45 }).observe($('#exploracao .ex-panel'));
+
+  /* hero ticker */
+  let rd = 1;
+  setInterval(() => { if (!reduce){ rd = rd % 3 + 1; $('#tkRound').textContent = 'Rodada ' + rd; } }, 2200);
+
+  /* ---------- journey ---------- */
+  $('#jr').innerHTML = JORNADA.map(s => `
+    <div class="sc${s.best ? ' best' : ''}">
+      <div class="sc-h">${s.t}</div>
+      <div class="sc-s">${s.s}</div>
+      ${s.steps.map((st, i) => `${i ? '<div class="dn">↓</div>' : ''}<div class="box" style="transition-delay:${i*.25}s">${st[0]}${st[1] ? `<small>${st[1]}</small>` : ''}</div>`).join('')}
+      <div class="res"><span class="pc">Conversão de vendas de <span data-c="${s.pc}">0</span>%</span><span class="vd">= <span data-c="${s.v}">0</span> vendas</span></div>
+      <div class="ratio">Conversas por venda: <b>${(s.conv / s.v).toLocaleString('pt-BR', {maximumFractionDigits:1})}</b></div>
+      <p class="sc-n">${s.n}</p>
+    </div>`).join('');
+
+  const countIO = new IntersectionObserver((es, ob) => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    ob.unobserve(e.target);
+    e.target.querySelectorAll('[data-c]').forEach(el => {
+      const to = +el.dataset.c, t0 = performance.now(), d = reduce ? 1 : 1100;
+      const tick = t => { const k = Math.min(1, (t - t0) / d); el.textContent = Math.round(to * (1 - Math.pow(1 - k, 3))); if (k < 1) requestAnimationFrame(tick); };
+      setTimeout(() => requestAnimationFrame(tick), 600);
+    });
+  }), { threshold: .3 });
+  countIO.observe($('#jr'));
+
+  /* ---------- eye chart zoom ---------- */
+  const eye = $('#eye'), eyeFrame = $('#eyeFrame');
+  const toggleZoom = () => {
+    const l8 = eye.querySelector('.l8');
+    const y = (l8.offsetTop + l8.offsetHeight / 2) / eye.offsetHeight * 100;
+    eye.style.transformOrigin = `50% ${y}%`;
+    eye.classList.toggle('zoom'); eyeFrame.classList.toggle('zoomed');
+  };
+  eye.addEventListener('click', toggleZoom);
+  eye.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); e.stopPropagation(); toggleZoom(); } });
+
+  /* ---------- swap guerrilla placeholders for real art when files exist ---------- */
+  $$('[data-art]').forEach(fig => {
+    const img = new Image();
+    img.onload = () => {
+      const fr = fig.querySelector('.frame'); fr.innerHTML = ''; img.alt = 'Ação de guerrilha'; fr.appendChild(img);
+      fig.querySelector('figcaption').style.display = 'none';
+    };
+    img.src = fig.dataset.art;
+  });
+
+  /* ---------- presentation mode ---------- */
+  const root = document.documentElement;
+  const slides = $$('.slide');
+  let cur = 0;
+  const cnt = $('#cnt'), bar = $('#progress');
+
+  const curIO = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){ cur = slides.indexOf(e.target); paint(); }
+  }), { threshold: .55 });
+  slides.forEach(s => curIO.observe(s));
+
+  function paint(){
+    cnt.textContent = `${cur + 1} / ${slides.length}`;
+    bar.style.width = ((cur + 1) / slides.length * 100) + '%';
+  }
+  function go(i){
+    cur = Math.max(0, Math.min(slides.length - 1, i));
+    slides[cur].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    paint();
+  }
+  function enter(){
+    root.classList.add('present');
+    const t = $('#toast'); t.classList.add('on'); setTimeout(() => t.classList.remove('on'), 3200);
+    if (location.hash !== '#apresentar') history.replaceState(null, '', '#apresentar');
+    go(cur); paint();
+  }
+  function exit(){
+    root.classList.remove('present');
+    if (document.fullscreenElement) document.exitFullscreen().catch(()=>{});
+    history.replaceState(null, '', location.pathname);
+  }
+  function fullscreen(){
+    if (!document.fullscreenElement) root.requestFullscreen?.().catch(()=>{});
+    else document.exitFullscreen().catch(()=>{});
+  }
+
+  $('#prev').onclick = () => go(cur - 1);
+  $('#next').onclick = () => go(cur + 1);
+  $('#fs').onclick = fullscreen;
+  $('#exit').onclick = exit;
+
+  document.addEventListener('keydown', e => {
+    const tag = (e.target.tagName || '').toLowerCase();
+    if (tag === 'input' || tag === 'textarea' || e.metaKey || e.ctrlKey || e.altKey) return;
+    const on = root.classList.contains('present');
+    if (e.key === 'p' || e.key === 'P'){ on ? exit() : enter(); return; }
+    if (!on) return;
+    if (['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){ e.preventDefault(); go(cur + 1); }
+    else if (['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){ e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home'){ e.preventDefault(); go(0); }
+    else if (e.key === 'End'){ e.preventDefault(); go(slides.length - 1); }
+    else if (e.key === 'f' || e.key === 'F'){ fullscreen(); }
+    else if (e.key === 'Escape' && !document.fullscreenElement){ exit(); }
+  });
+
+  if (location.hash === '#apresentar') enter();
+  paint();
+})();
+</script>
+</body>
+</html>

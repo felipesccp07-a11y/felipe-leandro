@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Contato — Tomorrow</title>
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+  :root{
+    --graphite:#181818; --graphite-2:#333333; --graphite-text-soft:#b7b7b0;
+    --smoke:#F5F5F5; --smoke-2:#e9e9e4; --smoke-text-soft:#6b6b64;
+    --orange:#F58F29; --orange-deep:#d97615;
+    --blue:#2B59C3; --blue-deep:#20439a;
+    --line-on-graphite: rgba(245,245,245,0.16); --line-on-graphite-soft: rgba(245,245,245,0.08);
+    --line-on-smoke: rgba(41,41,41,0.14);
+    --gutter: 24px;
+    color-scheme: dark;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--graphite); color:var(--smoke);
+    font-family:'Archivo',Helvetica,Arial,sans-serif; font-size:16px; line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  p{ margin:0; }
+  h1,h2{ margin:0; text-wrap:balance; font-weight:800; letter-spacing:-0.01em; }
+  *:focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+  .mono{ font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; }
+  .wrap{ max-width:640px; margin:0 auto; padding-inline:var(--gutter); }
+  .sec{ padding-block: clamp(56px, 9vw, 96px); }
+  .sec--graphite{ background:var(--graphite); color:var(--smoke); }
+  .sec--smoke{ background:var(--smoke); color:var(--graphite); }
+  .sec--graphite .soft{ color:var(--graphite-text-soft); }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.16em; text-transform:uppercase;
+    font-weight:600; display:inline-flex; align-items:center; gap:.5em; margin-bottom:1.1em;
+  }
+  .eyebrow::before{ content:''; width:9px; height:9px; flex:none; background:var(--orange); }
+
+  .nav{
+    position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; z-index:80;
+    background:var(--graphite); border-bottom:2px solid var(--blue);
+  }
+  .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding-block:14px; max-width:640px; margin:0 auto; padding-inline:var(--gutter); }
+  .logo-img{ height:20px; width:auto; display:block; }
+  .nav-back{
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem; font-weight:500; letter-spacing:.06em;
+    text-transform:uppercase; text-decoration:none; color:var(--smoke); opacity:.75;
+  }
+  .nav-back:hover{ opacity:1; color:var(--orange); }
+
+  .hero{ padding-top:calc(64px + env(safe-area-inset-top,0px) + 56px); padding-bottom:2.4rem; }
+  .h1{ font-size:clamp(1.7rem, 4.4vw, 2.5rem); }
+  .lede{ margin-top:1rem; font-size:1.05rem; max-width:46ch; color:var(--graphite-text-soft); }
+
+  form{ display:flex; flex-direction:column; gap:1.4rem; margin-top:.4rem; }
+  .field{ display:flex; flex-direction:column; gap:.5rem; }
+  .field-row{ display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; }
+  @media (max-width:560px){ .field-row{ grid-template-columns:1fr; } }
+  label{
+    font-family:'IBM Plex Mono',monospace; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase;
+    color:rgba(41,41,41,.65);
+  }
+  label .opt{ text-transform:none; letter-spacing:0; opacity:.7; }
+  input[type=text], input[type=tel], textarea, select{
+    font-family:'Archivo',sans-serif; font-size:1rem; padding:.85em 1em;
+    border:2px solid var(--graphite); background:#fff; color:var(--graphite);
+    width:100%; appearance:none;
+  }
+  select{
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath fill='%23181818' d='M5 7l5 6 5-6z'/%3E%3C/svg%3E");
+    background-repeat:no-repeat; background-position:right 1em center; padding-right:2.4em;
+  }
+  input::placeholder, textarea::placeholder{ color:rgba(41,41,41,.4); }
+  textarea{ resize:vertical; min-height:110px; }
+  input:focus, textarea:focus, select:focus{ outline:2px solid var(--blue); outline-offset:1px; }
+
+  .check-row{ display:flex; align-items:flex-start; gap:.7rem; }
+  .check-row input{ margin-top:.3rem; flex:none; width:18px; height:18px; accent-color:var(--blue); }
+  .check-row span{ font-size:.9rem; color:var(--smoke-text-soft); }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:.6em;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.9rem;
+    letter-spacing:.03em; text-decoration:none; border:2px solid transparent; cursor:pointer;
+    padding: 1em 1.6em; transition: transform .12s ease, background-color .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn--orange{ background:var(--orange); color:var(--graphite); }
+  .btn--orange:hover{ background:var(--orange-deep); }
+  .btn[disabled]{ opacity:.5; cursor:not-allowed; transform:none; }
+
+  .err{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:#b3261e; min-height:1.1em; }
+
+  .footer{ padding-block:2.6rem; border-top:2px solid var(--blue); }
+  .footer-row{ display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; align-items:center; }
+  .copyright{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--graphite-text-soft); }
+  .footer a{ font-family:'IBM Plex Mono',monospace; font-size:.82rem; text-decoration:none; }
+  .footer a:hover{ color:var(--orange); }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <img src="tmw-logo.png" alt="Tomorrow" class="logo-img">
+    <a class="nav-back" href="index.html">&larr; Voltar</a>
+  </div>
+</header>
+
+<section class="sec sec--graphite hero">
+  <div class="wrap">
+    <p class="eyebrow">TOMORROW &middot; FORMULÁRIO</p>
+    <h1 class="h1">Conte o projeto direito, sem ficar digitando tudo no WhatsApp.</h1>
+    <p class="lede">Preenche o que já souber. O que faltar, a gente pergunta na conversa. Retorno em até 1 dia com o que precisa ser feito.</p>
+  </div>
+</section>
+
+<section class="sec sec--smoke">
+  <div class="wrap">
+    <form id="form-contato" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="f-nome">Seu nome</label>
+          <input type="text" id="f-nome" name="nome" required autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="f-empresa">Empresa ou marca</label>
+          <input type="text" id="f-empresa" name="empresa" autocomplete="organization">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-whats">Seu WhatsApp</label>
+        <input type="tel" id="f-whats" name="whatsapp" required placeholder="(35) 9 0000-0000" autocomplete="tel">
+      </div>
+
+      <div class="field">
+        <label for="f-problema">Qual é o problema</label>
+        <textarea id="f-problema" name="problema" required placeholder="Ex.: vamos lançar uma linha nova em outubro e não temos nada pronto pra divulgar."></textarea>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="f-entrada">Como acha que se encaixa <span class="opt">(opcional)</span></label>
+          <select id="f-entrada" name="entrada">
+            <option value="">Prefiro conversar primeiro</option>
+            <option value="Projeto inteiro">Projeto inteiro</option>
+            <option value="Só a parte que falta">Só a parte que falta</option>
+            <option value="Fornecedor pra outra agência">Sou de agência, preciso de fornecedor</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="f-prazo">Prazo desejado <span class="opt">(opcional)</span></label>
+          <select id="f-prazo" name="prazo">
+            <option value="">Sem prazo definido</option>
+            <option value="Até 2 semanas">Até 2 semanas</option>
+            <option value="2 a 4 semanas">2 a 4 semanas</option>
+            <option value="1 a 3 meses">1 a 3 meses</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="check-row">
+        <input type="checkbox" id="f-ok" name="ok" required>
+        <label for="f-ok" style="text-transform:none; letter-spacing:0;"><span>Pode me chamar no WhatsApp informado acima pra conversar sobre isso.</span></label>
+      </div>
+
+      <div>
+        <button type="submit" class="btn btn--orange" id="btn-enviar">Enviar pelo WhatsApp</button>
+        <p class="err" id="err-msg"></p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<footer class="footer sec sec--graphite">
+  <div class="wrap footer-row">
+    <span class="copyright">&copy; 2026 Tomorrow.</span>
+    <a href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Prefiro só mandar mensagem &rarr;</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var NUMERO_WHATSAPP = '5535984468504'; // mesmo número usado no resto do site
+
+  var form = document.getElementById('form-contato');
+  var erro = document.getElementById('err-msg');
+
+  form.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    erro.textContent = '';
+
+    var nome = document.getElementById('f-nome').value.trim();
+    var empresa = document.getElementById('f-empresa').value.trim();
+    var whats = document.getElementById('f-whats').value.trim();
+    var problema = document.getElementById('f-problema').value.trim();
+    var entrada = document.getElementById('f-entrada').value;
+    var prazo = document.getElementById('f-prazo').value;
+    var ok = document.getElementById('f-ok').checked;
+
+    if(!nome || !whats || !problema){
+      erro.textContent = 'Preenche nome, WhatsApp e o problema pra continuar.';
+      return;
+    }
+    if(!ok){
+      erro.textContent = 'Precisa marcar que pode te chamar no WhatsApp.';
+      return;
+    }
+
+    var linhas = [];
+    linhas.push('Olá! Vim pelo formulário do site.');
+    linhas.push('Nome: ' + nome);
+    if(empresa) linhas.push('Empresa: ' + empresa);
+    linhas.push('Problema: ' + problema);
+    if(entrada) linhas.push('Como se encaixa: ' + entrada);
+    if(prazo) linhas.push('Prazo desejado: ' + prazo);
+    linhas.push('Meu WhatsApp: ' + whats);
+
+    var texto = encodeURIComponent(linhas.join('\n'));
+    window.open('https://wa.me/' + NUMERO_WHATSAPP + '?text=' + texto, '_blank', 'noopener');
+  });
+})();
+</script>
+
+</body>
+</html>

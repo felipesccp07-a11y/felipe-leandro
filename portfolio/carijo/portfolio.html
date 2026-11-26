@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Portfólio &middot; Tomorrow</title>
+<meta name="description" content="Projetos de marketing que a Tomorrow já colocou no ar.">
+<link rel="icon" href="favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  :root{
+    --graphite:#181818;
+    --graphite-2:#333333;
+    --graphite-text-soft:#b7b7b0;
+    --smoke:#F5F5F5;
+    --smoke-2:#e9e9e4;
+    --smoke-text-soft:#6b6b64;
+    --orange:#F58F29;
+    --orange-deep:#d97615;
+    --blue:#2B59C3;
+    --blue-deep:#20439a;
+    --line-on-graphite: rgba(245,245,245,0.16);
+    --line-on-graphite-soft: rgba(245,245,245,0.08);
+    --line-on-smoke: rgba(41,41,41,0.14);
+    --line-on-blue: rgba(245,245,245,0.22);
+    --gutter: 24px;
+    color-scheme: dark;
+  }
+
+  *,*::before,*::after{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--graphite);
+    color:var(--smoke);
+    font-family:'Archivo',Helvetica,Arial,sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{ max-width:100%; display:block; }
+  a{ color:inherit; }
+  ul{ margin:0; padding:0; list-style:none; }
+  p{ margin:0; }
+  h1,h2,h3{ margin:0; text-wrap:balance; font-weight:800; letter-spacing:-0.01em; }
+  *:focus-visible{ outline:2px solid var(--blue); outline-offset:3px; }
+
+  .mono{ font-family:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace; }
+
+  .wrap{ max-width:1140px; margin:0 auto; padding-inline:var(--gutter); }
+
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:600;
+    display:inline-flex;
+    align-items:center;
+    gap:.5em;
+    margin-bottom:1.1em;
+  }
+  .eyebrow::before{ content:''; width:9px; height:9px; flex:none; }
+  .eyebrow--orange::before{ background:var(--orange); }
+  .eyebrow--blue::before{ background:var(--blue); }
+
+  .num{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:.8rem;
+    letter-spacing:.08em;
+    opacity:.55;
+  }
+
+  .sec{ padding-block: clamp(56px, 9vw, 108px); }
+  .sec--graphite{ background:var(--graphite); color:var(--smoke); }
+  .sec--smoke{ background:var(--smoke); color:var(--graphite); }
+  .sec--orange{ background:var(--orange); color:var(--graphite); }
+  .sec--graphite .soft{ color:var(--graphite-text-soft); }
+  .sec--orange .soft{ color:rgba(41,41,41,.68); }
+
+  .sec-head{ max-width: 680px; margin-bottom: 2.6rem; }
+  .sec-head h2{ font-size:clamp(1.55rem, 3vw, 2.35rem); }
+  .sec-head p{ margin-top:.9rem; font-size:1.05rem; }
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:fixed; top:env(safe-area-inset-top,0px); left:0; right:0; z-index:80;
+    background:var(--graphite);
+    border-bottom:2px solid var(--blue);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-block:14px;
+  }
+  .logo-img{ height:20px; width:auto; display:block; }
+  .nav-cta{
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem; font-weight:500;
+    letter-spacing:.06em; text-transform:uppercase;
+    color:var(--graphite); background:var(--orange);
+    padding:.6em 1.1em; text-decoration:none; white-space:nowrap;
+    transition: background-color .15s ease;
+  }
+  .nav-cta:hover{ background:var(--orange-deep); }
+
+  /* ---------- hero ---------- */
+  .hero{ padding-top:calc(64px + env(safe-area-inset-top,0px) + 56px); padding-bottom:48px; }
+  .h1{ font-size:clamp(2rem, 4.6vw, 3.4rem); line-height:1.08; max-width:18ch; }
+  .lede{ margin-top:1.3rem; font-size:clamp(1.02rem,1.6vw,1.2rem); max-width:52ch; color:var(--graphite-text-soft); }
+
+  .btn{
+    display:inline-flex; align-items:center; gap:.6em;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:.86rem;
+    letter-spacing:.03em; text-decoration:none;
+    padding: 1em 1.6em; border:2px solid transparent; cursor:pointer;
+    transition: transform .12s ease, background-color .15s ease, border-color .15s ease;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn--orange{ background:var(--orange); color:var(--graphite); }
+  .btn--orange:hover{ background:var(--orange-deep); }
+  .btn--graphite{ background:var(--graphite); color:var(--smoke); }
+  .btn--graphite:hover{ background:#171717; }
+  .btn--ghost-smoke{ background:transparent; border-color:var(--smoke); color:var(--smoke); }
+  .btn--ghost-smoke:hover{ background:rgba(245,245,245,.08); }
+  .btn--ghost-graphite{ background:transparent; border-color:var(--graphite); color:var(--graphite); }
+  .btn--ghost-graphite:hover{ background:rgba(41,41,41,.06); }
+
+  /* ---------- galeria de projetos ---------- */
+  .port-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1.4rem;
+  }
+  .port-card{
+    display:block; text-decoration:none; color:inherit;
+    border-top:3px solid var(--orange);
+    background:#111111;
+  }
+  .port-card:nth-child(3n+2){ border-top-color:var(--blue); }
+  .port-card:nth-child(3n){ border-top-color:var(--smoke); }
+  .port-thumb{
+    position:relative;
+    aspect-ratio:4/5;
+    background:var(--graphite-2);
+    overflow:hidden;
+  }
+  .port-thumb img{
+    position:absolute; inset:0; width:100%; height:100%;
+    object-fit:cover;
+    transition: transform .35s ease;
+  }
+  .port-card:hover .port-thumb img{ transform:scale(1.04); }
+  .port-thumb-fallback{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    padding:1.4rem; text-align:center;
+    font-family:'IBM Plex Mono',monospace; font-size:.78rem;
+    letter-spacing:.06em; text-transform:uppercase;
+    color:var(--graphite-text-soft);
+  }
+  .port-info{ padding:1.2rem 1.3rem 1.4rem; }
+  .port-info h3{ font-size:1.06rem; margin-bottom:.4rem; }
+  .port-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:.76rem;
+    letter-spacing:.04em; color:var(--graphite-text-soft);
+  }
+  @media (max-width:860px){ .port-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .port-grid{ grid-template-columns:1fr; } .port-thumb{ aspect-ratio:16/11; } }
+
+  /* ---------- CTA laranja ---------- */
+  .bora-inner{ max-width:640px; }
+  .bora-inner h2{ font-size:clamp(1.7rem,3.6vw,2.6rem); color:var(--graphite); }
+  .bora-inner > p{ margin-top:1rem; font-size:1.08rem; }
+  .bora-row{ margin-top:2.2rem; display:flex; gap:1rem; flex-wrap:wrap; }
+
+  /* ---------- footer ---------- */
+  .footer{ padding-block:3.4rem 3rem; border-top:2px solid var(--blue); }
+  .footer-top{ display:flex; justify-content:space-between; gap:2rem; flex-wrap:wrap; }
+  .footer-logo-img{ height:26px; width:auto; display:block; }
+  .footer-contacts{ display:flex; flex-direction:column; gap:.9rem; }
+  .contact-row{ display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; }
+  .contact-row .mono{ font-size:.95rem; }
+  .copy-btn{
+    font-family:'IBM Plex Mono',monospace; font-size:.7rem; letter-spacing:.06em; text-transform:uppercase;
+    background:transparent; border:1px solid var(--line-on-graphite); color:var(--smoke);
+    padding:.4em .8em; cursor:pointer; transition:border-color .15s ease, background-color .15s ease;
+  }
+  .copy-btn:hover{ border-color:var(--orange); background:rgba(245,143,41,.08); }
+  .footer-bottom{ margin-top:2.6rem; display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap; align-items:center; }
+  .footer-bottom a{ text-decoration:none; font-family:'IBM Plex Mono',monospace; font-size:.82rem; }
+  .footer-bottom a:hover{ color:var(--orange); }
+  .copyright{ font-family:'IBM Plex Mono',monospace; font-size:.78rem; color:var(--graphite-text-soft); }
+
+  @media (max-width:400px){
+    :root{ --gutter:16px; }
+    .nav-cta{ font-size:.68rem; padding:.55em .85em; }
+    .logo-img{ height:17px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner wrap">
+    <a href="index.html" aria-label="Tomorrow &mdash; início"><img src="tomorrow.png" alt="Tomorrow" class="logo-img"></a>
+    <a class="nav-cta" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </div>
+</header>
+
+<section class="sec sec--graphite hero">
+  <div class="wrap">
+    <p class="eyebrow eyebrow--orange">TOMORROW &middot; PORTFÓLIO</p>
+    <h1 class="h1">Projetos que já colocamos no ar.</h1>
+    <p class="lede">Uma seleção do que foi feito: da ideia à execução. Clique em qualquer projeto pra ver o problema, a solução e o resultado.</p>
+  </div>
+</section>
+
+<section class="sec sec--graphite" id="galeria" style="padding-top:0;">
+  <div class="wrap">
+    <div class="port-grid">
+
+      <!-- ===== CARD DE PROJETO =====
+           Pra adicionar um projeto novo: copie um <a class="port-card">...</a> inteiro,
+           troque o href pro arquivo da página do projeto, a imagem, o título e a categoria.
+           Enquanto não tiver a imagem real, o bloco cinza com o texto aparece no lugar
+           (é só apagar a <div class="port-thumb-fallback"> quando a foto entrar). -->
+      <a class="port-card" href="projeto-carijo.html">
+        <div class="port-thumb">
+          <img src="img/portfolio/carijo/capa.jpg" alt="Carijó" loading="lazy" onerror="this.style.display='none'">
+          <div class="port-thumb-fallback">Carijó<br>(imagem em breve)</div>
+        </div>
+        <div class="port-info">
+          <h3>Carijó</h3>
+          <p class="port-tag">Narrativa de marca &middot; Restaurante</p>
+        </div>
+      </a>
+
+      <a class="port-card" href="projeto-exemplo.html">
+        <div class="port-thumb">
+          <img src="img/portfolio/thumbs/02.jpg" alt="Nome do projeto 2" loading="lazy" onerror="this.style.display='none'">
+          <div class="port-thumb-fallback">Projeto 02<br>(imagem em breve)</div>
+        </div>
+        <div class="port-info">
+          <h3>Nome do projeto 2</h3>
+          <p class="port-tag">Campanha &middot; Setor</p>
+        </div>
+      </a>
+
+      <a class="port-card" href="projeto-exemplo.html">
+        <div class="port-thumb">
+          <img src="img/portfolio/thumbs/03.jpg" alt="Nome do projeto 3" loading="lazy" onerror="this.style.display='none'">
+          <div class="port-thumb-fallback">Projeto 03<br>(imagem em breve)</div>
+        </div>
+        <div class="port-info">
+          <h3>Nome do projeto 3</h3>
+          <p class="port-tag">Lançamento &middot; Setor</p>
+        </div>
+      </a>
+
+      <a class="port-card" href="projeto-exemplo.html">
+        <div class="port-thumb">
+          <img src="img/portfolio/thumbs/04.jpg" alt="Nome do projeto 4" loading="lazy" onerror="this.style.display='none'">
+          <div class="port-thumb-fallback">Projeto 04<br>(imagem em breve)</div>
+        </div>
+        <div class="port-info">
+          <h3>Nome do projeto 4</h3>
+          <p class="port-tag">Sistema de marca &middot; Setor</p>
+        </div>
+      </a>
+
+      <a class="port-card" href="projeto-exemplo.html">
+        <div class="port-thumb">
+          <img src="img/portfolio/thumbs/05.jpg" alt="Nome do projeto 5" loading="lazy" onerror="this.style.display='none'">
+          <div class="port-thumb-fallback">Projeto 05<br>(imagem em breve)</div>
+        </div>
+        <div class="port-info">
+          <h3>Nome do projeto 5</h3>
+          <p class="port-tag">Data comercial &middot; Setor</p>
+        </div>
+      </a>
+
+      <a class="port-card" href="projeto-exemplo.html">
+        <div class="port-thumb">
+          <img src="img/portfolio/thumbs/06.jpg" alt="Nome do projeto 6" loading="lazy" onerror="this.style.display='none'">
+          <div class="port-thumb-fallback">Projeto 06<br>(imagem em breve)</div>
+        </div>
+        <div class="port-info">
+          <h3>Nome do projeto 6</h3>
+          <p class="port-tag">Evento &middot; Setor</p>
+        </div>
+      </a>
+      <!-- ===== FIM DOS CARDS ===== -->
+
+    </div>
+  </div>
+</section>
+
+<section class="sec sec--orange" id="cta">
+  <div class="wrap bora-inner">
+    <h2>Seu projeto pode ser o próximo daqui.</h2>
+    <p>Conte qual é o problema. Retorno em até 1 dia com o que precisa ser feito.</p>
+    <div class="bora-row">
+      <a class="btn btn--graphite" href="https://wa.me/5535984468504?text=Ol%C3%A1%21%20Vi%20o%20portf%C3%B3lio%20e%20quero%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener">Quero falar sobre um projeto</a>
+      <a class="btn btn--ghost-graphite" href="contato.html">Ou preencha o formulário</a>
+    </div>
+  </div>
+</section>
+
+<footer class="sec sec--graphite footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <img src="tmw-logo.png" alt="Tomorrow" class="footer-logo-img">
+      <div class="footer-contacts">
+        <div class="contact-row">
+          <span class="mono">+55 35 98446-8504</span>
+          <button type="button" class="copy-btn" data-copy="+55 35 98446-8504">Copiar</button>
+        </div>
+        <div class="contact-row">
+          <span class="mono">contato@wearetomorrow.com.br</span>
+          <button type="button" class="copy-btn" data-copy="contato@wearetomorrow.com.br">Copiar</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a href="https://www.instagram.com/agenciatomorrow" target="_blank" rel="noopener">Instagram</a>
+      <a href="index.html">&larr; Voltar ao início</a>
+      <span class="copyright">&copy; 2026 Tomorrow. Feito com &#9670; e nenhuma sigla.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    function fallbackSelect(text){
+      try{
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }catch(e){}
+    }
+    var buttons = document.querySelectorAll('.copy-btn');
+    for(var i=0;i<buttons.length;i++){
+      buttons[i].addEventListener('click', function(){
+        var b = this;
+        var text = b.getAttribute('data-copy');
+        var original = b.textContent;
+        function done(label){
+          b.textContent = label;
+          setTimeout(function(){ b.textContent = original; }, 1600);
+        }
+        try{
+          navigator.clipboard.writeText(text).then(function(){
+            done('Copiado');
+          }).catch(function(){
+            fallbackSelect(text);
+            done('Selecionado');
+          });
+        }catch(e){
+          fallbackSelect(text);
+          done('Selecionado');
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>

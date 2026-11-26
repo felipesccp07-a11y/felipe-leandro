@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>O que eu faço na sua conta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#141310;
+    --bg-panel:#1c1a16;
+    --line:#33302a;
+    --text:#eee9df;
+    --text-dim:#9c9689;
+    --accent:#d7a13a;
+    --accent-dim:#5c4a22;
+    --good:#7fae7a;
+    --bad:#c0645a;
+    font-family: 'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; font-weight:600; margin:0;}
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:32px 24px 64px;
+  }
+  header{
+    margin-bottom:32px;
+  }
+  header h1{
+    font-size:clamp(24px,4vw,34px);
+    line-height:1.15;
+    max-width:640px;
+  }
+  header p{
+    color:var(--text-dim);
+    margin-top:10px;
+    font-size:15px;
+    max-width:560px;
+  }
+  .layout{
+    display:grid;
+    grid-template-columns:240px 1fr;
+    gap:0;
+    border:1px solid var(--line);
+    border-radius:4px;
+    overflow:hidden;
+    background:var(--bg-panel);
+  }
+  nav{
+    border-right:1px solid var(--line);
+    padding:8px;
+  }
+  nav button{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:2px;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    color:var(--text-dim);
+    padding:12px 12px;
+    border-radius:3px;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:14px;
+    transition:background .15s;
+  }
+  nav button .n{
+    font-size:11px;
+    color:var(--text-dim);
+    opacity:.6;
+  }
+  nav button.active{
+    background:var(--accent-dim);
+    color:var(--text);
+  }
+  nav button.active .n{color:var(--accent); opacity:1;}
+  nav button:hover:not(.active){background:#26231d;}
+
+  main{padding:32px;}
+  .tag{
+    display:inline-block;
+    font-size:12px;
+    color:var(--accent);
+    border:1px solid var(--accent-dim);
+    padding:3px 9px;
+    border-radius:100px;
+    margin-bottom:14px;
+  }
+  main h2{font-size:24px; margin-bottom:6px;}
+  .sub{color:var(--text-dim); font-size:14px; margin-bottom:26px;}
+
+  .grid3{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:1px;
+    background:var(--line);
+    border:1px solid var(--line);
+    border-radius:3px;
+    overflow:hidden;
+    margin-bottom:24px;
+  }
+  .cell{
+    background:var(--bg-panel);
+    padding:18px;
+  }
+  .cell .label{
+    font-size:11px;
+    letter-spacing:.02em;
+    color:var(--text-dim);
+    margin-bottom:8px;
+  }
+  .cell p{font-size:14.5px; line-height:1.55; margin:0; color:var(--text);}
+  .cell.diag .label{color:var(--bad);}
+  .cell.acao .label{color:var(--accent);}
+  .cell.gera .label{color:var(--good);}
+
+  .demo{
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:20px;
+    background:#18160f;
+  }
+  .demo-title{font-size:13px; color:var(--text-dim); margin-bottom:14px;}
+
+  /* pixel toggle */
+  .pixel-row{display:flex; gap:16px; align-items:stretch;}
+  .pixel-box{
+    flex:1;
+    border:1px solid var(--line);
+    border-radius:3px;
+    padding:16px;
+  }
+  .pixel-box h4{font-size:13px; color:var(--text-dim); margin-bottom:12px; font-family:'Inter';font-weight:600;}
+  .ev{display:flex; justify-content:space-between; font-size:13px; padding:6px 0; border-bottom:1px dashed var(--line);}
+  .ev:last-child{border-bottom:none;}
+  .ev .v.off{color:var(--text-dim);}
+  .ev .v.on{color:var(--good);}
+  .switch-wrap{display:flex; align-items:center; gap:10px; margin-bottom:16px; font-size:13px; color:var(--text-dim);}
+  .switch{
+    width:38px;height:20px;background:#33302a;border-radius:100px;position:relative;cursor:pointer;flex-shrink:0;
+  }
+  .switch .knob{position:absolute; top:2px; left:2px; width:16px; height:16px; background:#8a8578; border-radius:50%; transition:.15s;}
+  .switch.on{background:var(--accent-dim);}
+  .switch.on .knob{left:20px; background:var(--accent);}
+
+  /* slider */
+  .slider-wrap{display:flex; align-items:center; gap:16px;}
+  input[type=range]{flex:1; accent-color:var(--accent);}
+  .result-box{
+    margin-top:16px;
+    display:flex;
+    gap:24px;
+  }
+  .result{flex:1; border:1px solid var(--line); border-radius:3px; padding:14px;}
+  .result .k{font-size:26px; font-family:'Fraunces'; font-weight:600;}
+  .result .l{font-size:12px; color:var(--text-dim); margin-top:2px;}
+
+  /* funnel */
+  .funnel{display:flex; flex-direction:column; gap:6px;}
+  .fstage{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 14px; border:1px solid var(--line); border-radius:3px; font-size:13.5px;
+    background:#1c1a16;
+  }
+  .fstage .drop{color:var(--bad); font-size:12px;}
+
+  /* pixel extras */
+  .learnbar{height:8px; background:#33302a; border-radius:100px; overflow:hidden;}
+  .learnfill{height:100%; width:8%; background:var(--accent); transition:width .2s;}
+
+  /* funil extras */
+  .fstage input{
+    width:56px; background:none; border:1px solid var(--line); color:var(--text);
+    font-family:inherit; font-size:13px; text-align:right; border-radius:3px; padding:2px 6px;
+  }
+  .funnel-alert{
+    margin-top:10px; font-size:13px; color:var(--bad); border:1px solid var(--bad); border-radius:3px;
+    padding:10px 12px; background:rgba(192,100,90,.08);
+  }
+
+  /* resposta extras */
+  .chatmock{border:1px solid var(--line); border-radius:3px; padding:14px; background:#18160f;}
+  .bubble{max-width:75%; padding:8px 12px; border-radius:10px; font-size:13px; margin-bottom:8px; line-height:1.4;}
+  .bubble.in{background:#26231d; color:var(--text);}
+  .bubble.out{background:var(--accent-dim); color:var(--text); margin-left:auto;}
+  .bubble .time{display:block; font-size:10px; color:var(--text-dim); margin-top:4px;}
+
+  /* retarget extras */
+  .compare-row{margin-top:16px; display:flex; flex-direction:column; gap:10px;}
+  .compare-bar{display:grid; grid-template-columns:110px 1fr 70px; align-items:center; gap:10px; font-size:12.5px; color:var(--text-dim);}
+  .cb-track{height:10px; background:#26231d; border-radius:100px; overflow:hidden;}
+  .cb-fill{height:100%; border-radius:100px; transition:width .2s;}
+  .cb-fill.cold{background:var(--bad);}
+  .cb-fill.warm{background:var(--good);}
+  .cb-val{color:var(--text); text-align:right;}
+
+  /* oferta extras */
+  .adtest{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  .adcard{border:1px solid var(--line); border-radius:3px; padding:14px;}
+  .adcard-tag{font-size:11px; color:var(--text-dim); margin-bottom:8px;}
+  .adinput{
+    width:100%; background:#18160f; border:1px solid var(--line); color:var(--text);
+    font-family:inherit; font-size:13.5px; padding:8px 10px; border-radius:3px; margin-bottom:10px;
+  }
+  .adbar-track{height:8px; background:#26231d; border-radius:100px; overflow:hidden; margin-bottom:6px;}
+  .adbar-fill{height:100%; background:var(--accent); width:0%; transition:width .5s;}
+  .adcard-metric{font-size:12px; color:var(--text-dim);}
+  .runtest-btn{
+    margin-top:14px; background:var(--accent); color:#141310; border:none; padding:9px 18px;
+    border-radius:3px; font-family:inherit; font-size:13px; font-weight:600; cursor:pointer;
+  }
+  .runtest-btn:hover{opacity:.9;}
+  .adtest-result{margin-top:12px; font-size:13.5px; color:var(--text-dim); min-height:20px;}
+
+  /* jornada */
+  .journey{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:16px;}
+  .jstep{
+    flex:1; min-width:110px;
+    border:1px solid var(--line); border-radius:3px;
+    padding:12px 10px; cursor:pointer; text-align:center; font-size:13px;
+    background:#1c1a16; color:var(--text-dim);
+    transition:.15s;
+  }
+  .jstep .jn{font-size:11px; opacity:.6; display:block; margin-bottom:4px;}
+  .jstep.active{background:var(--accent-dim); color:var(--text); border-color:var(--accent);}
+  .jstep.skip{opacity:.5;}
+  .journey-detail{
+    border:1px solid var(--line); border-radius:3px; padding:16px; font-size:14px; line-height:1.6;
+    min-height:70px;
+  }
+  .journey-detail .jtag{
+    display:inline-block; font-size:11px; padding:2px 8px; border-radius:100px; margin-bottom:8px;
+  }
+  .jtag.sim{background:var(--accent-dim); color:var(--accent);}
+  .jtag.talvez{background:#33302a; color:var(--text-dim);}
+
+  /* relatorio */
+  .weektabs{display:flex; gap:6px; margin-bottom:14px;}
+  .weektabs button{
+    background:none; border:1px solid var(--line); color:var(--text-dim);
+    padding:6px 14px; border-radius:100px; font-size:13px; cursor:pointer; font-family:inherit;
+  }
+  .weektabs button.active{background:var(--accent-dim); color:var(--text); border-color:var(--accent);}
+  .reportcard{
+    border:1px solid var(--line); border-radius:3px; padding:20px; background:#f4f1ea; color:#1c1a16;
+  }
+  .reportcard h4{font-family:'Fraunces'; font-size:17px; margin-bottom:14px; color:#1c1a16;}
+  .rsec{margin-bottom:14px;}
+  .rsec .rl{font-size:11px; color:#8a8578; margin-bottom:4px;}
+  .rsec p{font-size:13.5px; margin:0; line-height:1.55;}
+
+  footer{
+    margin-top:28px;
+    text-align:center;
+    color:var(--text-dim);
+    font-size:12.5px;
+  }
+
+  @media (max-width:760px){
+    .layout{grid-template-columns:1fr;}
+    nav{
+      display:flex; overflow-x:auto; border-right:none; border-bottom:1px solid var(--line);
+      -webkit-overflow-scrolling:touch;
+    }
+    nav button{width:auto; white-space:nowrap; flex-direction:row; gap:6px;}
+    main{padding:20px;}
+    .grid3{grid-template-columns:1fr;}
+    .pixel-row{flex-direction:column;}
+    .result-box{flex-direction:column;}
+  }
+
+  @media (prefers-color-scheme:light){
+    :root:not([data-theme="dark"]){
+      --bg:#141310; --bg-panel:#1c1a16; --line:#33302a; --text:#eee9df; --text-dim:#9c9689;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>O que eu faço na sua conta, e o que isso gera pra você.</h1>
+    <p>Sem curso, sem slide. Aqui está exatamente o que eu vejo hoje na sua operação e o que eu mudo.</p>
+  </header>
+
+  <div class="layout">
+    <nav id="nav"></nav>
+    <main id="main"></main>
+  </div>
+
+  <footer>we are tomorrow</footer>
+</div>
+
+<script>
+const items = [
+  {
+    id:'pixel',
+    n:'01',
+    label:'Rastreamento',
+    tag:'Diagnóstico técnico',
+    title:'Seu site está sem pixel configurado',
+    sub:'Sem isso a Meta gasta seu dinheiro tentando adivinhar quem compra.',
+    diag:'Anúncio rodando, mas o site não avisa a Meta quando alguém visualiza, coloca no carrinho ou compra. A plataforma está atirando no escuro.',
+    acao:'Instalo o pixel e configuro os eventos (visualização, carrinho, compra) direto no seu site ou WhatsApp.',
+    gera:'A Meta passa a aprender com quem realmente compra de você e busca gente parecida — o custo por venda cai nas próximas semanas.',
+    demo:'pixel'
+  },
+  {
+    id:'funil',
+    n:'02',
+    label:'Funil de leads',
+    tag:'Diagnóstico de processo',
+    title:'Os leads chegam e se perdem no meio do caminho',
+    sub:'Sem um funil visível, ninguém sabe onde o cliente está travando.',
+    diag:'Lead chega no WhatsApp, alguém responde quando dá, e boa parte simplesmente some sem ninguém perceber em qual etapa.',
+    acao:'Monto um funil com as etapas reais do seu atendimento (chegou → orçou → negociando → fechou) e acompanho onde está vazando.',
+    gera:'Você enxerga exatamente em qual etapa perde mais gente — e a gente ataca esse ponto específico, não o anúncio inteiro.',
+    demo:'funil'
+  },
+  {
+    id:'retarget',
+    n:'03',
+    label:'Retargeting',
+    tag:'Diagnóstico de verba',
+    title:'Você só anuncia pra quem nunca te viu',
+    sub:'Quem já visitou e não comprou está sendo ignorado.',
+    diag:'Toda a verba vai pra gente fria, que não conhece a marca. Ninguém volta pra buscar quem já demonstrou interesse.',
+    acao:'Crio uma campanha separada só pra quem já visitou o perfil, o site ou mandou mensagem e não fechou.',
+    gera:'Esse público já conhece você — o custo por resultado nele costuma ser bem menor que o de público frio.',
+    demo:'retarget'
+  },
+  {
+    id:'resposta',
+    n:'04',
+    label:'Tempo de resposta',
+    tag:'Diagnóstico de atendimento',
+    title:'O anúncio traz o cliente, mas a resposta demora',
+    sub:'Tráfego bom com atendimento lento é dinheiro pela metade.',
+    diag:'Lead manda mensagem e espera. Quanto mais demora a resposta, menor a chance de fechar — e isso não aparece no relatório de anúncio.',
+    acao:'Configuro resposta automática imediata + aviso pra você, garantindo que ninguém espera mais que alguns minutos.',
+    gera:'Mais gente que já demonstrou interesse chega a fechar, sem gastar um real a mais em anúncio.',
+    demo:'resposta'
+  },
+  {
+    id:'oferta',
+    n:'05',
+    label:'Teste de oferta',
+    tag:'Diagnóstico de criativo',
+    title:'Sempre o mesmo anúncio, sem comparar nada',
+    sub:'Sem teste, você nunca sabe se está deixando resultado na mesa.',
+    diag:'Um anúncio só, rodando por meses. Não dá pra saber se uma oferta ou imagem diferente traria mais resultado pelo mesmo dinheiro.',
+    acao:'Rodo pelo menos duas versões (oferta, imagem ou texto) ao mesmo tempo e deixo a que performa melhor.',
+    gera:'Resultado melhora sem aumentar verba — só direcionando pra o que já provou que funciona melhor.',
+    demo:'oferta'
+  },
+  {
+    id:'escopo',
+    n:'06',
+    label:'O que você compra',
+    tag:'Escopo',
+    title:'Não é um pacote fixo — é o caminho até a compra, resolvido ponta a ponta',
+    sub:'Eu não vendo "gestão de tráfego". Eu resolvo cada etapa que o seu lead atravessa antes de comprar.',
+    diag:'Hoje cada etapa dessa jornada é tratada separada (ou nem é tratada) — o anúncio é de um jeito, o criativo é genérico, não existe página pra converter, o orgânico não conversa com o pago.',
+    acao:'Clica em cada etapa abaixo pra ver o que eu monto ali, e o que entra ou não dependendo da realidade da sua operação.',
+    gera:'Você paga por um caminho inteiro sendo trabalhado, não por uma peça solta que depende do resto pra funcionar.',
+    demo:'jornada'
+  },
+  {
+    id:'entrega',
+    n:'07',
+    label:'Como eu entrego',
+    tag:'Formato de entrega',
+    title:'Relatório semanal, direto ao ponto — sem depender de reunião pra saber como está indo',
+    sub:'Você recebe isso toda semana, no PDF, sem precisar me perguntar nada.',
+    diag:'Sem um formato de acompanhamento fixo, o empresário só sabe como está indo quando pergunta — e geralmente pergunta quando já está incomodado.',
+    acao:'Monto um relatório semanal em PDF: o que aconteceu, o que eu fiz por causa disso, e qual o próximo passo. Sempre as três coisas, sempre nessa ordem.',
+    gera:'Você acompanha a evolução real, sem depender de mim pra traduzir número em decisão.',
+    demo:'relatorio'
+  },
+  {
+    id:'meta',
+    n:'08',
+    label:'Meta Ads — objetivos',
+    tag:'Execução · Meta',
+    title:'Cada objetivo entrega um resultado diferente — escolher errado queima verba',
+    sub:'A Meta tem 6 objetivos de campanha. Clique em cada um pra ver quando eu uso e o que ele faz de fato.',
+    diag:'Muita conta gira no objetivo errado: pede curtida ou visita achando que isso vira venda. O objetivo trava na criação da campanha — trocar depois é recomeçar do zero.',
+    acao:'Escolho o objetivo certo pra fase do seu negócio hoje, e escalo pra Sales assim que o Pixel tiver dado suficiente pra Meta aprender.',
+    gera:'Cada real gasto otimiza pra métrica que realmente vira dinheiro no seu caixa, não pra vaidade.',
+    demo:'metaobj'
+  },
+  {
+    id:'google',
+    n:'09',
+    label:'Google Ads — objetivos',
+    tag:'Execução · Google',
+    title:'No Google a pessoa já está procurando — o objetivo define o que fazer com essa intenção',
+    sub:'Clique em cada objetivo do Google Ads pra ver quando eu uso e o que executo.',
+    diag:'Muito negócio local nem aparece quando alguém pesquisa "perto de mim" — ou aparece com o objetivo errado, pagando por clique que nunca vira visita ou venda.',
+    acao:'Configuro a campanha certa pro objetivo real do seu negócio — pesquisa, Performance Max, ou visitas à loja — em vez de usar um modelo padrão pra tudo.',
+    gera:'Você capta gente que já está decidida a comprar algo parecido com o que você vende — o tipo de lead mais barato de converter que existe.',
+    demo:'googleobj'
+  }
+];
+
+const nav = document.getElementById('nav');
+const main = document.getElementById('main');
+
+items.forEach((it,idx)=>{
+  const b = document.createElement('button');
+  b.innerHTML = `<span class="n">${it.n}</span><span>${it.label}</span>`;
+  b.onclick = ()=>render(idx);
+  b.dataset.idx = idx;
+  nav.appendChild(b);
+});
+
+function render(idx){
+  const it = items[idx];
+  [...nav.children].forEach((b,i)=>b.classList.toggle('active', i===idx));
+
+  let demoHtml = '';
+  if(it.demo === 'pixel'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">O que a Meta enxerga do seu site</div>
+      <div class="switch-wrap">
+        <div class="switch" id="pixelSwitch" onclick="togglePixel()"><div class="knob"></div></div>
+        <span id="pixelLabel">Pixel desligado (situação atual)</span>
+      </div>
+      <div class="pixel-row">
+        <div class="pixel-box">
+          <h4>Eventos que a Meta recebe</h4>
+          <div class="ev"><span>Clique no anúncio</span><span class="v on">registrado</span></div>
+          <div class="ev"><span>Visualizou o produto</span><span class="v off" id="ev1">não registrado</span></div>
+          <div class="ev"><span>Colocou no carrinho</span><span class="v off" id="ev2">não registrado</span></div>
+          <div class="ev"><span>Comprou</span><span class="v off" id="ev3">não registrado</span></div>
+        </div>
+        <div class="pixel-box">
+          <h4>O que a Meta consegue fazer com isso</h4>
+          <p style="font-size:13px; color:var(--text-dim); line-height:1.6;" id="pixelResult">
+            Só sabe que alguém clicou. Não sabe quem comprou — então não consegue procurar mais gente parecida com quem compra de você.
+          </p>
+        </div>
+      </div>
+      <div class="result-box">
+        <div class="result"><div class="k" id="pixelCusto">R$ 18,40</div><div class="l">custo estimado por mensagem</div></div>
+        <div class="result">
+          <div class="l" style="margin-bottom:8px;">fase de aprendizado da Meta</div>
+          <div class="learnbar"><div class="learnfill" id="learnFill"></div></div>
+          <div class="l" id="learnLabel" style="margin-top:6px;">sem dado suficiente pra aprender</div>
+        </div>
+      </div>
+    </div>`;
+  }
+  if(it.demo === 'funil'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Onde os leads estão hoje — clique no número pra editar com o cliente</div>
+      <div class="funnel" id="funnelBox"></div>
+      <div class="funnel-alert" id="funnelAlert"></div>
+    </div>`;
+  }
+  if(it.demo === 'retarget'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Quantas pessoas visitaram você e não compraram no último mês?</div>
+      <div class="slider-wrap">
+        <span style="font-size:13px;color:var(--text-dim);">50</span>
+        <input type="range" min="50" max="2000" step="50" value="400" id="retargSlider" oninput="updateRetarg(this.value)">
+        <span style="font-size:13px;color:var(--text-dim);">2000</span>
+      </div>
+      <div class="result-box">
+        <div class="result"><div class="k" id="retargN">400</div><div class="l">pessoas nesse público quente</div></div>
+        <div class="result"><div class="k" id="retargCusto">R$ 6,10</div><div class="l">custo estimado por resultado</div></div>
+      </div>
+      <div class="compare-row">
+        <div class="compare-bar"><div class="cb-label">Público frio</div><div class="cb-track"><div class="cb-fill cold" style="width:100%;"></div></div><div class="cb-val">R$ 18,40</div></div>
+        <div class="compare-bar"><div class="cb-label">Esse público quente</div><div class="cb-track"><div class="cb-fill warm" id="warmBar" style="width:33%;"></div></div><div class="cb-val" id="warmVal">R$ 6,10</div></div>
+      </div>
+    </div>`;
+  }
+  if(it.demo === 'oferta'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Edite as duas versões e simule o teste</div>
+      <div class="adtest">
+        <div class="adcard" id="adA">
+          <div class="adcard-tag">Versão A</div>
+          <input class="adinput" id="adAtext" value="X-tudo artesanal, peça já">
+          <div class="adbar-track"><div class="adbar-fill" id="adAbar" style="width:0%;"></div></div>
+          <div class="adcard-metric" id="adAmetric">—</div>
+        </div>
+        <div class="adcard" id="adB">
+          <div class="adcard-tag">Versão B</div>
+          <input class="adinput" id="adBtext" value="Peça agora e ganhe batata frita">
+          <div class="adbar-track"><div class="adbar-fill" id="adBbar" style="width:0%;"></div></div>
+          <div class="adcard-metric" id="adBmetric">—</div>
+        </div>
+      </div>
+      <button class="runtest-btn" onclick="runAdTest()">Rodar teste</button>
+      <div class="adtest-result" id="adResult"></div>
+    </div>`;
+  }
+  if(it.demo === 'metaobj'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Clique em um objetivo</div>
+      <div class="journey" id="metaobjNav"></div>
+      <div class="journey-detail" id="metaobjDetail"></div>
+    </div>`;
+  }
+  if(it.demo === 'googleobj'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Clique em um objetivo</div>
+      <div class="journey" id="googleobjNav"></div>
+      <div class="journey-detail" id="googleobjDetail"></div>
+    </div>`;
+  }
+  if(it.demo === 'jornada'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Clique em cada etapa</div>
+      <div class="journey" id="journey"></div>
+      <div class="journey-detail" id="journeyDetail"></div>
+      <div class="demo-title" style="margin-top:16px;">Monte o escopo desse cliente</div>
+      <div id="scopeToggles"></div>
+      <div class="funnel-alert" id="scopeSummary" style="color:var(--good); border-color:var(--good); background:rgba(127,174,122,.08);"></div>
+    </div>`;
+  }
+  if(it.demo === 'relatorio'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Formato do PDF semanal — navegue pelas semanas</div>
+      <div class="weektabs" id="weektabs"></div>
+      <div class="reportcard" id="reportcard"></div>
+    </div>`;
+  }
+  if(it.demo === 'resposta'){
+    demoHtml = `
+    <div class="demo">
+      <div class="demo-title">Tempo de resposta x chance de fechar</div>
+      <div class="switch-wrap">
+        <div class="switch" id="autoSwitch" onclick="toggleAuto()"><div class="knob"></div></div>
+        <span id="autoLabel">Sem resposta automática</span>
+      </div>
+      <div class="slider-wrap">
+        <span style="font-size:13px;color:var(--text-dim);">rápido</span>
+        <input type="range" min="0" max="4" value="2" id="respSlider" oninput="updateResp(this.value)">
+        <span style="font-size:13px;color:var(--text-dim);">1 dia</span>
+      </div>
+      <div class="result-box">
+        <div class="result"><div class="k" id="respTime">1h</div><div class="l">tempo médio de resposta</div></div>
+        <div class="result"><div class="k" id="respConv">31%</div><div class="l">chance estimada de fechar</div></div>
+      </div>
+      <div class="demo-title" style="margin-top:16px;">Como fica a conversa</div>
+      <div class="chatmock" id="chatmock"></div>
+    </div>`;
+  }
+
+  main.innerHTML = `
+    <span class="tag">${it.tag}</span>
+    <h2>${it.title}</h2>
+    <div class="sub">${it.sub}</div>
+    <div class="grid3">
+      <div class="cell diag"><div class="label">O que eu identifico</div><p>${it.diag}</p></div>
+      <div class="cell acao"><div class="label">O que eu faço</div><p>${it.acao}</p></div>
+      <div class="cell gera"><div class="label">O que isso gera pra você</div><p>${it.gera}</p></div>
+    </div>
+    ${demoHtml}
+  `;
+
+  if(it.demo === 'jornada') renderJourney();
+  if(it.demo === 'relatorio') renderReport();
+  if(it.demo === 'funil') renderFunnel();
+  if(it.demo === 'resposta') renderChat('14:32');
+  if(it.demo === 'retarget') updateRetarg(400);
+  if(it.demo === 'metaobj') renderObjectives('metaobj', metaObjectives);
+  if(it.demo === 'googleobj') renderObjectives('googleobj', googleObjectives);
+}
+
+function togglePixel(){
+  const sw = document.getElementById('pixelSwitch');
+  const on = !sw.classList.contains('on');
+  sw.classList.toggle('on', on);
+  document.getElementById('pixelLabel').textContent = on ? 'Pixel ligado (o que eu configuro)' : 'Pixel desligado (situação atual)';
+  ['ev1','ev2','ev3'].forEach(id=>{
+    const el = document.getElementById(id);
+    el.textContent = on ? 'registrado' : 'não registrado';
+    el.className = 'v ' + (on ? 'on' : 'off');
+  });
+  document.getElementById('pixelResult').textContent = on
+    ? 'Sabe exatamente quem visualizou, colocou no carrinho e comprou — e usa isso pra buscar mais gente com o mesmo perfil de quem já compra.'
+    : 'Só sabe que alguém clicou. Não sabe quem comprou — então não consegue procurar mais gente parecida com quem compra de você.';
+  document.getElementById('pixelCusto').textContent = on ? 'R$ 9,20' : 'R$ 18,40';
+  document.getElementById('learnFill').style.width = on ? '78%' : '8%';
+  document.getElementById('learnLabel').textContent = on
+    ? 'aprendendo rápido — dado de compra chegando toda hora'
+    : 'sem dado suficiente pra aprender';
+}
+
+// funil editável
+let funnelData = [100, 72, 41, 9];
+const funnelLabels = ['Chegou no WhatsApp','Recebeu resposta','Foi orçado','Fechou'];
+function renderFunnel(){
+  const box = document.getElementById('funnelBox');
+  if(!box) return;
+  box.innerHTML = funnelData.map((v,i)=>{
+    const drop = i===0 ? '' : `<span class="drop">${Math.round((1-v/funnelData[i-1])*100)}%</span>`;
+    return `<div class="fstage"><span>${funnelLabels[i]}</span><span><input type="number" value="${v}" onchange="updateFunnel(${i}, this.value)"> ${drop}</span></div>`;
+  }).join('');
+  let worst = 1, worstDrop = 0;
+  for(let i=1;i<funnelData.length;i++){
+    const d = 1 - funnelData[i]/funnelData[i-1];
+    if(d > worstDrop){ worstDrop = d; worst = i; }
+  }
+  document.getElementById('funnelAlert').textContent =
+    `Maior gargalo: "${funnelLabels[worst]}" — perde ${Math.round(worstDrop*100)}% de quem chegou até ali. É aqui que eu ataco primeiro.`;
+}
+function updateFunnel(i, v){
+  funnelData[i] = Number(v) || 0;
+  renderFunnel();
+}
+
+// resposta: automação + chat mock
+let autoOn = false;
+function toggleAuto(){
+  autoOn = !autoOn;
+  document.getElementById('autoSwitch').classList.toggle('on', autoOn);
+  document.getElementById('autoLabel').textContent = autoOn ? 'Com resposta automática' : 'Sem resposta automática';
+  updateResp(document.getElementById('respSlider').value);
+}
+function renderChat(effectiveTime){
+  const c = document.getElementById('chatmock');
+  if(!c) return;
+  c.innerHTML = `
+    <div class="bubble in">Oi, vocês entregam hoje ainda?<span class="time">14:02</span></div>
+    <div class="bubble out">${autoOn ? 'Oi! Entregamos sim 😊 Qual bairro?' : 'Oi! Entregamos sim 😊 Qual bairro?'}<span class="time">${effectiveTime}</span></div>
+  `;
+}
+
+const respTimes = ['5 min','30 min','1h','4h','1 dia'];
+const respConvs = ['48%','39%','31%','19%','8%'];
+const respConvsAuto = ['52%','52%','52%','48%','44%'];
+function updateResp(v){
+  document.getElementById('respTime').textContent = autoOn ? '10 seg (auto)' : respTimes[v];
+  document.getElementById('respConv').textContent = autoOn ? respConvsAuto[v] : respConvs[v];
+  renderChat(autoOn ? '14:02' : ({0:'14:07',1:'14:32',2:'15:00',3:'18:00','4':'amanhã'})[v]);
+}
+
+// retargeting
+function updateRetarg(v){
+  const n = Number(v);
+  document.getElementById('retargN').textContent = n;
+  const custo = (18.40 - (n/2000)*13).toFixed(2).replace('.',',');
+  document.getElementById('retargCusto').textContent = 'R$ ' + custo;
+  document.getElementById('warmVal').textContent = 'R$ ' + custo;
+  const pct = Math.max(15, 100 - (n/2000)*70);
+  document.getElementById('warmBar').style.width = pct + '%';
+}
+
+// teste de oferta
+function runAdTest(){
+  const aScore = Math.floor(Math.random()*40)+30;
+  const bScore = Math.floor(Math.random()*40)+30;
+  document.getElementById('adAbar').style.width = aScore+'%';
+  document.getElementById('adBbar').style.width = bScore+'%';
+  document.getElementById('adAmetric').textContent = 'CTR simulado: ' + aScore/10 + '%';
+  document.getElementById('adBmetric').textContent = 'CTR simulado: ' + bScore/10 + '%';
+  const winner = aScore >= bScore ? 'A' : 'B';
+  const winnerText = aScore >= bScore ? document.getElementById('adAtext').value : document.getElementById('adBtext').value;
+  document.getElementById('adResult').textContent = `Versão ${winner} venceu ("${winnerText}") — é essa que eu escalo, a outra eu pauso.`;
+}
+
+// jornada do lead
+const journeySteps = [
+  {n:'1', label:'Anúncio', tag:'sim', desc:'Sempre entra. É o que leva a pessoa até você — construído em cima do objetivo certo (mensagem, não curtida).'},
+  {n:'2', label:'Criativo', tag:'sim', desc:'Sempre entra. Imagem, vídeo e texto pensados pro seu produto, testados em mais de uma versão.'},
+  {n:'3', label:'Página de conversão', tag:'talvez', desc:'Entra quando o link da bio ou o site não fecham venda sozinhos. Se seu WhatsApp já resolve bem, não crio uma sem necessidade.'},
+  {n:'4', label:'Orgânico', tag:'talvez', desc:'Entra quando faz sentido sustentar a marca entre uma compra e outra. Se seu produto é só recorrência via anúncio, não force conteúdo por conteúdo.'},
+  {n:'5', label:'Atendimento do lead', tag:'sim', desc:'Sempre acompanho. De nada adianta trazer o lead certo se ele espera 1 dia pra ter resposta.'}
+];
+let scopeChoices = {};
+function renderJourney(){
+  const j = document.getElementById('journey');
+  if(!j) return;
+  j.innerHTML = journeySteps.map((s,i)=>`
+    <div class="jstep ${s.tag==='talvez'?'skip':''}" onclick="showJourneyStep(${i})" id="jstep${i}">
+      <span class="jn">${s.n}</span>${s.label}
+    </div>`).join('');
+  showJourneyStep(0);
+
+  const opt = journeySteps.filter(s=>s.tag==='talvez');
+  opt.forEach(s=>{ if(!(s.label in scopeChoices)) scopeChoices[s.label] = true; });
+  const box = document.getElementById('scopeToggles');
+  box.innerHTML = opt.map(s=>`
+    <div class="switch-wrap" style="margin-bottom:8px;">
+      <div class="switch ${scopeChoices[s.label]?'on':''}" onclick="toggleScope('${s.label}')"><div class="knob"></div></div>
+      <span>${s.label} entra no escopo desse cliente</span>
+    </div>`).join('');
+  updateScopeSummary();
+}
+function toggleScope(label){
+  scopeChoices[label] = !scopeChoices[label];
+  renderJourney();
+}
+function updateScopeSummary(){
+  const always = journeySteps.filter(s=>s.tag==='sim').map(s=>s.label);
+  const included = Object.keys(scopeChoices).filter(k=>scopeChoices[k]);
+  const summary = document.getElementById('scopeSummary');
+  if(summary) summary.textContent = 'Escopo desse cliente: ' + [...always, ...included].join(', ') + '.';
+}
+function showJourneyStep(i){
+  journeySteps.forEach((s,idx)=>{
+    document.getElementById('jstep'+idx).classList.toggle('active', idx===i);
+  });
+  const s = journeySteps[i];
+  document.getElementById('journeyDetail').innerHTML = `
+    <span class="jtag ${s.tag}">${s.tag==='sim' ? 'sempre entra' : 'entra se fizer sentido pra você'}</span>
+    <p>${s.desc}</p>`;
+}
+
+// relatorio semanal
+const weeks = [
+  {label:'Semana 1', resultado:'Campanha no ar, 38 mensagens recebidas, custo por mensagem em ajuste.', feito:'Subimos 3 criativos em teste e ativamos o público de retargeting.', proximo:'Aguardar volume pra Meta aprender e cortar o criativo mais fraco.'},
+  {label:'Semana 2', resultado:'52 mensagens, custo por mensagem caiu 18% em relação à semana 1.', feito:'Pausamos o criativo mais fraco e escalamos o que performou melhor.', proximo:'Testar uma nova oferta na campanha principal.'},
+  {label:'Semana 3', resultado:'61 mensagens, novo teste de oferta com resultado 12% melhor.', feito:'Direcionamos mais verba pra oferta vencedora e ajustamos a página de conversão.', proximo:'Rodar campanha de retargeting pra quem visitou e não comprou.'},
+  {label:'Semana 4', resultado:'74 mensagens, custo por mensagem 31% menor que no início do mês.', feito:'Fechamos o mês com relatório consolidado e plano do próximo mês.', proximo:'Aumentar verba com segurança, mantendo o custo por mensagem.'}
+];
+function renderReport(){
+  const t = document.getElementById('weektabs');
+  if(!t) return;
+  t.innerHTML = weeks.map((w,i)=>`<button onclick="showWeek(${i})" id="wtab${i}">${w.label}</button>`).join('');
+  showWeek(0);
+}
+function showWeek(i){
+  weeks.forEach((w,idx)=>{
+    document.getElementById('wtab'+idx).classList.toggle('active', idx===i);
+  });
+  const w = weeks[i];
+  document.getElementById('reportcard').innerHTML = `
+    <h4>${w.label} — Relatório de tráfego</h4>
+    <div class="rsec"><div class="rl">Resultado da semana</div><p>${w.resultado}</p></div>
+    <div class="rsec"><div class="rl">O que fizemos por causa disso</div><p>${w.feito}</p></div>
+    <div class="rsec"><div class="rl">Próximo passo</div><p>${w.proximo}</p></div>`;
+}
+
+// objetivos Meta e Google
+const metaObjectives = [
+  {n:'1', label:'Awareness', quando:'lançamento de marca nova ou produto que ninguém conhece ainda na região.', acao:'campanha de alcance/lembrança, verba baixa, vídeo ou imagem forte, sem pedir ação nenhuma além de ser lembrado.', vantagem:'constrói a base de quem vai reconhecer sua marca quando ela aparecer de novo vendendo.'},
+  {n:'2', label:'Traffic', quando:'quando o objetivo real é fazer gente visitar o site ou perfil, sem pixel de compra ainda maduro.', acao:'anúncio otimizado pra clique no link — uso como ponte enquanto o pixel não tem dado suficiente.', vantagem:'gera volume de visita barato pra alimentar o pixel e o retargeting mais rápido.'},
+  {n:'3', label:'Engagement', quando:'preciso de prova social (comentário, compartilhamento) antes de escalar um criativo.', acao:'testo o criativo nesse objetivo primeiro, validando reação real antes de colocar dinheiro sério em Sales.', vantagem:'filtra criativo ruim gastando pouco, antes de queimar verba de venda com ele.'},
+  {n:'4', label:'Leads', quando:'o produto exige explicação, orçamento ou é ticket alto — venda direta não converte no primeiro contato.', acao:'formulário instantâneo ou mensagem no WhatsApp, capturando contato de quem tem interesse real.', vantagem:'gera uma lista de gente qualificada pro seu time de vendas trabalhar, mesmo sem venda na hora.'},
+  {n:'5', label:'App Promotion', quando:'você tem um aplicativo próprio e quer instalação ou uso dele.', acao:'campanha separada da de vendas no site, pra não brigar pelo mesmo público e mesma verba.', vantagem:'traz usuário pro app sem misturar métrica de instalação com métrica de venda no site.'},
+  {n:'6', label:'Sales', quando:'o pixel já registra compra e você já tem volume mínimo de conversão por semana.', acao:'otimizo direto pra compra, carrinho ou checkout, deixando a Meta buscar gente parecida com quem já comprou.', vantagem:'é o objetivo que aprende com quem paga de verdade — o resto é preparação pra chegar aqui.'}
+];
+const googleObjectives = [
+  {n:'1', label:'Vendas', quando:'o cliente já pesquisa ativamente algo que você vende e você quer converter direto.', acao:'campanha de Pesquisa ou Performance Max, mostrando o anúncio pra quem já está buscando o termo.', vantagem:'capta gente no momento exato em que decide comprar — o lead mais barato de fechar que existe.'},
+  {n:'2', label:'Leads', quando:'o serviço precisa de contato antes da venda (orçamento, agendamento, consulta).', acao:'anúncio de pesquisa com extensão de formulário ou chamada direta.', vantagem:'gera contato qualificado de quem já demonstrou intenção de busca, não de quem só passou o olho.'},
+  {n:'3', label:'Tráfego no site', quando:'preciso de volume de visita qualificada antes de ter conversão suficiente pra otimizar por venda.', acao:'campanha de pesquisa ou display voltada pra clique, alimentando o site de visitante interessado.', vantagem:'constrói base de público pra futuras campanhas de remarketing no Google e no YouTube.'},
+  {n:'4', label:'Consideração de produto/marca', quando:'o produto é novo no mercado e a pessoa precisa entender antes de decidir.', acao:'campanha de vídeo no YouTube ou Demand Gen mostrando o produto em uso.', vantagem:'planta a marca na cabeça de quem ainda está pesquisando, antes da concorrência aparecer.'},
+  {n:'5', label:'Alcance e reconhecimento', quando:'marca nova numa região, precisa aparecer pra muita gente rápido.', acao:'campanha de vídeo ou display com foco em alcance, verba distribuída pra cobertura, não clique.', vantagem:'coloca a marca na frente de muita gente por um custo baixo por pessoa alcançada.'},
+  {n:'6', label:'Promoção de app', quando:'negócio tem app próprio e quer instalação vinda da busca ou do YouTube.', acao:'campanha de app automatizada, otimizando pra instalação ou evento dentro do app.', vantagem:'coloca o app na frente de quem já pesquisa algo relacionado ao que ele resolve.'},
+  {n:'7', label:'Visitas à loja física', quando:'negócio físico quer gente que pesquisa no Google indo até o endereço.', acao:'campanha com foco em localização, usando o perfil da empresa no Google e extensões de endereço.', vantagem:'mede e gera visita real na loja, não só clique — direto pro que move o caixa de um negócio físico.'}
+];
+function renderObjectives(prefix, list){
+  const nav = document.getElementById(prefix+'Nav');
+  if(!nav) return;
+  nav.innerHTML = list.map((o,i)=>`
+    <div class="jstep" onclick="showObjStep('${prefix}', ${i})" id="${prefix}step${i}">
+      <span class="jn">${o.n}</span>${o.label}
+    </div>`).join('');
+  showObjStep(prefix, 0);
+}
+function showObjStep(prefix, i){
+  const list = prefix === 'metaobj' ? metaObjectives : googleObjectives;
+  list.forEach((o,idx)=>{
+    document.getElementById(prefix+'step'+idx).classList.toggle('active', idx===i);
+  });
+  const o = list[i];
+  document.getElementById(prefix+'Detail').innerHTML = `
+    <p><strong style="color:var(--accent);">Quando uso:</strong> ${o.quando}</p>
+    <p style="margin-top:8px;"><strong style="color:var(--accent);">O que eu executo:</strong> ${o.acao}</p>
+    <p style="margin-top:8px;"><strong style="color:var(--good);">Vantagem:</strong> ${o.vantagem}</p>
+  `;
+}
+
+render(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Funil ao vivo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3efe6; --ink:#191712; --card:#fffdf7; --line:#191712;
+  --or:#d9772e; --dim:#8a8578; --danger:#b64a3c;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0; background:var(--bg); color:var(--ink);
+  font-family:'Inter',sans-serif;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.wrap{max-width:1200px; margin:0 auto; padding:28px 20px 60px;}
+h1{font-family:'Fraunces',serif; font-size:clamp(22px,3.6vw,30px); margin:0 0 8px; line-height:1.2;}
+.lead{color:var(--dim); font-size:14.5px; margin:0 0 22px; max-width:640px;}
+
+.presets{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;}
+.presets button{
+  font:inherit; font-size:13.5px; font-weight:600; background:var(--card); color:var(--ink);
+  border:2px solid var(--line); padding:8px 14px; border-radius:100px; cursor:pointer;
+}
+.presets button:hover{background:var(--ink); color:var(--bg);}
+.presets button.clear{border-color:var(--danger); color:var(--danger);}
+.presets button.clear:hover{background:var(--danger); color:#fff;}
+
+details.qa{
+  border:2px solid var(--line); border-radius:6px; background:var(--card); margin-bottom:24px; padding:0;
+}
+details.qa summary{
+  cursor:pointer; padding:12px 16px; font-weight:700; font-size:14px; list-style:none;
+}
+details.qa summary::-webkit-details-marker{display:none;}
+details.qa summary::before{content:"▸ "; color:var(--or);}
+details.qa[open] summary::before{content:"▾ "; }
+.qa-body{padding:0 16px 16px; font-size:14px; line-height:1.7;}
+.qa-body ul{margin:0; padding-left:18px;}
+
+.scroll-outer{overflow:auto; border:2px solid var(--line); border-radius:6px; background:var(--card); padding:4px;}
+.stage{position:relative; min-width:100%; width:max-content;}
+#lines{position:absolute; top:0; left:0; pointer-events:none;}
+.canvas-wrap{
+  display:flex; align-items:flex-start; gap:56px; padding:44px 34px; position:relative; z-index:1;
+}
+.entries{display:flex; flex-direction:column; gap:12px; padding-top:6px;}
+.tree{position:relative;}
+
+.box{
+  position:relative; width:190px; padding:12px 14px; border:2px solid var(--line);
+  border-radius:5px; background:var(--bg); font-size:13.5px; font-weight:600; line-height:1.35;
+}
+.box.entry{background:#fff; width:170px;}
+.box.node{background:var(--card);}
+.box.node.root{border-color:var(--or); box-shadow:3px 3px 0 var(--or); background:#fff;}
+.tree .box{position:absolute;}
+.boxtext{outline:none; cursor:text; display:inline-block; width:100%;}
+.boxtext.ph{color:var(--dim); font-style:italic; font-weight:500;}
+.box .del{
+  position:absolute; top:-9px; right:-9px; width:20px; height:20px; border-radius:50%;
+  background:var(--danger); color:#fff; border:none; font-size:12px; line-height:1; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; font-weight:700; z-index:2;
+}
+.box .fwd, .box .down{
+  position:absolute; width:26px; height:26px;
+  border-radius:50%; border:2px solid var(--line); background:var(--card); color:var(--ink);
+  cursor:pointer; font-weight:700; font-size:14px; line-height:1; z-index:2;
+}
+.box .fwd{top:50%; right:-14px; transform:translateY(-50%);}
+.box .down{bottom:-14px; left:50%; transform:translateX(-50%);}
+.box .fwd:hover, .box .down:hover{background:var(--or); border-color:var(--or); color:#fff;}
+.addentry{
+  align-self:flex-start; background:none; border:2px dashed var(--line); color:var(--dim);
+  border-radius:5px; padding:10px 14px; font:inherit; font-size:13px; font-weight:600; cursor:pointer;
+  min-width:150px;
+}
+.addentry:hover{color:var(--ink); border-color:var(--or);}
+
+.hint{margin-top:16px; font-size:12.5px; color:var(--dim);}
+
+.examples{margin-top:40px;}
+.examples h2{font-family:'Fraunces',serif; font-size:19px; margin:0 0 4px;}
+.examples>.lead{margin-bottom:18px;}
+.ex-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+.ex-card{border:2px solid var(--line); border-radius:6px; background:var(--card); padding:16px;}
+.ex-card .tag{
+  display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.03em;
+  padding:3px 9px; border-radius:100px; border:2px solid var(--line); margin-bottom:10px;
+}
+.ex-card.simple .tag{border-color:#6a9c6f; color:#4d7a51;}
+.ex-card.medio .tag{border-color:var(--or); color:var(--or);}
+.ex-card.complexo .tag{border-color:var(--danger); color:var(--danger);}
+.ex-card h3{font-size:14.5px; margin:0 0 12px;}
+.mini-chain{display:flex; flex-wrap:wrap; align-items:center; gap:5px; font-size:12.5px;}
+.mini-step{border:2px solid var(--line); border-radius:4px; padding:6px 9px; background:var(--bg); font-weight:600;}
+.mini-arrow{color:var(--dim); font-weight:700;}
+.branch{margin-top:10px; padding-left:14px; border-left:2px dashed var(--line);}
+.branch-label{font-size:11.5px; color:var(--dim); margin:10px 0 5px;}
+@media(max-width:860px){ .ex-grid{grid-template-columns:1fr;} }
+
+footer{margin-top:30px; text-align:center; font-size:12.5px; color:var(--dim);}
+
+@media(max-width:640px){
+  .canvas-wrap{gap:36px; padding:30px 20px;}
+  .box{width:150px;}
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#191712; --ink:#f3efe6; --card:#242119; --line:#f3efe6; --dim:#9c9689;
+  }
+  .box.entry{background:#242119;}
+  .box.node.root{background:#242119;}
+  .mini-step{background:#191712;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Monte o funil ao vivo com o lead</h1>
+  <p class="lead">Vai perguntando e preenchendo na hora. Clica no texto pra editar. O <b>+</b> do lado de cada caixa cria um caminho novo a partir dela — clica de novo pra empilhar mais de um. O × tira a caixa (e o que vem depois dela).</p>
+
+  <div class="presets" id="presets">
+    <button class="clear" id="clearBtn">Limpar tudo</button>
+  </div>
+
+  <details class="qa">
+    <summary>Perguntas pra fazer enquanto monta (clica pra abrir)</summary>
+    <div class="qa-body">
+      <ul>
+        <li>Como a pessoa te conhece hoje? (indicação, anúncio, busca no Google, passou na porta)</li>
+        <li>Ela cai direto no WhatsApp ou passa por alguma página antes?</li>
+        <li>Existe algum filtro antes de falar preço, ou já manda a tabela de cara?</li>
+        <li>Onde ela mais some — depois de perguntar preço, depois do orçamento, depois de agendar?</li>
+        <li>O que faz ela decidir de fato — prova social, urgência, preço, confiança em alguém?</li>
+        <li>Quantos passos existem hoje entre "nunca ouviu falar" e "pagou"?</li>
+      </ul>
+    </div>
+  </details>
+
+  <div class="scroll-outer">
+    <div class="stage" id="stage">
+      <svg id="lines"></svg>
+      <div class="canvas-wrap" id="canvasWrap"></div>
+    </div>
+  </div>
+
+  <p class="hint">Dica: os canais da esquerda são as formas de conhecer sua empresa, todos juntando num ponto de entrada. Dali pra frente, cada etapa pode abrir mais de um caminho — use isso quando o lead tratar clientes diferentes de jeitos diferentes.</p>
+
+  <div class="examples">
+    <h2>Pra ilustrar: o mesmo funil não serve pra tudo</h2>
+    <p class="lead">Três níveis de complexidade — só de referência, não carrega no board acima.</p>
+    <div class="ex-grid">
+
+      <div class="ex-card simple">
+        <span class="tag">Simples</span>
+        <h3>Delivery / fast food</h3>
+        <div class="mini-chain">
+          <span class="mini-step">Vê o anúncio</span><span class="mini-arrow">→</span>
+          <span class="mini-step">Pede pelo link ou WhatsApp</span><span class="mini-arrow">→</span>
+          <span class="mini-step">Fechou</span>
+        </div>
+      </div>
+
+      <div class="ex-card medio">
+        <span class="tag">Médio</span>
+        <h3>Escola de inglês</h3>
+        <div class="mini-chain">
+          <span class="mini-step">Anúncio ou indicação</span><span class="mini-arrow">→</span>
+          <span class="mini-step">Agenda aula experimental</span><span class="mini-arrow">→</span>
+          <span class="mini-step">Faz a aula</span>
+        </div>
+        <div class="branch">
+          <div class="branch-label">gostou</div>
+          <div class="mini-chain"><span class="mini-step">Fala com consultor</span><span class="mini-arrow">→</span><span class="mini-step">Fechou matrícula</span></div>
+          <div class="branch-label">ficou em dúvida</div>
+          <div class="mini-chain"><span class="mini-step">Recebe follow-up</span><span class="mini-arrow">→</span><span class="mini-step">Nova tentativa em 7 dias</span></div>
+        </div>
+      </div>
+
+      <div class="ex-card complexo">
+        <span class="tag">Complexo</span>
+        <h3>Alto ticket / venda consultiva</h3>
+        <div class="mini-chain">
+          <span class="mini-step">Anúncio</span><span class="mini-arrow">→</span>
+          <span class="mini-step">Baixa material rico</span><span class="mini-arrow">→</span>
+          <span class="mini-step">Recebe e-mails por dias</span><span class="mini-arrow">→</span>
+          <span class="mini-step">Convite pro webinar</span>
+        </div>
+        <div class="branch">
+          <div class="branch-label">compareceu</div>
+          <div class="mini-chain"><span class="mini-step">Oferta especial</span><span class="mini-arrow">→</span><span class="mini-step">Reunião de vendas</span><span class="mini-arrow">→</span><span class="mini-step">Proposta</span><span class="mini-arrow">→</span><span class="mini-step">Fechou</span></div>
+          <div class="branch-label">não compareceu</div>
+          <div class="mini-chain"><span class="mini-step">WhatsApp de reengajamento</span><span class="mini-arrow">→</span><span class="mini-step">Novo convite</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>we are tomorrow</footer>
+</div>
+
+<script>
+let uid = 1;
+function newNode(){ return { id: uid++, text:'', children:[] }; }
+
+let state = { entries:[''], roots: [ (function(){ const r = newNode(); r.children.push(newNode()); return r; })() ] };
+
+const canvasWrap = document.getElementById('canvasWrap');
+const svg = document.getElementById('lines');
+const stage = document.getElementById('stage');
+
+const ROW_H = 84;
+const COL_W = 250;
+const BOX_W = 190;
+
+function findNodeIn(node, id){
+  if(node.id === id) return node;
+  for(const c of node.children){ const f = findNodeIn(c,id); if(f) return f; }
+  return null;
+}
+function findNode(id){
+  for(const r of state.roots){ const f = findNodeIn(r,id); if(f) return f; }
+  return null;
+}
+function findParentIn(node, id){
+  for(const c of node.children){
+    if(c.id === id) return node;
+    const f = findParentIn(c, id); if(f) return f;
+  }
+  return null;
+}
+function findParent(id){
+  for(const r of state.roots){ const f = findParentIn(r, id); if(f) return f; }
+  return null;
+}
+function isTop(node){ return state.roots.includes(node); }
+
+function layout(){
+  let leafIndex = 0;
+  function visit(node, depth){
+    node.depth = depth;
+    if(node.children.length===0){
+      node.row = leafIndex; leafIndex++;
+    } else {
+      node.children.forEach(c=>visit(c, depth+1));
+      const rows = node.children.map(c=>c.row);
+      node.row = (Math.min(...rows)+Math.max(...rows))/2;
+    }
+  }
+  state.roots.forEach(r=>visit(r, 0));
+  return leafIndex;
+}
+
+function nodePlaceholder(node){
+  if(isTop(node)) return 'primeira etapa';
+  return node.children.length === 0 ? 'fecha aqui' : 'próxima etapa';
+}
+
+function renderBoxes(){
+  let html = '<div class="entries" id="entries">';
+  state.entries.forEach((t,i)=>{
+    html += boxHtml(t, 'entry', {kind:'entry', i}, 'canal de entrada', false, false, true);
+  });
+  html += '<button class="addentry" id="addEntry">+ canal de entrada</button></div>';
+
+  const leafCount = layout();
+  const treeH = Math.max(leafCount * ROW_H, ROW_H);
+  const treeW = (Math.max(...state.roots.map(getMaxDepth))+1) * COL_W;
+  html += `<div class="tree" id="tree" style="width:${treeW}px; height:${treeH}px;">${treeHtml()}</div>`;
+
+  canvasWrap.innerHTML = html;
+  attachHandlers();
+  requestAnimationFrame(drawLines);
+}
+
+function getMaxDepth(node){
+  if(node.children.length===0) return node.depth;
+  return Math.max(...node.children.map(getMaxDepth));
+}
+
+function treeHtml(){
+  let out = '';
+  function collect(node){
+    const x = node.depth * COL_W;
+    const y = node.row * ROW_H;
+    const box = boxHtml(node.text, 'node', {kind:'node', id:node.id}, nodePlaceholder(node), isTop(node), true, true);
+    out += box.replace('class="box', `style="left:${x}px; top:${y}px;" class="box`);
+    node.children.forEach(collect);
+  }
+  state.roots.forEach(collect);
+  return out;
+}
+
+function boxHtml(text, type, ref, placeholder, isRoot, showFwd, showDown){
+  const isEmpty = !text;
+  const cls = `box ${type}${isRoot?' root':''}`;
+  const spanCls = 'boxtext' + (isEmpty ? ' ph' : '');
+  const shown = isEmpty ? escapeHtml(placeholder) : escapeHtml(text);
+  const refAttr = ref.kind==='entry' ? `data-kind="entry" data-i="${ref.i}"` : `data-kind="node" data-id="${ref.id}"`;
+  let out = `<div class="${cls}" ${refAttr}>`;
+  out += `<span class="${spanCls}" contenteditable="true" data-ph="${escapeHtml(placeholder)}">${shown}</span>`;
+  out += `<button class="del">×</button>`;
+  if(showFwd) out += `<button class="fwd" title="continuar pra frente">→</button>`;
+  if(showDown) out += `<button class="down" title="empilhar outra opção aqui embaixo">↓</button>`;
+  out += `</div>`;
+  return out;
+}
+function escapeHtml(s){
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function attachHandlers(){
+  document.querySelectorAll('.boxtext').forEach(el=>{
+    el.addEventListener('focus', ()=>{
+      if(el.classList.contains('ph')){
+        el.classList.remove('ph');
+        el.textContent = '';
+      }
+    });
+    el.addEventListener('blur', ()=>{
+      const box = el.closest('.box');
+      const text = el.textContent.trim();
+      saveText(box, text);
+      if(!text){
+        el.classList.add('ph');
+        el.textContent = el.dataset.ph;
+      } else {
+        el.textContent = text;
+      }
+    });
+    el.addEventListener('input', ()=>{
+      const box = el.closest('.box');
+      saveText(box, el.textContent);
+      requestAnimationFrame(drawLines);
+    });
+    el.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); el.blur(); }});
+    el.addEventListener('paste', e=>{
+      e.preventDefault();
+      const t = (e.clipboardData || window.clipboardData).getData('text');
+      document.execCommand('insertText', false, t);
+    });
+  });
+  document.querySelectorAll('.del').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const box = btn.closest('.box');
+      if(box.dataset.kind==='entry'){
+        const i = +box.dataset.i;
+        if(state.entries.length>1) state.entries.splice(i,1);
+      } else {
+        const id = +box.dataset.id;
+        const rootIdx = state.roots.findIndex(r=>r.id===id);
+        if(rootIdx>=0){
+          if(state.roots.length>1) state.roots.splice(rootIdx,1);
+        } else {
+          const parent = findParent(id);
+          if(parent) parent.children = parent.children.filter(c=>c.id!==id);
+        }
+      }
+      renderBoxes();
+    });
+  });
+  document.querySelectorAll('.fwd').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const box = btn.closest('.box');
+      const node = findNode(+box.dataset.id);
+      if(node) node.children.push(newNode());
+      renderBoxes();
+    });
+  });
+  document.querySelectorAll('.down').forEach(btn=>{
+    btn.addEventListener('click', e=>{
+      e.stopPropagation();
+      const box = btn.closest('.box');
+      if(box.dataset.kind==='entry'){
+        const i = +box.dataset.i;
+        state.entries.splice(i+1, 0, '');
+      } else {
+        const id = +box.dataset.id;
+        const rootIdx = state.roots.findIndex(r=>r.id===id);
+        if(rootIdx>=0){
+          state.roots.splice(rootIdx+1, 0, newNode());
+        } else {
+          const parent = findParent(id);
+          if(parent){
+            const idx = parent.children.findIndex(c=>c.id===id);
+            parent.children.splice(idx+1, 0, newNode());
+          }
+        }
+      }
+      renderBoxes();
+    });
+  });
+  document.getElementById('addEntry').addEventListener('click', ()=>{
+    state.entries.push('');
+    renderBoxes();
+  });
+}
+
+function saveText(box, text){
+  if(box.dataset.kind==='entry'){
+    state.entries[+box.dataset.i] = text;
+  } else {
+    const node = findNode(+box.dataset.id);
+    if(node) node.text = text;
+  }
+}
+
+function drawLines(){
+  const stageRect = stage.getBoundingClientRect();
+  const w = stage.scrollWidth, h = stage.scrollHeight;
+  svg.setAttribute('width', w);
+  svg.setAttribute('height', h);
+  svg.setAttribute('viewBox', '0 0 '+w+' '+h);
+
+  let paths = '';
+  const entryBoxes = document.querySelectorAll('#entries .box');
+  const topBoxes = document.querySelectorAll('.box.node.root');
+
+  topBoxes.forEach(rootBox=>{
+    const r = rootBox.getBoundingClientRect();
+    const ex = r.left - stageRect.left, ey = r.top - stageRect.top + r.height/2;
+    entryBoxes.forEach(box=>{
+      const er = box.getBoundingClientRect();
+      const sx = er.right - stageRect.left, sy = er.top - stageRect.top + er.height/2;
+      const dx = Math.max(30,(ex-sx)*0.55);
+      paths += `<path d="M${sx},${sy} C ${sx+dx},${sy} ${ex-dx},${ey} ${ex},${ey}" stroke="var(--ink)" stroke-width="2" fill="none" opacity="0.85"/>`;
+    });
+  });
+
+  function walk(node){
+    const boxEl = document.querySelector(`.box.node[data-id="${node.id}"]`);
+    if(!boxEl) return;
+    const r1 = boxEl.getBoundingClientRect();
+    const sx = r1.right - stageRect.left, sy = r1.top - stageRect.top + r1.height/2;
+    node.children.forEach(child=>{
+      const c = document.querySelector(`.box.node[data-id="${child.id}"]`);
+      if(!c) return;
+      const r2 = c.getBoundingClientRect();
+      const ex2 = r2.left - stageRect.left, ey2 = r2.top - stageRect.top + r2.height/2;
+      const dx = Math.max(24,(ex2-sx)*0.5);
+      paths += `<path d="M${sx},${sy} C ${sx+dx},${sy} ${ex2-dx},${ey2} ${ex2},${ey2}" stroke="var(--ink)" stroke-width="2" fill="none" marker-end="url(#arrow)"/>`;
+      walk(child);
+    });
+  }
+  state.roots.forEach(walk);
+
+  svg.innerHTML = `<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="var(--ink)"/></marker></defs>` + paths;
+}
+
+document.getElementById('clearBtn').addEventListener('click', ()=>{
+  const r = newNode(); r.children.push(newNode());
+  state = { entries:[''], roots:[r] };
+  renderBoxes();
+});
+window.addEventListener('resize', ()=>requestAnimationFrame(drawLines));
+
+renderBoxes();
+</script>
+</body>
+</html>
